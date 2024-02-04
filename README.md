@@ -1,4 +1,4 @@
-Game idea 1:
+#Game idea 1:
 
 
 Vampire Survivors
@@ -8,7 +8,7 @@ Top down stealth combat game, where our protagonist insists on not using guns. A
 creative and stealthy ways to close the distance to their enemies, where being caught out in the open means
 certain death.
 
-Game idea 2:
+#Game idea 2:
 
 
 Kingdom Rush
