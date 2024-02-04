@@ -1,7 +1,6 @@
 # Game idea 1:
 
-
-Vampire Survivors
+## Vampire Survivors
 
 
 Top down stealth combat game, where our protagonist insists on not using guns. As such they have to find
@@ -10,8 +9,7 @@ certain death.
 
 # Game idea 2:
 
-
-Kingdom Rush
+## Kingdom Rush
 
 
 A tower defence game where you play as a fragile engineer who you have to maneuver around the map and around enemies
