@@ -1,0 +1,9 @@
+Game Two: Vampire Survivors, except its a rhythm game. 
+
+A 2D isometric view world with the camera centred on the player.
+Endless hordes of monstrosities from the far reaches of space are
+attacking the player, a lone spaceman with little but a jetpack.
+
+Can you survive the 3 and a half minutes it is going to take for
+your automated life pod to come and rescue you?
+
