@@ -7,3 +7,5 @@ Welcome to Team 17, comprised of:
 
 
 For full information of Game ideas, Paper prototyping and Team Photo - see the Ideas_Phase folder.
+
+![](https://github.com/UoB-COMSM0110/2024-group-17/blob/main/Ideas_Phase/spacegame.gif)
