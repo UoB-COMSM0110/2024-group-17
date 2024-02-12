@@ -1,0 +1,44 @@
+User: Us as artists
+We want to make a game that is actually good, with elements that are cohesive and engaging to implement. We want to use tech which
+interests us and we havent used before, to make us better developers. We also want a good mark. 
+
+
+User: Markers
+As a marker, I want the game to be as intuitive as possible, so I can see as much of the game as possible to give a fair mark for it.
+I want the game to be enjoyable, pretty, and with technically impressive aspects. I want a clear indication of three challenges,
+and a clear twist that separates this game out from other projects and the game used for inspiration.
+
+
+
+User: Non-gamer
+As someone who has only ever played mario kart with my nephew, I need the game to have an extensive tutorial, and the game to have a casual mode that I
+can enjoy. It should be easy to learn hard to master, and I should be able to restart quickly for the next attempt. I'd quite like a story, so I can
+enjoy the game in short bursts on the bus etc. 
+
+
+
+User: Competitive Speed-runner
+I want depth of mechanics, with lots of potential for me to show my skills. I want there to be swag strats and exploits that make my run engaging to
+watch and perform. Maybe an infinite mode that just gets unfairly hard so I can impress people.
+
+
+User: Normal gamer
+I want a game that is easy to learn. I want nice graphics, and a game I can just enjoy with immersive gameplay with satisfying physics. I do not want a
+scoring system, because I just want to enjoy it and not have a competition with anyone but myself.
+
+User Stories:
+
+As a marker:
+	1. The marker will immediately know from the first screen how to play the game
+	2. On the main menu, there will be the controls, settings menu, and a big "start" button
+	3. Once the game starts, there will be prompts for the appropriate controls when they're needed, in case they miss them on the main menu
+	4. A prompt will show to indicate that there is a rhythm element to the game, and the UI will indicate this by changing colour with the beat also
+	5. Look for three impressive elements that would clearly take coordination and effort from the development team
+	6. Is it clear that it was a team creating the game (a diverse range of features, that make the most of every team member's individual skills)
+	7. Once the game ends, it should be clear how to exit, or restart if the game is fun!
+
+As a Normal Gamer:
+ 	1. The gamer will open the game
+	2. They'll easily be able to start the game
+	3. Same as marker, but will be able to just enjoy the game without time constraints
+	4. Will be able to enjoy the graphics 
