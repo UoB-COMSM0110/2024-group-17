@@ -1,0 +1,9 @@
+User Case Reflection
+
+After identifying our stakeholders, we identified a number of issues. The first of which relates to how we can make our game cater to people who don't have much experience playing computer games, and those who have a limited time to experience them (i.e. those marking our work).
+
+It became clear that the most important characteristic our game should have is it should be very intuitive. Having analysed the use cases, I found the main way to do this was to have as much instruction as possible for the player, and provide multiple difficulty options for the user to choose from.
+
+Instructions could just be added to the main menu for players to read, but in this case, we have decided to provide tips to the player as they play the game to guide them through their first playthrough, so they can get the hang of it. We also thought it would be a good idea to provide explicit hints to the player relating to the objective of the game, such as drawing attention to the timer, and warnings about the enemies about to come onto the screen. 
+
+We realised that while it would be nice to make the game as aesthetically pleasing as possible, it will be more important to make it obvious to players what each icon represents, and the objective of the game at the same time, which will be a challenge as there is a rhythm game element to our game which may be hard to communicate to non-gamers.
