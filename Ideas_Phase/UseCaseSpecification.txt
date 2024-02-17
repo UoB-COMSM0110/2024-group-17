@@ -1,0 +1,21 @@
+Space Game Use Case Specification
+
+1. Users should see an intuitively laid-out main menu, which features basic information about controls and easy to access settings menus, as well as a way to exit the game.
+
+2. Upon clicking "Start Game", the user should be presented difficulty options, which affect many factors, such as the number of enemies, the effectiveness of weapons, and how much XP is needed to level up. After selecting their preferred option, the user is dropped into the middle of the screen, preferably with a cool animation that represents the vibe of the game (eg. dropping into a combat zone with only 3 minutes before extraction)
+
+3. The user should be given a suggestion as to what they should do when dropped in, with maybe a cool graphic over the cursor that suggests that if they click, they will boost or shoot.
+
+4. User should be reminded of the controls as necessary for the first 30 seconds, in case they missed the instructions on the main menu
+
+5. As the user starts to play, the enemies come slowly at first. There should be graphical indications on the edge of the screen which warn the player of incoming enemies, so they have as much understanding of what the aim of the game is as possible.
+
+6. The UI should pulse with the BPM of the dynamically generated music, so the rhythm game element of the product will be evident. Maybe a nice text prompt will be useful for this.
+
+7. The music should get more intense as time passes, and the timer should flash a different colour every now and then to remind the player of the actual objective of the game (to survive for three minutes in unassailable odds).
+
+8. When the user eventually gets enough XP to level up, the game should pause, and the user should be prompted clearly to select their new weapon. (This could just be a case of increasing the damage or size of the projectiles to kill more enemies at once or more quickly)
+
+9. If the player dies, they should maybe be given a reason why they died (or a tip on how to survive longer), which will help them understand how the game works in case they missed all the tips on the way.
+
+10. If the player chooses to restart, the game restarts (with the option for the player to reselect the difficulty). They should also be given the option to quit if they wish.
