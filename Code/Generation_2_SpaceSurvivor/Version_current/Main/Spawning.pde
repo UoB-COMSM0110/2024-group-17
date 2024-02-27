@@ -10,7 +10,9 @@ class Spawning{
   void randspawn(Player p1, ArrayList<Enemy> enemylist){
     if(tick-pspawn > spawncd){
        spawncd = management.currentlevel.morespawns;
-       int x,y, r =abs(rand.nextInt())%4;
+       int x = abs(rand.nextInt())%4;
+       int y = abs(rand.nextInt())%4;
+       int r = abs(rand.nextInt())%4;
        switch(r){
          case 0:
            x = (rand.nextInt()%1500 - 750);
