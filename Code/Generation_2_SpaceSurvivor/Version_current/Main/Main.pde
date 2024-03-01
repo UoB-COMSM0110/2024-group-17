@@ -52,6 +52,7 @@ double[] starsY = new double[1000];
 int[] starCloseness = new int[1000];
 double[] trailX = new double[15];
 double[] trailY = new double[15];
+boolean hasStarted = false;
 
 
 //SETUP FUNCTION: called once
@@ -84,6 +85,7 @@ void setup(){
   spawn = new Spawning();
   user = new UI(p1);
   background = new BackManager(backgroundtile);
+  
 
   frameRate(50);
 }
@@ -141,10 +143,13 @@ public void callRestart() {
 }
 
 void draw(){
+  if (hasStarted == false) {
+    MainMenu(); 
+  }
   if(!user.paused&&!user.dead){
     gameplayLoop();
   }
-  if(user.paused){
+  if(user.paused && hasStarted == true){
     Paused();
   }
   if(user.dead){
@@ -280,6 +285,19 @@ void Dead(){
   user.deathscreen(cam);  
 }
 
+void MainMenu(){
+  background(0);
+  //updateStarPositions();
+  for (int i = 0; i < 1000; i++) {
+    fill(255);
+    stroke(255);
+    ellipse((int)starsX[i], (int)starsY[i], 1, 1);
+  }
+  cam.move(p1.x,p1.y);
+  camera(camMat, cam.x,cam.y,scale,scale);
+  user.paused = true;
+  user.mainmenu(cam);
+}
 
 
 void setAnimCounter(){
