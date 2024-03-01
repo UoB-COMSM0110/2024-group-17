@@ -1,4 +1,4 @@
-class UI{
+class UI {
   int health;
   int score;
   long aTick;
@@ -6,13 +6,60 @@ class UI{
 
   boolean paused;
   boolean dead;
+  PImage optionsImage1; 
+  PImage menuImage1;
+  PImage restartImage1;
+  PImage optionsImage2; 
+  PImage menuImage2;
+  PImage restartImage2;
+  PImage optionsButtonImage;
+  PImage menuButtonImage;
+  PImage restartButtonImage;
+  
   
   UI(Player p1){
     health = p1.health;
     score = p1.points;
     paused = false;
     dead = false;
+    optionsImage1 = loadImage("data/options_button_1.png");
+    menuImage1 = loadImage("data/exit_button_1.png");
+    restartImage1 = loadImage("data/restart_button_1.png");
+    optionsImage2 = loadImage("data/options_button_2.png");
+    menuImage2 = loadImage("data/exit_button_2.png");
+    restartImage2 = loadImage("data/restart_button_2.png");
   }
+  
+  void buttonHover() {
+    // ultra hacky
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50)) {
+       optionsButtonImage = optionsImage2; 
+       print("Hovering");
+       
+    } else {
+       optionsButtonImage = optionsImage1; 
+       print("Not Hovering: " + mouseX + ", " + mouseY);
+    }
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2) && mouseY < (height / 2 + 50)) {
+       menuButtonImage = menuImage2; 
+       print("Hovering");
+    } else {
+       menuButtonImage = menuImage1; 
+       print("Not Hovering: " + mouseX + ", " + mouseY);
+    }
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 + 100) && mouseY < (height / 2 + 150)) {
+       restartButtonImage = restartImage2; 
+       print("Hovering");
+       if (mouseButton == LEFT) {
+           restart();
+       }
+    } else {
+       restartButtonImage = restartImage1; 
+       print("Not Hovering: " + mouseX + ", " + mouseY);
+    }
+    
+  }
+  
     
   void update(Player p1){
     health = p1.health;
@@ -42,11 +89,16 @@ class UI{
   }
   
   void pausescreen(Camera cam){  
-    text("Paused", cam.x,cam.y);
+    //text("Paused", cam.x,cam.y);
+    buttonHover();
+    image(optionsButtonImage, p1.x-180, p1.y-200);
+    image(menuButtonImage, p1.x-180, p1.y);
+    image(restartButtonImage, p1.x-180, p1.y + 200);
     textSize(50);
-    text("press r to restart", cam.x, cam.y+50/scale);
+    //text("press r to restart", cam.x, cam.y+50/scale);
     textSize(100);
-    noLoop();
+    
+    //noLoop();
   }
   
   void cooldowns(Camera cam,Player p1){

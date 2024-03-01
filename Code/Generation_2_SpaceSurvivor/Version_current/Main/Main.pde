@@ -29,6 +29,7 @@ PImage asymbol;
 PImage enemyImage1;
 PImage enemyImage2;
 PImage enemyImage;
+PImage baseBackground;
 
 //Global variables:
 Player p1;
@@ -51,15 +52,21 @@ long ptime;
 public long tick;
 ArrayList<Enemy> enemylist;
 ArrayList<Projectile> projectilelist;
+int[] starsX = new int[1000];
+int[] starsY = new int[1000];
 
 
 //SETUP FUNCTION: called once
 void setup(){
+  for (int i = 0; i < 1000; i++) {
+     starsX[i] = rand.nextInt(1280);
+     starsY[i] = rand.nextInt(1024);
+  }
   //setup window and settings
   ellipseMode(RADIUS);
   size(1280,1024,P2D);
   frameRate(50);
-   
+  
   setupOsc();
   setupImages();
   
@@ -98,6 +105,7 @@ void setupOsc(){
 }
 
 void setupImages(){
+  baseBackground = loadImage("background.png");
   enemyImage1 = loadImage("enemy_walk_1.png");
   enemyImage1.resize(50,50);
   enemyImage2 = loadImage("enemy_walk_2.png");
@@ -118,8 +126,8 @@ void setupImages(){
   playerLeftWalk3.resize(50,50);
   player = playerRightWalk1;
   player.resize(50,50);
-  backgroundtile = loadImage("tile.png");
-  backgroundtile.resize(2560,2560);
+  //backgroundtile = loadImage("tile.png");
+  //backgroundtile.resize(2560,2560);
 }
 
 void setticks(){
@@ -141,6 +149,10 @@ void restart(){
   ptime = millis();
 }
 
+public void callRestart() {
+   restart(); 
+}
+
 void draw(){
   if(!user.paused&&!user.dead){
     gameplayLoop();
@@ -159,16 +171,22 @@ void gameplayLoop(){
   setticks();
   
   //Draw the background to clear the frame, maybe not nessesary anymore
-  background(42);
+  background(0);
+  for (int i = 0; i < 1000; i++) {
+    fill(255);
+     ellipse(starsX[i], starsY[i], 1, 1);
+     print("Drawing star at " + starsX[i] + ", " + starsY[i]);
+  }
   
   //Move the camera to the right place
   cam.move(p1.x,p1.y);
   camera(camMat, cam.x,cam.y,scale,scale);
   
+  
   //Set up the background first, so we draw stuff on top
-  background.isdiff(p1);
-  background.renderall();
-
+  //background.isdiff(p1);
+  //background.renderall();
+  
   //Call the enemy and projectile subDraw functions
   Enemyfunctioncall();
   Projectilefunction();
