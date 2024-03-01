@@ -31,8 +31,8 @@ class weaponsystem{
   float dist=sqrt(mx*mx+my*my);
   wx +=(mx/dist)*speed;
   wy +=(my/dist)*speed;
-  println(startx,starty);
-  println(msx,msy); 
+ // println(startx,starty);
+ //println(msx,msy); 
   r1.attack(msx,msy,wx-50,wy-50);
  
   }
@@ -63,6 +63,7 @@ class weaponsystem{
   }
   }
   }
-  
-
+  int getR(){
+    return r1.r;
+  }
 }

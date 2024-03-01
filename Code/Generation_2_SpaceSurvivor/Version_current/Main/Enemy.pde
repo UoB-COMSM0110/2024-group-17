@@ -11,6 +11,9 @@ class Enemy{
   float delx;
   float dely;
   float dist;
+  float Rx;
+  float Ry;
+  float dis;
   char character;
   
   int colr;
@@ -31,6 +34,7 @@ class Enemy{
    shouldRemove = false;
    characterattributes(management);
    updateVector(p1);
+   updateRock(w1);
   }
   
   void characterattributes(levelManager management){
@@ -81,4 +85,23 @@ class Enemy{
       }
     }
   }
+  
+    void updateRock(weaponsystem w1){
+     Rx = x-w1.wx;
+     Ry = y-w1.wy;
+     dis = sqrt(Rx*Rx + Ry*Ry);
+  }
+  
+  void collTest(weaponsystem w1){
+    int ra = w1.getR();
+    println(dis,r,ra);
+    if(dis < (r + ra)){
+      println("hit!");
+      shouldRemove = true;
+      oscP5.send(kill, myBroadcastLocationKill);
+      p1.kill(1);
+      return;
+    }
+  }
+  
 }

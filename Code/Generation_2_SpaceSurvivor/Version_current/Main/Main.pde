@@ -202,8 +202,10 @@ void Enemyfunctioncall(){
   for(int i=enemylist.size()-1;i>=0;i--){
     Enemy enemy = enemylist.get(i);
     enemy.updateVector(p1);
+    enemy.updateRock(w1);
     enemy.chase();
     enemy.collideTest(p1);
+    enemy.collTest(w1);
     if(enemy.shouldRemove){
       enemylist.remove(enemy);  
     }
