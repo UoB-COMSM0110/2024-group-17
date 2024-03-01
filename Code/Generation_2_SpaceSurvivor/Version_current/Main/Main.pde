@@ -30,6 +30,7 @@ PImage enemyImage1;
 PImage enemyImage2;
 PImage enemyImage;
 PImage weaponrocket;
+PImage explo;
 
 //Global variables:
 Player p1;
@@ -121,6 +122,8 @@ void setupImages(){
   playerLeftWalk3.resize(50,50);
   weaponrocket= loadImage("rock.png");
   weaponrocket.resize(50,50);
+  explo = loadImage("exp.png");
+  explo.resize(200, 200);
   player = playerRightWalk1;
   player.resize(50,50);
   backgroundtile = loadImage("tile.png");

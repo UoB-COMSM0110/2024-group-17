@@ -35,8 +35,8 @@ class weaponsystem{
  //println(msx,msy); 
   if(r1.attack(msx,msy,wx-50,wy-50)){
     weapon_atv = false;
+    image(explo, msx-50, msy-50, 200, 200);
   }
- 
   }
   }
   public void useweapon(boolean isactive, float x, float y){
