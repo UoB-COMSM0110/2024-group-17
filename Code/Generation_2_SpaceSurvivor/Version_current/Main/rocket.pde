@@ -2,11 +2,14 @@ class rocket implements weapon{
 int ms=-1;
 int cdtime=2000;
 int r = 25;
-void attack(float mpx, float mpy,float x, float y){
+boolean attack(float mpx, float mpy,float x, float y){
  image(weaponrocket,x,y);
- if(mpx == x && mpy == y){
-   r = 75;
+ if(mpx >= x && mpy >= y){
+   println("reach");
+   r = 100;
+   return true;
  }
+ return false;
 }
 void setcd(){
 ms=millis();

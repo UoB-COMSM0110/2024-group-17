@@ -94,9 +94,9 @@ class Enemy{
   
   void collTest(weaponsystem w1){
     int ra = w1.getR();
-    println(dis,r,ra);
+    //println(dis,r,ra);
     if(dis < (r + ra)){
-      println("hit!");
+      //println("hit!");
       shouldRemove = true;
       oscP5.send(kill, myBroadcastLocationKill);
       p1.kill(1);

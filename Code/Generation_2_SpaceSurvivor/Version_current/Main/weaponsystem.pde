@@ -33,7 +33,9 @@ class weaponsystem{
   wy +=(my/dist)*speed;
  // println(startx,starty);
  //println(msx,msy); 
-  r1.attack(msx,msy,wx-50,wy-50);
+  if(r1.attack(msx,msy,wx-50,wy-50)){
+    weapon_atv = false;
+  }
  
   }
   }
@@ -64,6 +66,9 @@ class weaponsystem{
   }
   }
   int getR(){
+    if(weapon_atv == false){
+      return -999;
+    }
     return r1.r;
   }
 }
