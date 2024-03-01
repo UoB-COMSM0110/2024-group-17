@@ -185,7 +185,7 @@ void drawTrail() {
     fill(255, 165, 0);
     stroke(255, 165, 0);
     ellipse((int)trailX[i], (int)trailY[i], 15 - i, 15 - i);
-    println("Drawing ellipse at ", trailX[i], trailY[i]);
+    //println("Drawing ellipse at ", trailX[i], trailY[i]);
   }
 }
 
@@ -279,6 +279,8 @@ void Dead(){
   camera(camMat, cam.x,cam.y,scale,scale);
   user.deathscreen(cam);  
 }
+
+
 
 void setAnimCounter(){
   if (animCounter == 5) {

@@ -1,4 +1,4 @@
-enum state { PAUSED, DEAD};
+enum state { MAINMENU,PAUSED, DEAD};
 class UI {
   int health;
   int score;
@@ -16,6 +16,7 @@ class UI {
   PImage optionsButtonImage;
   PImage menuButtonImage;
   PImage restartButtonImage;
+  PImage healthBarSegment;
   
   
   UI(Player p1){
@@ -23,6 +24,7 @@ class UI {
     score = p1.points;
     paused = false;
     dead = false;
+    healthBarSegment = loadImage("data/health_bar_segment.png");
     optionsImage1 = loadImage("data/options_button_1.png");
     menuImage1 = loadImage("data/exit_button_1.png");
     restartImage1 = loadImage("data/restart_button_1.png");
@@ -67,9 +69,12 @@ class UI {
   }
   
   void healthbar(Camera cam){
+    fill(48,25,52);
+    rect(cam.x - 500 / scale, cam.y - 470 / scale, 35, 100);
     for(int i=0;i<health;i++){
        fill(0,255,255);
-       ellipse(cam.x - 500/scale,cam.y-470/scale + i*75/scale,25/scale,25/scale);
+       image(healthBarSegment, cam.x - 500 / scale, cam.y - 470 / scale + i / scale);
+       //ellipse(cam.x - 500/scale,cam.y-470/scale + i*75/scale,25/scale,25/scale);
     }
   } 
   

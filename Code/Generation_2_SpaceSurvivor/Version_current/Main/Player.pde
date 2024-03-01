@@ -56,7 +56,7 @@ class Player{
     rolllength = 50;
     Rcd = 100;
     player = inplayer;
-    health = 3;
+    health = 100;
   }
   
   void render(){
