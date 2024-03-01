@@ -1,3 +1,4 @@
+enum state { PAUSED, DEAD};
 class UI {
   int health;
   int score;
@@ -30,9 +31,9 @@ class UI {
     restartImage2 = loadImage("data/restart_button_2.png");
   }
   
-  void buttonHover() {
+  void buttonHover(state s) {
     // ultra hacky
-    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50)) {
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50) && s == state.PAUSED) {
        optionsButtonImage = optionsImage2; 
        print("Hovering");
        
@@ -85,12 +86,15 @@ class UI {
   }
   
   void deathscreen(Camera cam){
-    text("You're Dead", cam.x,cam.y);
+    text("You're Dead", cam.x,cam.y - 100);
+    buttonHover(state.DEAD);
+    image(menuButtonImage, p1.x-180, p1.y);
+    image(restartButtonImage, p1.x-180, p1.y + 200);
   }
   
   void pausescreen(Camera cam){  
     //text("Paused", cam.x,cam.y);
-    buttonHover();
+    buttonHover(state.PAUSED);
     image(optionsButtonImage, p1.x-180, p1.y-200);
     image(menuButtonImage, p1.x-180, p1.y);
     image(restartButtonImage, p1.x-180, p1.y + 200);

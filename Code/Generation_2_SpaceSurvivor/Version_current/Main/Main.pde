@@ -52,8 +52,9 @@ long ptime;
 public long tick;
 ArrayList<Enemy> enemylist;
 ArrayList<Projectile> projectilelist;
-int[] starsX = new int[1000];
-int[] starsY = new int[1000];
+double[] starsX = new double[1000];
+double[] starsY = new double[1000];
+int[] starCloseness = new int[1000];
 
 
 //SETUP FUNCTION: called once
@@ -61,6 +62,7 @@ void setup(){
   for (int i = 0; i < 1000; i++) {
      starsX[i] = rand.nextInt(1280);
      starsY[i] = rand.nextInt(1024);
+     starCloseness[i] = rand.nextInt(10);
   }
   //setup window and settings
   ellipseMode(RADIUS);
@@ -166,16 +168,35 @@ void draw(){
   //Need a start screenloop too
 }
 
+void updateStarPositions() {
+  // move the stars in a parallax type of way depending on their 'closeness' to the player
+  for (int i = 0; i < 1000; i++) {
+    if (keyspressed[3] == true) {
+     starsX[i] -= starCloseness[i] * 0.01;
+    }
+    if (keyspressed[1] == true) {
+      starsX[i] += starCloseness[i] * 0.01;
+    }
+    if (keyspressed[2] == true) {
+     starsY[i] += starCloseness[i] * 0.01;
+    }
+    if (keyspressed[0] == true){
+      starsY[i] -= starCloseness[i] * 0.01;
+    }
+     
+  }
+}
+
 void gameplayLoop(){
   //Set current tick of the frame
   setticks();
   
   //Draw the background to clear the frame, maybe not nessesary anymore
   background(0);
+  updateStarPositions();
   for (int i = 0; i < 1000; i++) {
     fill(255);
-     ellipse(starsX[i], starsY[i], 1, 1);
-     print("Drawing star at " + starsX[i] + ", " + starsY[i]);
+     ellipse((int)starsX[i], (int)starsY[i], 1, 1);
   }
   
   //Move the camera to the right place
