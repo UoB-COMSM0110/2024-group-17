@@ -35,28 +35,22 @@ class UI {
     // ultra hacky
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50) && s == state.PAUSED) {
        optionsButtonImage = optionsImage2; 
-       print("Hovering");
        
     } else {
        optionsButtonImage = optionsImage1; 
-       print("Not Hovering: " + mouseX + ", " + mouseY);
     }
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2) && mouseY < (height / 2 + 50)) {
        menuButtonImage = menuImage2; 
-       print("Hovering");
     } else {
        menuButtonImage = menuImage1; 
-       print("Not Hovering: " + mouseX + ", " + mouseY);
     }
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 + 100) && mouseY < (height / 2 + 150)) {
        restartButtonImage = restartImage2; 
-       print("Hovering");
        if (mouseButton == LEFT) {
            restart();
        }
     } else {
        restartButtonImage = restartImage1; 
-       print("Not Hovering: " + mouseX + ", " + mouseY);
     }
     
   }
