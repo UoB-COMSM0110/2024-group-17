@@ -34,6 +34,7 @@ PImage enemyImage;
 Player p1;
 Spawning spawn;
 UI user;
+weaponsystem w1;
 BackManager background;
 public levelManager management;
 ParticleSystem ps;
@@ -78,7 +79,7 @@ void setup(){
   spawn = new Spawning();
   user = new UI(p1);
   background = new BackManager(backgroundtile);
-
+  w1 = new weaponsystem();
   frameRate(50);
 }
 
@@ -139,6 +140,7 @@ void restart(){
   user = new UI(p1);
   cam = new Camera(x,y);
   ptime = millis();
+  w1= new weaponsystem();
 }
 
 void draw(){
@@ -306,6 +308,9 @@ void keyPressed(){
   }
   if(key == ' '){
     p1.roll(keyspressed); 
+  }
+  if (key == 'e'){
+  
   }
 }
 
