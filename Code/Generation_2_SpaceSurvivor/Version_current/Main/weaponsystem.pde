@@ -9,10 +9,12 @@ class weaponsystem{
   float wy;
   float startx;
   float starty;
+  int speed;
   weaponsystem(){
   weapon_id=0;
   weapon_atv=false;
   r1 = new rocket();
+  speed=10;
   }
   // basic 0 
   public void update_id(int new_id){
@@ -24,29 +26,36 @@ class weaponsystem{
   
   public void move(){
   if(weapon_atv){
-  float mx=msx-wx;
-  float my=msy-wy;
+  float mx=msx-startx;
+  float my=msy-starty;
   float dist=sqrt(mx*mx+my*my);
-  wx -=(mx/dist)*5;
-  wy -=(my/dist)*5;
-  
+  wx +=(mx/dist)*speed;
+  wy +=(my/dist)*speed;
+  println(startx,starty);
+  println(msx,msy); 
   r1.attack(msx,msy,wx-50,wy-50);
  
   }
   }
   public void useweapon(boolean isactive, float x, float y){
   if(isactive){
-     msx=mouseX;
-     msy=mouseY;
- image(weaponrocket,msx,msy);
-    weapon_atv=true;
+   
+    
     switch  (weapon_id)
   {
     case 0:
+   if(r1.checkcd()){
+      msx=((mouseX-(width/2))/scale)+x;
+      msy=((mouseY-(height/2))/scale)+y;
       wx=x;
       wy=y;
       startx=x;
       starty=y;
+      weapon_atv=true;
+      r1.setcd();
+   }
+   else {
+   }
       //r1.attack(msx,msy,x-50,y-50);
       break;//
     default: 
