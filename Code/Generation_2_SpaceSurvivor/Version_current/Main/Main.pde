@@ -29,6 +29,7 @@ PImage asymbol;
 PImage enemyImage1;
 PImage enemyImage2;
 PImage enemyImage;
+PImage weaponrocket;
 
 //Global variables:
 Player p1;
@@ -48,6 +49,7 @@ float x,y;
 int counter = 0;
 public float scale;
 boolean[] keyspressed = new boolean[5];
+boolean is_shoot = false;
 long ptime;
 public long tick;
 ArrayList<Enemy> enemylist;
@@ -117,6 +119,8 @@ void setupImages(){
   playerLeftWalk2.resize(50,50);
   playerLeftWalk3 = loadImage("walk_l_3.png");
   playerLeftWalk3.resize(50,50);
+  weaponrocket= loadImage("rock.png");
+  weaponrocket.resize(50,50);
   player = playerRightWalk1;
   player.resize(50,50);
   backgroundtile = loadImage("tile.png");
@@ -180,6 +184,9 @@ void gameplayLoop(){
   p1.move(keyspressed);
   p1.render();
   
+  //Update weapon info
+  w1.useweapon(is_shoot,p1.x,p1.y);
+  w1.move();
   //Update the UI info
   user.update(p1);
   user.healthbar(cam);
@@ -310,7 +317,7 @@ void keyPressed(){
     p1.roll(keyspressed); 
   }
   if (key == 'e'){
-  
+    is_shoot = true;
   }
 }
 
@@ -326,6 +333,9 @@ void keyReleased(){
   }
   if(key == 'd'){
     keyspressed[3] = false;
+  }
+  if(key == 'e'){
+    is_shoot = false;
   }
 }
 
