@@ -77,7 +77,7 @@ class weaponsystem{
     if( weapon_atv == 2){
       if(time_remain()<500){
         println("called",time_remain());
-      r1.rocketboom(msx-50,msy-50);
+      r1.rocketboom(wx,wy);
       return r1.boom_r;
       }
       else{

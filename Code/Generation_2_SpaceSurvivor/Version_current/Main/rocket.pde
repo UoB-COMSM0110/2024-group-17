@@ -34,6 +34,7 @@ ms_now=(ms_now-ms)/1000;
 return ms_now;
 }
 void rocketboom(float msx,float msy){
-image(explo, msx, msy, 200, 200);
+  int size = 400;
+image(explo, msx-size/2, msy-size/2,size,size);
 }
 }

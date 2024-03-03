@@ -69,6 +69,7 @@ void setup(){
   ptime = millis();
   cam = new Camera(x,y);
   p1 = new Player(50,50,player);
+  w1 = new weaponsystem();
   management = new levelManager();
   projectilelist = new ArrayList<Projectile>();
   EnemyList = new ArrayList<Enemy>();  
@@ -85,23 +86,10 @@ void setupImages(){
   enemyImage2.resize(50,50);
   enemyImage = enemyImage1;
   enemyImage.resize(50,50);
-  playerRightWalk1 = loadImage("walk_r_1.png"); 
-  playerRightWalk1.resize(50,50);
-  playerRightWalk2 = loadImage("walk_r_2.png");
-  playerRightWalk2.resize(50,50);
-  playerRightWalk3 = loadImage("walk_r_3.png");
-  playerRightWalk3.resize(50,50);
-  playerLeftWalk1 = loadImage("walk_l_1.png"); 
-  playerLeftWalk1.resize(50,50);
-  playerLeftWalk2 = loadImage("walk_l_2.png");
-  playerLeftWalk2.resize(50,50);
-  playerLeftWalk3 = loadImage("walk_l_3.png");
-  playerLeftWalk3.resize(50,50);
+  player = loadImage("player_ufo.png"); 
   weaponrocket= loadImage("rock.png");
   weaponrocket.resize(50,50);
   explo = loadImage("exp.png");
-  explo.resize(200, 200);
-  player = playerRightWalk1;
   player.resize(50,50);
   //backgroundtile = loadImage("tile.png");
   //backgroundtile.resize(2560,2560);
@@ -244,6 +232,8 @@ void Enemyfunctioncall(){
      En.updateVector(p1);
      En.chase(i,size);
      En.collideTest(p1);
+     En.updateRock(w1);
+     En.collTest(w1);
      image(enemyImage, En.x - 50, En.y - 50);       
   } 
   for(int i=size-1;i>=0;i--){

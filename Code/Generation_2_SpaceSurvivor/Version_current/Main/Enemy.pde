@@ -214,7 +214,7 @@ class Enemy implements Comparable<Enemy>{
       w1.hit();
       //println(ra);
       shouldRemove = true;
-      oscP5.send(kill, myBroadcastLocationKill);
+
       p1.kill(1);
       return;
     }
