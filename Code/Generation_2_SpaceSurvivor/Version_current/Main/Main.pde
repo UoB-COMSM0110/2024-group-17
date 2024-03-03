@@ -7,17 +7,12 @@ import processing.awt.PGraphicsJava2D;
 PImage testimage;
 PImage backgroundtile;
 PImage player;
-PImage playerRightWalk1;
-PImage playerRightWalk2;
-PImage playerRightWalk3;
-PImage playerLeftWalk1;
-PImage playerLeftWalk2;
-PImage playerLeftWalk3;
+PImage playerImage;
 PImage asymbol;
 PImage enemyImage1;
 PImage enemyImage2;
 PImage enemyImage;
-
+PImage baseBackground;
 //Global variables:
 Player p1;
 Spawning spawn;
@@ -38,10 +33,21 @@ boolean[] keyspressed = new boolean[5];
 long ptime;
 public long tick;
 ArrayList<Projectile> projectilelist;
-ArrayList<Enemy> EnemyList;
+double[] starsX = new double[1000];
+double[] starsY = new double[1000];
+int[] starCloseness = new int[1000];
+double[] trailX = new double[15];
+double[] trailY = new double[15];
+boolean hasStarted = false;
+
 
 //SETUP FUNCTION: called once
 void setup(){
+  for (int i = 0; i < 1000; i++) {
+     starsX[i] = rand.nextInt(1280);
+     starsY[i] = rand.nextInt(1024);
+     starCloseness[i] = rand.nextInt(10);
+  }
   //setup window and settings
   ellipseMode(RADIUS);
   size(1280,1024,P2D);
@@ -68,28 +74,17 @@ void setup(){
 } 
 
 void setupImages(){
-  enemyImage1 = loadImage("enemy_walk_1.png");
+  enemyImage1 = loadImage("data/enemy_walk_1.png");
   enemyImage1.resize(50,50);
-  enemyImage2 = loadImage("enemy_walk_2.png");
+  enemyImage2 = loadImage("data/enemy_walk_2.png");
   enemyImage2.resize(50,50);
   enemyImage = enemyImage1;
   enemyImage.resize(50,50);
-  playerRightWalk1 = loadImage("walk_r_1.png"); 
-  playerRightWalk1.resize(50,50);
-  playerRightWalk2 = loadImage("walk_r_2.png");
-  playerRightWalk2.resize(50,50);
-  playerRightWalk3 = loadImage("walk_r_3.png");
-  playerRightWalk3.resize(50,50);
-  playerLeftWalk1 = loadImage("walk_l_1.png"); 
-  playerLeftWalk1.resize(50,50);
-  playerLeftWalk2 = loadImage("walk_l_2.png");
-  playerLeftWalk2.resize(50,50);
-  playerLeftWalk3 = loadImage("walk_l_3.png");
-  playerLeftWalk3.resize(50,50);
-  player = playerRightWalk1;
+  playerImage = loadImage("data/player_ufo.png");
+  player = playerImage;
   player.resize(50,50);
-  backgroundtile = loadImage("tile.png");
-  backgroundtile.resize(2560,2560);
+  //backgroundtile = loadImage("tile.png");
+  //backgroundtile.resize(2560,2560);
 }
 
 void setticks(){
@@ -110,11 +105,18 @@ void restart(){
   ptime = millis();
 }
 
+public void callRestart() {
+   restart(); 
+}
+
 void draw(){
+  if (hasStarted == false) {
+    MainMenu(); 
+  }
   if(!user.paused&&!user.dead){
     gameplayLoop();
   }
-  if(user.paused){
+  if(user.paused && hasStarted == true){
     Paused();
   }
   if(user.dead){
@@ -124,22 +126,72 @@ void draw(){
   //Need a start screenloop too
 }
 
+void updateStarPositions() {
+  // move the stars in a parallax type of way depending on their 'closeness' to the player
+  for (int i = 0; i < 1000; i++) {
+    if (keyspressed[3] == true) {
+     starsX[i] -= starCloseness[i] * 0.01;
+    }
+    if (keyspressed[1] == true) {
+      starsX[i] += starCloseness[i] * 0.01;
+    }
+    if (keyspressed[2] == true) {
+     starsY[i] -= starCloseness[i] * 0.01;
+    }
+    if (keyspressed[0] == true){
+      starsY[i] += starCloseness[i] * 0.01;
+    }     
+  }
+}
+
+void updateTrail() {
+  for (int i = trailX.length - 1; i > 0; i--) {
+      trailX[i] = trailX[i - 1];
+      trailY[i] = trailY[i - 1];
+  }
+  trailX[0] = p1.x - 20;
+  trailY[0] = p1.y - 5;
+}
+
+void drawTrail() {
+  for (int i = 1; i < 15; i++) {
+    fill(255, 165, 0);
+    stroke(255, 165, 0);
+    ellipse((int)trailX[i], (int)trailY[i], 15 - i, 15 - i);
+    //println("Drawing ellipse at ", trailX[i], trailY[i]);
+  }
+}
+
+
+
 void gameplayLoop(){
   //Set current tick of the frame
   setticks();
   //println(frameRate);
   
   //Draw the background to clear the frame, maybe not nessesary anymore
-  background(42);
-  
-  //Move the camera to the right place
+  background(0);
+  updateStarPositions();
+  for (int i = 0; i < 1000; i++) {
+    fill(255);
+    stroke(255);
+    ellipse((int)starsX[i], (int)starsY[i], 1, 1);
+  }
   cam.move(p1.x,p1.y);
   camera(camMat, cam.x,cam.y,scale,scale);
   
-  //Set up the background first, so we draw stuff on top
-  background.isdiff(p1);
-  background.renderall();
+  // incomplete; need to work out how to draw the trail
+  updateTrail();
+  drawTrail();
 
+  
+  //Move the camera to the right place
+
+  
+  //Set up the background first, so we draw stuff on top
+  //background.isdiff(p1);
+  //background.renderall();
+  
   //Call the enemy and projectile subDraw functions
   Enemyfunctioncall();
   Projectilefunction();
@@ -204,6 +256,21 @@ void Dead(){
   user.deathscreen(cam);  
 }
 
+void MainMenu(){
+  background(0);
+  //updateStarPositions();
+  for (int i = 0; i < 1000; i++) {
+    fill(255);
+    stroke(255);
+    ellipse((int)starsX[i], (int)starsY[i], 1, 1);
+  }
+  cam.move(p1.x,p1.y);
+  camera(camMat, cam.x,cam.y,scale,scale);
+  user.paused = true;
+  user.mainmenu(cam);
+}
+
+
 void setAnimCounter(){
   if (animCounter == 5) {
     if (enemyImage == enemyImage1) {
@@ -216,21 +283,6 @@ void setAnimCounter(){
   animCounter++; 
 }
 
-void updateAnim() { 
-  if (counter % 100 == 50) {
-     if (player == playerRightWalk1) {
-        player = playerRightWalk2; 
-        counter = 0;
-     } else if (player == playerRightWalk2) {
-        player = playerRightWalk3; 
-        counter = 0;
-     } else if (player == playerRightWalk3) {
-        player = playerRightWalk1; 
-        counter = 0;
-     }
-  }
-  counter++;
-}
 
 
 //Function to check for the Attack 
@@ -246,7 +298,6 @@ void mousePressed(){
 void keyPressed(){
   if(key == 'w'){
     keyspressed[0] = true;
-    updateAnim();
   }
   if(key == 'a'){
     keyspressed[1] = true;

@@ -56,47 +56,12 @@ class Player{
     rolllength = 50;
     Rcd = 100;
     player = inplayer;
-    health = 3;
+    health = 100;
   }
   
   void render(){
-    fill(255);
-    if (xmom > 0 && (ymom >= 0 || ymom < 0)) {
-       counter++;
-       if (player == playerLeftWalk1 || player == playerLeftWalk2 || player == playerLeftWalk3) {
-         player = playerRightWalk1; 
-       }
-       if (counter % 5 == 0) {
-       if (player == playerRightWalk1) {
-          player = playerRightWalk2; 
-          counter = 0;
-       } else if (player == playerRightWalk2) {
-          player = playerRightWalk3; 
-          counter = 0;
-       } else if (player == playerRightWalk3) {
-          player = playerRightWalk1; 
-          counter = 0;
-       }
-      } 
-     }
-     if (xmom < 0 && (ymom >= 0 || ymom < 0)) {
-       counter++;
-       if (player == playerRightWalk1 || player == playerRightWalk2 || player == playerRightWalk3) {
-         player = playerLeftWalk1; 
-       }
-       if (counter % 5 == 0) {
-       if (player == playerLeftWalk1) {
-          player = playerLeftWalk2; 
-          counter = 0;
-       } else if (player == playerLeftWalk2) {
-          player = playerLeftWalk3; 
-          counter = 0;
-       } else if (player == playerLeftWalk3) {
-          player = playerLeftWalk1; 
-          counter = 0;
-       }
-      } 
-     }
+    fill(255, 165, 0);
+    ellipse(x- 25, y, 10, 10);
     image(player,x-50,y-50);
   }
   
