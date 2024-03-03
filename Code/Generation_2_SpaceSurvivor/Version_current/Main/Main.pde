@@ -32,6 +32,7 @@ public float scale;
 boolean[] keyspressed = new boolean[5];
 long ptime;
 public long tick;
+ArrayList<Enemy> EnemyList;
 ArrayList<Projectile> projectilelist;
 double[] starsX = new double[1000];
 double[] starsY = new double[1000];
