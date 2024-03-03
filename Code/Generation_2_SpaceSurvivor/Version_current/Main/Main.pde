@@ -12,11 +12,14 @@ PImage asymbol;
 PImage enemyImage1;
 PImage enemyImage2;
 PImage enemyImage;
-PImage baseBackground;
+PImage baseBackground;PImage weaponrocket;
+PImage explo;
+
 //Global variables:
 Player p1;
 Spawning spawn;
 UI user;
+weaponsystem w1;
 BackManager background;
 public levelManager management;
 ParticleSystem ps;
@@ -30,6 +33,7 @@ float x,y;
 int counter = 0;
 public float scale;
 boolean[] keyspressed = new boolean[5];
+boolean is_shoot = false;
 long ptime;
 public long tick;
 ArrayList<Enemy> EnemyList;
@@ -81,8 +85,23 @@ void setupImages(){
   enemyImage2.resize(50,50);
   enemyImage = enemyImage1;
   enemyImage.resize(50,50);
-  playerImage = loadImage("data/player_ufo.png");
-  player = playerImage;
+  playerRightWalk1 = loadImage("walk_r_1.png"); 
+  playerRightWalk1.resize(50,50);
+  playerRightWalk2 = loadImage("walk_r_2.png");
+  playerRightWalk2.resize(50,50);
+  playerRightWalk3 = loadImage("walk_r_3.png");
+  playerRightWalk3.resize(50,50);
+  playerLeftWalk1 = loadImage("walk_l_1.png"); 
+  playerLeftWalk1.resize(50,50);
+  playerLeftWalk2 = loadImage("walk_l_2.png");
+  playerLeftWalk2.resize(50,50);
+  playerLeftWalk3 = loadImage("walk_l_3.png");
+  playerLeftWalk3.resize(50,50);
+  weaponrocket= loadImage("rock.png");
+  weaponrocket.resize(50,50);
+  explo = loadImage("exp.png");
+  explo.resize(200, 200);
+  player = playerRightWalk1;
   player.resize(50,50);
   //backgroundtile = loadImage("tile.png");
   //backgroundtile.resize(2560,2560);
@@ -104,6 +123,7 @@ void restart(){
   user = new UI(p1);
   cam = new Camera(x,y);
   ptime = millis();
+  w1= new weaponsystem();
 }
 
 public void callRestart() {
@@ -202,6 +222,9 @@ void gameplayLoop(){
   p1.move(keyspressed);
   p1.render();
   
+  //Update weapon info
+  w1.useweapon(is_shoot,p1.x,p1.y);
+  w1.move();
   //Update the UI info
   user.update(p1);
   user.healthbar(cam);
@@ -330,6 +353,9 @@ void keyPressed(){
   if(key == ' '){
     p1.roll(keyspressed); 
   }
+  if (key == 'e'){
+    is_shoot = true;
+  }
 }
 
 void keyReleased(){
@@ -344,6 +370,9 @@ void keyReleased(){
   }
   if(key == 'd'){
     keyspressed[3] = false;
+  }
+  if(key == 'e'){
+    is_shoot = false;
   }
 }
 

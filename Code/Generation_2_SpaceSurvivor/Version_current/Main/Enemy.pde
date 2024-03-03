@@ -16,6 +16,9 @@ class Enemy implements Comparable<Enemy>{
   float delx;
   float dely;
   float dist;
+  float Rx;
+  float Ry;
+  float dis;
   char character;
   
   int colr;
@@ -38,6 +41,7 @@ class Enemy implements Comparable<Enemy>{
    updateVector(p1);
    Vx = -delx;
    Vy = -dely;
+   updateRock(w1);
   }
   
   void characterattributes(levelManager management){
@@ -194,4 +198,26 @@ class Enemy implements Comparable<Enemy>{
   public int compareTo(Enemy other){
     return Bearing.compareTo(other.Bearing); 
   }
+  
+    void updateRock(weaponsystem w1){
+     Rx = x-w1.wx;
+     Ry = y-w1.wy;
+     dis = sqrt(Rx*Rx + Ry*Ry);
+  }
+  
+  void collTest(weaponsystem w1){
+    
+       int ra = w1.getR();
+    //println(dis,r,ra);
+    if(dis < (r + ra)){
+     // println("hit!");
+      w1.hit();
+      //println(ra);
+      shouldRemove = true;
+      oscP5.send(kill, myBroadcastLocationKill);
+      p1.kill(1);
+      return;
+    }
+  }
+  
 }
