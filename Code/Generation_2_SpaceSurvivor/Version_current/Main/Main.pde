@@ -1,18 +1,6 @@
 
-//Networking variables: if not working please install the OscP5 library
-import oscP5.*;
-import netP5.*;
 import java.util.Random;
-OscP5 oscP5;
-NetAddress myBroadcastLocationAttack;
-NetAddress myBroadcastLocationKill;
-NetAddress myBroadcastLocationStop;
-NetAddress myBroadcastLocationStart;
-OscMessage attack;
-OscMessage kill;
-OscMessage stopsignal;
-OscMessage startsignal;
-
+import java.util.Collections;
 
 //All image files
 import processing.awt.PGraphicsJava2D;
@@ -49,9 +37,8 @@ public float scale;
 boolean[] keyspressed = new boolean[5];
 long ptime;
 public long tick;
-ArrayList<Enemy> enemylist;
 ArrayList<Projectile> projectilelist;
-
+ArrayList<Enemy> EnemyList;
 
 //SETUP FUNCTION: called once
 void setup(){
@@ -60,7 +47,6 @@ void setup(){
   size(1280,1024,P2D);
   frameRate(50);
    
-  setupOsc();
   setupImages();
   
   //Initialise global variables
@@ -73,29 +59,13 @@ void setup(){
   cam = new Camera(x,y);
   p1 = new Player(50,50,player);
   management = new levelManager();
-  enemylist = new ArrayList<Enemy>();
   projectilelist = new ArrayList<Projectile>();
+  EnemyList = new ArrayList<Enemy>();  
   spawn = new Spawning();
   user = new UI(p1);
   background = new BackManager(backgroundtile);
-
   frameRate(50);
-}
-
-void setupOsc(){
-  oscP5 = new OscP5(this, 6500);
-  myBroadcastLocationAttack = new NetAddress("127.0.0.1", 6449);
-  myBroadcastLocationKill = new NetAddress("127.0.0.1", 6448);
-  myBroadcastLocationStop = new NetAddress("127.0.0.1", 6447);
-  myBroadcastLocationStart = new NetAddress("127.0.0.1", 6446);
-  attack = new OscMessage("/foo/notes");
-  attack.add(1);
-  kill = new OscMessage("/foo/notes2");
-  kill.add(2);
-  stopsignal = new OscMessage("/foo/notes3");
-  startsignal = new OscMessage("/foo/notes4"); 
-  
-}
+} 
 
 void setupImages(){
   enemyImage1 = loadImage("enemy_walk_1.png");
@@ -133,7 +103,6 @@ void restart(){
 //  tick = 0;
   management = new levelManager();
   p1 = new Player(0,0,player);
-  enemylist = new ArrayList<Enemy>();
   projectilelist = new ArrayList<Projectile>();
   spawn = new Spawning();
   user = new UI(p1);
@@ -151,12 +120,14 @@ void draw(){
   if(user.dead){
     Dead(); 
   }
+  println(frameRate,EnemyList.size());
   //Need a start screenloop too
 }
 
 void gameplayLoop(){
   //Set current tick of the frame
   setticks();
+  //println(frameRate);
   
   //Draw the background to clear the frame, maybe not nessesary anymore
   background(42);
@@ -185,24 +156,27 @@ void gameplayLoop(){
   user.score(cam);
   
   //Check for spawns for the next frame;
-  spawn.randspawn(p1,enemylist);
+  spawn.randspawn(p1);
   management.checknext();   
 }
 
 void Enemyfunctioncall(){
-  for(int i=enemylist.size()-1;i>=0;i--){
-    Enemy enemy = enemylist.get(i);
-    enemy.updateVector(p1);
-    enemy.chase();
-    enemy.collideTest(p1);
-    if(enemy.shouldRemove){
-      enemylist.remove(enemy);  
+  Collections.sort(EnemyList);
+  int size = EnemyList.size();
+  for(int i=0;i<size;i++){
+     Enemy En = EnemyList.get(i);
+     En.updateVector(p1);
+     En.chase(i,size);
+     En.collideTest(p1);
+     image(enemyImage, En.x - 50, En.y - 50);       
+  } 
+  for(int i=size-1;i>=0;i--){
+  Enemy En = EnemyList.get(i);
+    if(En.shouldRemove){
+      EnemyList.remove(En);  
     }
-    else{
-      image(enemyImage, enemy.x - 50, enemy.y - 50);
-    }
-  }   
-}
+  }  
+} 
 
 
 void Projectilefunction(){
@@ -261,9 +235,7 @@ void updateAnim() {
 
 //Function to check for the Attack 
 void mousePressed(){
-  if(mouseButton == LEFT && !p1.bAoncd && !p1.rolling && !p1.attacking && (tick - p1.aTick > p1.bAcd)){
-     println("click registered");   
-     oscP5.send(attack, myBroadcastLocationAttack);
+  if(mouseButton == LEFT && !p1.bAoncd && !p1.rolling && !p1.attacking && (tick - p1.aTick > p1.bAcd)){ 
      float mpx = ((mouseX-(width/2))/scale)+p1.x;
      float mpy = ((mouseY-(height/2))/scale)+p1.y;
      p1.basicAttack(mpx,mpy);
@@ -299,7 +271,6 @@ void keyPressed(){
       exit(); 
     }
     user.paused = !user.paused;
-    oscP5.send(stopsignal,myBroadcastLocationStop);
     if(!user.paused){
        loop();
     }
@@ -322,23 +293,6 @@ void keyReleased(){
   if(key == 'd'){
     keyspressed[3] = false;
   }
-}
-
-
-//Code to manage messages from ChucK
-void oscEvent(OscMessage themessage){
-   startBeat(themessage.get(0).intValue());
-  
-}
-void startBeat(int tempo){
-   starttick = tick; 
-   beatlength = 6000/tempo;    
-}
-int beatdist(){
-  if(beatlength==0){
-    return 0;
-  }
-  return (int)(tick-starttick)%beatlength - beatlength;
 }
 
 

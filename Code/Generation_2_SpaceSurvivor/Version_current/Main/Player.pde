@@ -45,7 +45,7 @@ class Player{
     r = 25.0;
     points = 0; 
     grace = 100;
-    vuln = true;
+    vuln = false;
     bAoncd = false;
     attacking = false;
     ptick=0;
@@ -153,7 +153,7 @@ class Player{
      }
      if(!vuln){
        if(tick-dTick > grace){
-         vuln = true;
+         vuln = false;
        }
      } 
   }
@@ -184,8 +184,7 @@ class Player{
       xmom = (mpx-x)/10;
       ymom = (mpy-y)/10;
       aTick = tick;
-      bAcd = 75 + abs(beatdist());
-      println(bAcd);
+      bAcd = 75;
       attacking = true;
   }
  

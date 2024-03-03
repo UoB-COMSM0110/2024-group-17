@@ -1,7 +1,6 @@
 class Camera{
   float x;
   float y;
-  int speed;
   
   Camera(float startingx, float startingy){
     x = startingx;

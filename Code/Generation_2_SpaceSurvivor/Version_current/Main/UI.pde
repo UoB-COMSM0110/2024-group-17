@@ -33,7 +33,7 @@ class UI{
   
   void score(Camera cam){
     textAlign(CENTER);
-    textSize(100+abs(beatdist()));
+    textSize(100);
     text( score,cam.x,cam.y+470/scale);
   }
   
