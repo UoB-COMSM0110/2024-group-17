@@ -98,8 +98,8 @@ class Enemy implements Comparable<Enemy>{
         Enemy otherEnemy = EnemyList.get(i);
         float dist = sqrt((x - otherEnemy.x)*(x - otherEnemy.x) + (y - otherEnemy.y)*(y - otherEnemy.y));
         if(dist <500){
-          deltaVx-=(otherEnemy.Vx-Vx)*0.001;
-          deltaVy-=(otherEnemy.Vy-Vy)*0.001;        
+          deltaVx-=(otherEnemy.Vx-Vx)*0.0005;
+          deltaVy-=(otherEnemy.Vy-Vy)*0.0005;        
         }
         if(dist<100){
           deltaVx +=500000*(x-otherEnemy.x)/(dist*dist*dist); 

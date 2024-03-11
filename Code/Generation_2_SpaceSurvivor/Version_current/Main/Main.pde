@@ -127,6 +127,10 @@ void restart(){
   cam = new Camera(x,y);
   ptime = millis();
   w1= new weaponsystem();
+  for(int i=EnemyList.size()-1;i>=0;i--){
+  Enemy En = EnemyList.get(i);
+     EnemyList.remove(En);  
+  }  
 }
 
 public void callRestart() {
