@@ -90,10 +90,10 @@ class Enemy implements Comparable<Enemy>{
     // text(character,x,y+r/2);
   }
   
-  void chase(int EnemyIndex,int size){
+  void chase(int EnemyIndex,int size, int knockMod){
     float deltaVx=0;
     float deltaVy=0;
-    for(int i=0;i<EnemyList.size();i++){
+    for(int i=0;i<size;i++){
       if(i!=EnemyIndex){
         Enemy otherEnemy = EnemyList.get(i);
         float dist = sqrt((x - otherEnemy.x)*(x - otherEnemy.x) + (y - otherEnemy.y)*(y - otherEnemy.y));
@@ -112,13 +112,13 @@ class Enemy implements Comparable<Enemy>{
       }
     }
     
-    deltaVx+=(-delx)*1;
-    deltaVy+=(-dely)*1;
+    deltaVx+=knockMod*(-delx)*1;
+    deltaVy+=knockMod*(-dely)*1;
     
     float deltaVmag =sqrt(deltaVx*deltaVx+deltaVy*deltaVy); 
 
-    deltaVx = 0.25*deltaVx/deltaVmag;
-    deltaVy = 0.25*deltaVy/deltaVmag;
+    deltaVx = deltaVx/deltaVmag;
+    deltaVy = deltaVy/deltaVmag;
 
     Vx+=deltaVx;
     Vy+=deltaVy;
@@ -127,60 +127,18 @@ class Enemy implements Comparable<Enemy>{
     
     Vy = Vy/Vmag;
     Vx = Vx/Vmag;
-    x +=(Vx)*Speed;   
-    y +=(Vy)*Speed;    
-     
-    
-    
-    
-    /*
-    int startI = i;
-    float theta=0;
-    Enemy otherEnemy;
-    if(size==1){
-      return;
+
+    if(knockMod<1){
+      x +=(Vx)*Speed*-knockMod*800/(dist);   
+      y +=(Vy)*Speed*-knockMod*800/(dist); 
     }
-    do{
-      if(i==size-1){
-        i=-1;
-      }
-      i++;
-      if(i==startI){
-        break;
-      }
-      otherEnemy = EnemyList.get(i);
-      float magVres = sqrt((otherEnemy.x-x)*(otherEnemy.x-x) + (otherEnemy.y-y)*(otherEnemy.y-y));
-      float delTheta = Bearing - otherEnemy.Bearing;
-      if(magVres<200 && delTheta < PI/4){
-        theta -= 1000*(delTheta)/(magVres);     
-      }
-    }while(otherEnemy.Bearing - Bearing < PI/2);
-    i = startI;
-    do{
-      if(i==0){
-        i = size;
-      }
-      i--;
-      if(i==startI){
-        break;
-      }
-      otherEnemy = EnemyList.get(i);
-      float magVres = sqrt((otherEnemy.x-x)*(otherEnemy.x-x) + (otherEnemy.y-y)*(otherEnemy.y-y));
-      float delTheta = Bearing - otherEnemy.Bearing;
-      if(magVres<2000 && delTheta < PI/4){
-        theta -= 1000*(delTheta)/(magVres);     
-      }
-    }while(otherEnemy.Bearing - Bearing > PI/2);
-    println(theta);
-    float delx2 = delx*cos(theta) - dely*sin(theta);
-    dely = delx*sin(theta) + dely*cos(theta);
-    delx = delx2;
-    x -= (delx/dist) * speed;
-    y -= (dely/dist) * speed;
-    */
+    else{
+      x +=(Vx)*Speed;   
+      y +=(Vy)*Speed;      
+    }
   }
   
-  void collideTest(Player p1){    
+  void collideTest(Player p1){
     if(dist < (r + p1.r)){
       //Collision detected
       //p1.xmom -= delx * 1/dist * bounce ;
@@ -205,9 +163,7 @@ class Enemy implements Comparable<Enemy>{
      dis = sqrt(Rx*Rx + Ry*Ry);
   }
   
-  void collTest(weaponsystem w1){
-    
-       int ra = w1.getR();
+  void collTest(weaponsystem w1,int ra){
     //println(dis,r,ra);
     if(dis < (r + ra)){
      // println("hit!");

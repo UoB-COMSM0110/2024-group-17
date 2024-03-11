@@ -1,6 +1,6 @@
  class Spawning{
   long pspawn;
-  int spawncd;
+  float spawncd;
   int groupSizeIndex;
   boolean GroupSet = false;
   int x,y,r;
@@ -13,6 +13,7 @@
   
   void randspawn(Player p1){
     if(tick-pspawn > spawncd){
+      spawncd = spawncd * (100.0/(float)tick);
        //spawncd = management.currentlevel.morespawns;
 
        if(!GroupSet){

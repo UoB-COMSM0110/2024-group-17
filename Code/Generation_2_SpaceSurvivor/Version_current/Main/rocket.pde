@@ -1,6 +1,6 @@
 class rocket implements weapon{
 int ms=-1;
-int cdtime=2000;
+int cdtime=200;
 int r ;
 int boom_r=200;
 int MAX = 600;

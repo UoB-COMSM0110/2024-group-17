@@ -1,6 +1,11 @@
 
 import java.util.Random;
 import java.util.Collections;
+import processing.sound.*;
+SoundFile file;
+SoundFile StartMusic;
+SoundFile GameMusic;
+SoundFile DeathMusic;
 
 //All image files
 import processing.awt.PGraphicsJava2D;
@@ -32,7 +37,7 @@ int beatlength = 0;
 float x,y;
 int counter = 0;
 public float scale;
-boolean[] keyspressed = new boolean[5];
+boolean[] keyspressed = new boolean[6];
 boolean is_shoot = false;
 long ptime;
 public long tick;
@@ -44,6 +49,10 @@ int[] starCloseness = new int[1000];
 double[] trailX = new double[15];
 double[] trailY = new double[15];
 boolean hasStarted = false;
+boolean StartMusicPlaying = false;
+boolean GameMusicPlaying = false;
+boolean DeathMusicPlaying = false;
+int knockbackModifier =1;
 
 
 //SETUP FUNCTION: called once
@@ -67,6 +76,9 @@ void setup(){
   scale = .5;
   tick = 0;
   ptime = millis();
+  StartMusic = new SoundFile(this,"TitleScreen.wav");
+  GameMusic = new SoundFile(this,"GameMusic.wav");
+  DeathMusic = new SoundFile(this,"DeathMusic.wav");
   cam = new Camera(x,y);
   p1 = new Player(50,50,player);
   w1 = new weaponsystem();
@@ -91,6 +103,7 @@ void setupImages(){
   weaponrocket.resize(50,50);
   explo = loadImage("exp.png");
   player.resize(50,50);
+
   //backgroundtile = loadImage("tile.png");
   //backgroundtile.resize(2560,2560);
 }
@@ -103,6 +116,8 @@ void setticks(){
 //Reset the global variables for a new run.
 void restart(){
   loop();
+  GameMusic.stop();
+  GameMusicPlaying = false;
 //  tick = 0;
   management = new levelManager();
   p1 = new Player(0,0,player);
@@ -131,7 +146,7 @@ void draw(){
   if(user.dead){
     Dead(); 
   }
-  println(frameRate,EnemyList.size());
+  //println(frameRate,EnemyList.size());
   //Need a start screenloop too
 }
 
@@ -180,6 +195,16 @@ void gameplayLoop(){
   
   //Draw the background to clear the frame, maybe not nessesary anymore
   background(0);
+  
+  if(!GameMusicPlaying){
+    StartMusicPlaying = false;
+    StartMusic.stop();
+    DeathMusicPlaying = false;
+    DeathMusic.stop();
+    GameMusic.play();
+    GameMusicPlaying = true;
+  }
+  
   updateStarPositions();
   for (int i = 0; i < 1000; i++) {
     fill(255);
@@ -189,17 +214,8 @@ void gameplayLoop(){
   cam.move(p1.x,p1.y);
   camera(camMat, cam.x,cam.y,scale,scale);
   
-  // incomplete; need to work out how to draw the trail
   updateTrail();
   drawTrail();
-
-  
-  //Move the camera to the right place
-
-  
-  //Set up the background first, so we draw stuff on top
-  //background.isdiff(p1);
-  //background.renderall();
   
   //Call the enemy and projectile subDraw functions
   Enemyfunctioncall();
@@ -227,13 +243,14 @@ void gameplayLoop(){
 void Enemyfunctioncall(){
   Collections.sort(EnemyList);
   int size = EnemyList.size();
+  int ra = w1.getR();
   for(int i=0;i<size;i++){
      Enemy En = EnemyList.get(i);
      En.updateVector(p1);
-     En.chase(i,size);
+     En.chase(i,size,knockbackModifier);
      En.collideTest(p1);
      En.updateRock(w1);
-     En.collTest(w1);
+     En.collTest(w1,ra);
      image(enemyImage, En.x - 50, En.y - 50);       
   } 
   for(int i=size-1;i>=0;i--){
@@ -266,6 +283,12 @@ void Paused(){
 }
 
 void Dead(){
+  if(!DeathMusicPlaying){
+    GameMusic.stop();
+    GameMusicPlaying = false;
+    DeathMusic.play();
+    DeathMusicPlaying = true;
+  }
   camera(camMat, cam.x,cam.y,scale,scale);
   user.deathscreen(cam);  
 }
@@ -282,8 +305,15 @@ void MainMenu(){
   camera(camMat, cam.x,cam.y,scale,scale);
   user.paused = true;
   user.mainmenu(cam);
+  if(!StartMusicPlaying){
+    StartMusic.play();
+    StartMusicPlaying = true;
+    DeathMusicPlaying = false;
+    DeathMusic.stop();
+    GameMusicPlaying = false;
+    GameMusic.stop();
+  }
 }
-
 
 void setAnimCounter(){
   if (animCounter == 5) {
@@ -336,12 +366,17 @@ void keyPressed(){
       exit(); 
     }
     user.paused = !user.paused;
+    if(user.paused){
+      GameMusic.amp(0.25);
+    }
     if(!user.paused){
+       GameMusic.amp(1);
        loop();
     }
   }
   if(key == ' '){
-    p1.roll(keyspressed); 
+    keyspressed[5] = true;
+    //p1.roll(keyspressed); 
   }
   if (key == 'e'){
     is_shoot = true;
@@ -363,6 +398,10 @@ void keyReleased(){
   }
   if(key == 'e'){
     is_shoot = false;
+  }
+  if(key == ' '){
+    keyspressed[5] = false;
+    //p1.roll(keyspressed); 
   }
 }
 

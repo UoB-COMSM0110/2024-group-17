@@ -1,6 +1,6 @@
 enum state { MAINMENU,PAUSED, DEAD};
 class UI {
-  int health;
+  float health;
   int score;
   long aTick;
   long rollstart;
@@ -62,9 +62,11 @@ class UI {
     } else {
        beginButtonImage = beginImage1; 
     }
-    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2) && mouseY < (height / 2 + 50) && s == state.MAINMENU) {
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2) && mouseY < (height / 2 + 50) &&( s == state.MAINMENU|| s == state.PAUSED)) {
        exitButtonImage = exitImage2; 
-       if (mouseButton == LEFT) {
+
+       if (mouseButton == LEFT && mousePressed) {
+
          exit();
        }
     } else {
@@ -77,10 +79,11 @@ class UI {
          //MainMenu();
        }
     } else {
-       menuButtonImage = menuImage1; 
+       menuButtonImage = menuImage1;  
     }
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 + 100) && mouseY < (height / 2 + 150)) {
        restartButtonImage = restartImage2; 
+
        if (mouseButton == LEFT) {
            restart();
        }
@@ -103,7 +106,7 @@ class UI {
   
   void healthbar(Camera cam){
     fill(48,25,52);
-    rect(cam.x - 500 / scale, cam.y - 470 / scale, 35, 100);
+    rect(cam.x - 500 / scale, cam.y - 470 / scale, 42, 100/scale);
     for(int i=0;i<health;i++){
        fill(0,255,255);
        image(healthBarSegment, cam.x - 500 / scale, cam.y - 470 / scale + i / scale);
