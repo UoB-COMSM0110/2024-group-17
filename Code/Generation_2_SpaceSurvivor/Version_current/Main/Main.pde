@@ -286,6 +286,11 @@ void Paused(){
   
 }
 
+void options() {
+  camera(camMat, cam.x,cam.y,scale,scale);
+  user.optionsscreen(cam);
+}
+
 void Dead(){
   if(!DeathMusicPlaying){
     GameMusic.stop();

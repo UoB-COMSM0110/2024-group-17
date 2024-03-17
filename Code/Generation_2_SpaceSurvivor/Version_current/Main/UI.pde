@@ -1,4 +1,4 @@
-enum state { MAINMENU,PAUSED, DEAD};
+enum state { MAINMENU,PAUSED, DEAD, OPTIONS, DIFFICULTY};
 class UI {
   float health;
   int score;
@@ -11,6 +11,12 @@ class UI {
   PImage menuImage1;
   PImage beginImage1; 
   PImage beginImage2;
+  PImage difficultyImage1;
+  PImage difficultyImage2;
+  PImage normalImage1;
+  PImage normalImage2;
+  PImage insaneImage1;
+  PImage insaneImage2;
   PImage exitImage1; 
   PImage exitImage2;
   PImage restartImage1;
@@ -23,6 +29,9 @@ class UI {
   PImage beginButtonImage;
   PImage exitButtonImage;
   PImage healthBarSegment;
+  PImage difficultyButtonImage;
+  PImage normalButtonImage;
+  PImage insaneButtonImage;
   
   
   
@@ -39,6 +48,12 @@ class UI {
     beginImage2 = loadImage("data/start_button_2.png");
     exitImage1 = loadImage("data/exit_button_1.png");
     exitImage2 = loadImage("data/exit_button_2.png");
+    normalImage1 = loadImage("data/normal_button_1.png");
+    normalImage2 = loadImage("data/normal_button_2.png");
+    insaneImage1 = loadImage("data/insane_button_1.png");
+    insaneImage2 = loadImage("data/insane_button_2.png");
+    difficultyImage1 = loadImage("data/difficulty_button_1.png");
+    difficultyImage2 = loadImage("data/difficulty_button_2.png");
     optionsImage2 = loadImage("data/options_button_2.png");
     menuImage2 = loadImage("data/exit_button_2.png");
     restartImage2 = loadImage("data/restart_button_2.png");
@@ -46,8 +61,23 @@ class UI {
   
   void buttonHover(state s) {
     // ultra hacky
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50) && s == state.OPTIONS) {
+       optionsButtonImage = optionsImage2; 
+       
+    } else {
+       optionsButtonImage = optionsImage1; 
+    }
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50) && s == state.DIFFICULTY) {
+       difficultyButtonImage = difficultyImage2; 
+       
+    } else {
+       difficultyButtonImage = difficultyImage1; 
+    }
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50) && s == state.PAUSED) {
        optionsButtonImage = optionsImage2; 
+       if (mouseButton == LEFT) {
+          options();
+       }
        
     } else {
        optionsButtonImage = optionsImage1; 
@@ -151,6 +181,17 @@ class UI {
     textSize(100);
     
     //noLoop();
+  }
+  
+  void optionsscreen(Camera cam) {
+    buttonHover(state.OPTIONS);
+    image(difficultyButtonImage, p1.x-180, p1.y-200);
+  }
+  
+  void difficultyscreen(Camera cam) {
+    buttonHover(state.DIFFICULTY);
+    image(normalButtonImage, p1.x-180, p1.y-200);
+    image(insaneButtonImage, p1.x-180, p1.y);
   }
   
   void cooldowns(Camera cam,Player p1){
