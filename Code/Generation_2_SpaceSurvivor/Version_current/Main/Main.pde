@@ -24,6 +24,7 @@ PImage explo;
 Player p1;
 Spawning spawn;
 UI user;
+int selectedDifficulty;
 weaponsystem w1;
 BackManager background;
 public levelManager management;
@@ -57,6 +58,7 @@ int knockbackModifier =1;
 
 //SETUP FUNCTION: called once
 void setup(){
+  selectedDifficulty = 0;
   for (int i = 0; i < 1000; i++) {
      starsX[i] = rand.nextInt(1280);
      starsY[i] = rand.nextInt(1024);
@@ -149,6 +151,9 @@ void draw(){
   }
   if(user.dead){
     Dead(); 
+  }
+  if(user.difficulty){
+    options(); 
   }
   //println(frameRate,EnemyList.size());
   //Need a start screenloop too
@@ -283,12 +288,11 @@ void Projectilefunction(){
 void Paused(){
    camera(camMat, cam.x,cam.y,scale,scale);
    user.pausescreen(cam);  
-  
 }
 
 void options() {
   camera(camMat, cam.x,cam.y,scale,scale);
-  user.optionsscreen(cam);
+  user.difficultyscreen(cam);
 }
 
 void Dead(){

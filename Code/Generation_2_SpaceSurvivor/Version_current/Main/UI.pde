@@ -7,6 +7,7 @@ class UI {
 
   boolean paused;
   boolean dead;
+  boolean difficulty;
   PImage optionsImage1; 
   PImage menuImage1;
   PImage beginImage1; 
@@ -60,19 +61,28 @@ class UI {
   }
   
   void buttonHover(state s) {
+    if (s == state.OPTIONS) {
+       println("In options menu"); 
+    }
+    if (s == state.DIFFICULTY) {
+       println("In diff menu"); 
+    }
     // ultra hacky
+    /*
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50) && s == state.OPTIONS) {
        optionsButtonImage = optionsImage2; 
        
     } else {
        optionsButtonImage = optionsImage1; 
     }
+    
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50) && s == state.DIFFICULTY) {
        difficultyButtonImage = difficultyImage2; 
-       
+       println("DIFFICULTY HOVER");
     } else {
        difficultyButtonImage = difficultyImage1; 
     }
+    */
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50) && s == state.PAUSED) {
        optionsButtonImage = optionsImage2; 
        if (mouseButton == LEFT) {
@@ -85,13 +95,60 @@ class UI {
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50) && s == state.MAINMENU) {
        beginButtonImage = beginImage2; 
        if (mouseButton == LEFT) {
-         user.paused = false;
-         hasStarted = true;
+         difficulty=true;
        }
        
     } else {
        beginButtonImage = beginImage1; 
     }
+    
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 + 100) && mouseY < (height / 2 + 150) && s == state.MAINMENU) {
+       optionsButtonImage = optionsImage2; 
+       if (mouseButton == LEFT) {
+         options();
+       }
+       
+    } else {
+       optionsButtonImage = optionsImage1; 
+    }
+    
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50) && s == state.DIFFICULTY) {
+       normalButtonImage = normalImage2; 
+       if (mouseButton == LEFT) {
+         selectedDifficulty = 2;
+         difficulty=false;
+         //restart();
+         
+       }
+       
+    } else {
+       normalButtonImage = normalImage1; 
+    }
+    
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 + 100) && mouseY < (height / 2 + 150) && s == state.DIFFICULTY) {
+       insaneButtonImage = insaneImage2; 
+       if (mouseButton == LEFT) {
+         selectedDifficulty = 1;
+         difficulty=false;
+         //restart();
+       }
+       
+    } else {
+       insaneButtonImage = insaneImage1; 
+    }
+    
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 + 100) && mouseY < (height / 2 + 150) && s == state.MAINMENU) {
+       optionsButtonImage = optionsImage2; 
+       if (mouseButton == LEFT) {
+         difficulty=true;
+         options();
+       }
+       
+    } else {
+       optionsButtonImage = optionsImage1; 
+     
+    }
+    
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2) && mouseY < (height / 2 + 50) &&( s == state.MAINMENU|| s == state.PAUSED)) {
        exitButtonImage = exitImage2; 
 
@@ -111,7 +168,7 @@ class UI {
     } else {
        menuButtonImage = menuImage1;  
     }
-    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 + 100) && mouseY < (height / 2 + 150)) {
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 + 100) && mouseY < (height / 2 + 150) && (s == state.PAUSED || s == state.DEAD)) {
        restartButtonImage = restartImage2; 
 
        if (mouseButton == LEFT) {
@@ -162,8 +219,8 @@ class UI {
     textSize(100);
     text("SPACE SURVIVORS", cam.x - 400,cam.y - 400);
     image(beginButtonImage, p1.x-180, p1.y-200);
-    image(optionsButtonImage, p1.x-180, p1.y);
-    image(exitButtonImage, p1.x-180, p1.y + 200);
+    image(exitButtonImage, p1.x-180, p1.y);
+    image(optionsButtonImage, p1.x-180, p1.y + 200);
     textSize(50);
     //text("press r to restart", cam.x, cam.y+50/scale);
     
@@ -185,6 +242,7 @@ class UI {
   
   void optionsscreen(Camera cam) {
     buttonHover(state.OPTIONS);
+    println("OPTIONS PRESSED");
     image(difficultyButtonImage, p1.x-180, p1.y-200);
   }
   
