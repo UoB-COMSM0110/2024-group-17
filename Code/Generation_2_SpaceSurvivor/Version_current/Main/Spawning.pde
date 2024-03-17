@@ -8,12 +8,17 @@
   Spawning(){ 
     pspawn = 0;
     spawncd = 10;
+    if(selectedDifficulty==0){
+      spawncd =100; 
+    }
     groupSizeIndex = 3;
   }
   
   void randspawn(Player p1){
-    if(tick-pspawn > spawncd){
-      spawncd = spawncd * (100.0/(float)tick);
+    if(tick-pspawn > spawncd && EnemyList.size()<1200){
+      if(selectedDifficulty>0){
+        spawncd = spawncd * (100.0/(float)tick);
+      }
        //spawncd = management.currentlevel.morespawns;
 
        if(!GroupSet){

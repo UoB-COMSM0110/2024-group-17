@@ -6,7 +6,7 @@ class Enemy implements Comparable<Enemy>{
   float Vx;
   float Vy;
   float Vmag;
-  float Speed = 8;
+  float Speed = 15;
   
   int bounce;
   int damage;
@@ -42,6 +42,9 @@ class Enemy implements Comparable<Enemy>{
    Vx = -delx;
    Vy = -dely;
    updateRock(w1);
+   if(selectedDifficulty==0){
+     Speed=7; 
+   }
   }
   
   void characterattributes(levelManager management){
@@ -149,7 +152,7 @@ class Enemy implements Comparable<Enemy>{
          return;
       }
       if(p1.vuln){
-        p1.damaged(1);
+        p1.damaged(1+(3*selectedDifficulty));
       }
     }
   }

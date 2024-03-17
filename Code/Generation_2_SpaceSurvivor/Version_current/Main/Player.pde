@@ -5,7 +5,7 @@ class Player{
   float x;
   float y;
   float r;
-  float control = 0.5;
+  float control = 1;
   float xmom;
   float ymom;
   long ptick;

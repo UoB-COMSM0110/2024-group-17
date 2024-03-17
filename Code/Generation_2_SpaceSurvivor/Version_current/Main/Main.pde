@@ -118,6 +118,7 @@ void setticks(){
 //Reset the global variables for a new run.
 void restart(){
   loop();
+
   GameMusic.stop();
   GameMusicPlaying = false;
 //  tick = 0;
@@ -125,7 +126,7 @@ void restart(){
   p1 = new Player(0,0,player);
   projectilelist = new ArrayList<Projectile>();
   spawn = new Spawning();
-  user = new UI(p1);
+//  user = new UI(p1);
   cam = new Camera(x,y);
   ptime = millis();
   w1= new weaponsystem();
@@ -133,6 +134,7 @@ void restart(){
   Enemy En = EnemyList.get(i);
      EnemyList.remove(En);  
   }  
+  user.mainMenu=true;
 }
 
 public void callRestart() {
@@ -140,20 +142,20 @@ public void callRestart() {
 }
 
 void draw(){
-  if (hasStarted == false) {
+  if (user.mainMenu) {
     MainMenu(); 
   }
-  if(!user.paused&&!user.dead){
+  if(!user.paused&&!user.dead&&!user.mainMenu&&!user.difficulty){
     gameplayLoop();
   }
-  if(user.paused && hasStarted == true){
+  if(user.paused){
     Paused();
   }
   if(user.dead){
     Dead(); 
   }
   if(user.difficulty){
-    options(); 
+    Difficulty(); 
   }
   //println(frameRate,EnemyList.size());
   //Need a start screenloop too
@@ -290,7 +292,15 @@ void Paused(){
    user.pausescreen(cam);  
 }
 
-void options() {
+void Difficulty() {
+  background(0);
+
+  //updateStarPositions();
+  for (int i = 0; i < 1000; i++) {
+    fill(255);
+    stroke(255);
+    ellipse((int)starsX[i], (int)starsY[i], 1, 1);
+  }
   camera(camMat, cam.x,cam.y,scale,scale);
   user.difficultyscreen(cam);
 }
@@ -316,7 +326,6 @@ void MainMenu(){
   }
   cam.move(p1.x,p1.y);
   camera(camMat, cam.x,cam.y,scale,scale);
-  user.paused = true;
   user.mainmenu(cam);
   if(!StartMusicPlaying){
     StartMusic.play();
@@ -339,8 +348,6 @@ void setAnimCounter(){
   }
   animCounter++; 
 }
-
-
 
 //Function to check for the Attack 
 void mousePressed(){
@@ -377,6 +384,9 @@ void keyPressed(){
     key = 0;
     if(user.dead){
       exit(); 
+    }
+    if(user.mainMenu||user.difficulty){
+      return;
     }
     user.paused = !user.paused;
     if(user.paused){

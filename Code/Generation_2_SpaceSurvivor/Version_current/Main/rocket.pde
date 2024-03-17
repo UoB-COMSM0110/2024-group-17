@@ -1,12 +1,16 @@
 class rocket implements weapon{
 int ms=-1;
-int cdtime=200;
+int cdtime=1500;
 int r ;
 int boom_r=200;
 int MAX = 600;
-rocket(){
-r=25;
-}
+  rocket(){
+    r=25;
+    if(selectedDifficulty>0){
+      cdtime=500;  
+    }
+  }
+
 boolean attack(float mpx, float mpy,float x, float y){
  image(weaponrocket,x,y);
  if(sqrt(sq(mpx-x)+sq(mpy-y))>=MAX){
