@@ -6,11 +6,15 @@ public class Map{
   ArrayList<Replicator> replicators;
   ArrayList<Asteroid> asteroids;
  // Gateway gateway;
-  boolean isTimePassing;
+  boolean isTimePassing = false;;
   ArrayList<Collideable> allObjects = new ArrayList<Collideable> ();
+  //Player player = new Player(0,0,allObjects);
+  SoundFile gameMusic;
   
-  Map(int difficultyInput){
-    isTimePassing = false;
+  
+  Map(int difficultyInput, Main main){
+    gameMusic = new SoundFile(main,"GameMusic.wav"); 
+    gameMusic.play();
     difficulty = difficultyInput;
     generateRandomAsteroids(); 
     generateRandomReplicators(); 
@@ -20,7 +24,7 @@ public class Map{
     isTimePassing = true;
   }
   
-  public void nextFrame(){
+  public void doThings(){
     setTime();
     for(Asteroid asteroid : asteroids){
       asteroid.doThings();
@@ -28,8 +32,10 @@ public class Map{
     for(Replicator replicator : replicators){
       replicator.doThings();
     }
-    
-    
+  }
+  
+  public void stopMusic(){
+    gameMusic.stop();
   }
   
   public void setTime(){

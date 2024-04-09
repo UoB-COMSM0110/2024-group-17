@@ -21,7 +21,7 @@ class Player{
   long aTick;
   int bAlen;
   
-  PImage player;
+  PImage player = loadImage("player_ufo.png");
   
   int knockbackCD=500;
   int knockbackMag=-2;
@@ -30,15 +30,18 @@ class Player{
   boolean knockbackOnCD = false;
   boolean knockbackActive = false;
   
-  Weapons weaponSystem = new Weapons();
+  Weapons weaponSystem;
+  UI userInterface;
   
-  Player(float startingX, float startingY,PImage inplayer){
+  Player(float startingX, float startingY,ArrayList<Collideable> allObjects,Camera cam){
     position = new Coordinate(startingX, startingY);
+    weaponSystem = new Weapons(this,allObjects);
+    userInterface = new UI(this,cam);
+    player.resize(50,50);
     previousTick = tick;
     aTick = 0;
     bAcd = 75;
     bAlen = 20;
-    player = inplayer; 
   }
   
   public void doThings(boolean[] keyspressed){
@@ -46,12 +49,17 @@ class Player{
     move(keyspressed);
     weaponSystem.doThings(keyspressed,position);
     if(keyspressed[5]){basicAttack();}
+    userInterface.doThings();
     render();
   }
   
   public float xGet(){return position.xGet();}
   
-  public float yGet(){return position.yGet();}
+  public float yGet(){return position.yGet();}  
+  
+  public float xmomGet(){return xmom;}
+  
+  public float ymomGet(){return ymom;}
   
   void render(){
     fill(255, 165, 0);
@@ -84,36 +92,13 @@ class Player{
       ymom = 0;
     }
     
-  
-    knockBackField();
-    
    }
-   
-  void knockBackField(){
-    if(!knockbackOnCD && keyspressed[5]){
-      knockbackTriggerTime = tick;
-      knockbackModifier = knockbackMag;
-      knockbackOnCD = true;
-      knockbackActive = true;
-    }
-  }
-    
+       
   void updatecds(){
      if(attacking){
        if(tick-aTick > bAlen){
          attacking = false;
          r = 25;
-       }
-     }
-     if(knockbackOnCD){
-       if(tick - knockbackTriggerTime>knockbackCD){
-         knockbackOnCD = false;
-       }
-     }
-     if(knockbackActive){
-       if(tick-knockbackTriggerTime>knockbackTime){
-         knockbackModifier = 1;
-         knockbackActive = false;
        }
      }
      if(health<100){
@@ -122,6 +107,8 @@ class Player{
      }
      previousTick = tick;
   }
+  
+  public boolean isDead(){return health<=0;}
   
   void damaged(int dam){
     health-=dam;
@@ -132,13 +119,12 @@ class Player{
   void kill(int point){
     points += point;
   }
+  
     
   void basicAttack(){
-    
      if(tick -aTick < bAcd){return;}
-
-     float mpx = (mouseX-(width/2))*2;
-     float mpy = (mouseY-(height/2))*2;
+      float mpx = (mouseX-(width/2))*2;
+      float mpy = (mouseY-(height/2))*2;
       xmom = (mpx)/10;
       ymom = (mpy)/10;
       r = 100;

@@ -20,8 +20,6 @@ class Enemy implements Collideable{
   float delx;
   float dely;
   float dist;
-  
-  ParticleSystem ps;
       
   Enemy(float startingX, float startingY,int difficultyInput, ArrayList<Enemy> localGroupInput){
    localGroup = localGroupInput;

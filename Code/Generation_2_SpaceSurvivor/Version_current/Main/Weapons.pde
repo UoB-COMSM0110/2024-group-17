@@ -1,15 +1,21 @@
 public class Weapons{
-   RocketLauncher launcher = new RocketLauncher();
-   boolean launcherActive=true;
+   RocketLauncher launcher;
+   boolean launcherActive = true;
+   BasicGun gun;
+   boolean gunActive = true;
+   Player player;
   
-  
-  Weapons(){
-    
+  Weapons(Player playerInput, ArrayList<Collideable> allObjects){
+    launcher = new RocketLauncher(playerInput,allObjects);
+     gun = new BasicGun(playerInput, allObjects);
   }
   
-  public void doThings(boolean[] keyspressed, Coordinate position){
+  public void doThings(boolean[] keyspressed, Coordinate position ){
     if(launcherActive){
       launcher.doThings(position,keyspressed);
+    }
+    if(gunActive){
+      gun.doThings(position,keyspressed); 
     }
   }
   
