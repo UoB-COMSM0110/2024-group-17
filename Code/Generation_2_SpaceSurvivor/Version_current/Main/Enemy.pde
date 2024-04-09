@@ -1,122 +1,140 @@
-class Enemy implements Comparable<Enemy>{
-  float x;
-  float y;
-  int r;
-  Float Bearing;
+class Enemy implements Collideable{
+  
+  int state = 0;
+  int difficulty;
+  Spawner home;
+  Coordinate position;
+  ArrayList<Enemy> localGroup;
+  
+  int r = 50;
   float Vx;
   float Vy;
   float Vmag;
-  float Speed = 15;
+  float speed;
   
-  int bounce;
+  int bounce=0;
   int damage;
   long ptick;
-  boolean shouldRemove;
+  boolean shouldRemove = false;
 
   float delx;
   float dely;
   float dist;
-  float Rx;
-  float Ry;
-  float dis;
-  char character;
   
-  int colr;
-  int colg;
-  int colb;
-  
-  PImage enemyImage1;
-  PImage enemyImage2;
-  PImage enemyImage;
-  int animCounter;
   ParticleSystem ps;
       
-  Enemy(float startingX, float startingY,Player p1,levelManager management){
-   x = startingX;
-   y = startingY;
+  Enemy(float startingX, float startingY,int difficultyInput, ArrayList<Enemy> localGroupInput){
+   localGroup = localGroupInput;
+   position = new Coordinate( startingX,startingY);
    ptick=0;
-   animCounter = 0;
-   shouldRemove = false;
-   characterattributes(management);
-   updateVector(p1);
-   Vx = -delx;
-   Vy = -dely;
-   updateRock(w1);
-   if(selectedDifficulty==0){
-     Speed=7; 
-   }
+   difficulty = difficultyInput;
+   setStats();
   }
   
-  void characterattributes(levelManager management){
-    colr = management.currentlevel.colr;
-    colg = management.currentlevel.colg;
-    colb = management.currentlevel.colb;
-    bounce = management.currentlevel.bounce;
-    damage = management.currentlevel.doubledamage;
-    r = 25;
-    character = management.currentlevel.character;
-  }
-
+  public int getRadius(){return r;}
   
-  void updateVector(Player p1){
-     delx = x-p1.x;
-     dely = y-p1.y;
-     dist = sqrt(delx*delx + dely*dely);
-     modifyBearing();
+  public float xGet(){return position.xGet();}
+  
+  public float yGet(){return position.yGet();}
+  
+  public void doThings(Player p1){
+    switch (state){
+      case 0 : 
+        passive();
+        break;
+      case 1 : 
+        active(p1);
+        break;
+      case 2 : 
+       // searching();
+        break;
+      case 3 : 
+       // alerting();
+        break;
+    }
+    render();
   }
   
-  void modifyBearing(){ 
-    if(dely>0){
-      Bearing = atan(dely/delx);
-      return;
-    }
-    if(dely<0){
-      Bearing = -atan(dely/delx);
-      return;
-    }
-    if(dely==0 && delx>0){
-      Bearing = 0.0;
-      return;
-    }
-    if(dely==0 && delx<0){
-      Bearing = PI;
-      return;
-    } 
+  private void passive(){
+    updateVector(position.xGet(),position.yGet());
+    chase();
+  }
+  
+  private void active(Player p1){
+    updateVector(p1.xGet(),p1.yGet());
+    chase();
+    collideTest(p1);
+  }
+  
+  private void setStats(){
+    switch (difficulty){
+      case 0 : 
+        speed = 7;
+        damage = 5;
+        break;
+      case 1:
+        speed = 15;
+        damage = 10;
+        break;
+      default:
+        speed=0;
+        damage=0;     
+     }
   }
       
-  void render(){
-    // noFill();
-    // strokeWeight(10);
-    // ellipse(x,y,r,r);
-    //image(asymbol,x-500,y-500);
-    // fill(colr,colg,colb);
-    // text(character,x,y+r/2);
+  private void render(){
+    image(enemyImage,position.xGet() - 50,position.yGet() - 50); 
   }
   
-  void chase(int EnemyIndex,int size, int knockMod){
+   private void updateVector(float xTarget, float yTarget){
+     delx = position.xGet()-xTarget;
+     dely = position.yGet()-yTarget;
+     dist = sqrt(delx*delx + dely*dely);
+   }
+  
+  private void collideTest(Player p1){
+    if(dist < (r + p1.r)){
+      //Collision detected
+      //p1.xmom -= delx * 1/dist * bounce ;
+      //p1.ymom -= dely * 1/dist * bounce ;
+      if(p1.attacking){
+         shouldRemove = true;
+         p1.kill(1);
+         return;
+      }
+      if(p1.vuln){
+        p1.damaged(1+(3*selectedDifficulty));
+      }
+    }
+  }
+  
+  private void chase(){
     float deltaVx=0;
     float deltaVy=0;
-    for(int i=0;i<size;i++){
-      if(i!=EnemyIndex){
-        Enemy otherEnemy = EnemyList.get(i);
-        float dist = sqrt((x - otherEnemy.x)*(x - otherEnemy.x) + (y - otherEnemy.y)*(y - otherEnemy.y));
+    for(Enemy otherEnemy : localGroup){
+      if(!otherEnemy.equals(this)){
+        float xOther = otherEnemy.xGet();
+        float yOther = otherEnemy.yGet();
+        float dist = sqrt((position.xGet() - xOther)*(position.xGet() -xOther) + (position.yGet() -yOther)*(position.xGet() - yOther));
         if(dist <500){
           deltaVx-=(otherEnemy.Vx-Vx)*0.0005;
           deltaVy-=(otherEnemy.Vy-Vy)*0.0005;        
         }
         if(dist<100){
-          deltaVx +=500000*(x-otherEnemy.x)/(dist*dist*dist); 
-          deltaVy +=500000*(y-otherEnemy.y)/(dist*dist*dist); 
+          deltaVx +=500000*(position.xGet()-xOther)/(dist*dist*dist); 
+          deltaVy +=500000*(position.yGet()-yOther)/(dist*dist*dist); 
         }
+        /*
         if(abs(otherEnemy.Bearing-Bearing) < 0.3){
           deltaVx -=5*(x-otherEnemy.x)/(dist); 
           deltaVy -=5*(y-otherEnemy.y)/(dist); 
         }
+        */
       }
     }
     
-    deltaVx+=knockMod*(-delx)*1;
-    deltaVy+=knockMod*(-dely)*1;
+    deltaVx+=(-delx)*1;
+    deltaVy+=(-dely)*1;
     
     float deltaVmag =sqrt(deltaVx*deltaVx+deltaVy*deltaVy); 
 
@@ -130,53 +148,32 @@ class Enemy implements Comparable<Enemy>{
     
     Vy = Vy/Vmag;
     Vx = Vx/Vmag;
-
+    /*
     if(knockMod<1){
       x +=(Vx)*Speed*-knockMod*800/(dist);   
       y +=(Vy)*Speed*-knockMod*800/(dist); 
     }
-    else{
-      x +=(Vx)*Speed;   
-      y +=(Vy)*Speed;      
-    }
+    */
+    position.setPosition((Vx)*speed,(Vy)*speed);  
   }
+
   
-  void collideTest(Player p1){
-    if(dist < (r + p1.r)){
-      //Collision detected
-      //p1.xmom -= delx * 1/dist * bounce ;
-      //p1.ymom -= dely * 1/dist * bounce ;
-      if(p1.rolling || p1.attacking){
-         shouldRemove = true;
-         p1.kill(1);
-         return;
-      }
-      if(p1.vuln){
-        p1.damaged(1+(3*selectedDifficulty));
-      }
-    }
-  }
-  public int compareTo(Enemy other){
-    return Bearing.compareTo(other.Bearing); 
-  }
   
-    void updateRock(weaponsystem w1){
+  /*
+  
+  void updateRock(weaponsystem w1){
      Rx = x-w1.wx;
      Ry = y-w1.wy;
      dis = sqrt(Rx*Rx + Ry*Ry);
   }
   
   void collTest(weaponsystem w1,int ra){
-    //println(dis,r,ra);
     if(dis < (r + ra)){
-     // println("hit!");
       w1.hit();
-      //println(ra);
       shouldRemove = true;
-
       p1.kill(1);
       return;
     }
   }
-  
+  */
 }

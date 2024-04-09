@@ -1,28 +1,53 @@
 class Projectile {
  
-  PVector direction;
-  int duration;
-  int w, h;
-  int originX, originY;
-  boolean shouldDestroy;
+  float xmom,ymom;
+  long createTick;
+  long duration;
+  int radius;
+  int velocity;
+  Coordinate position;
+  boolean shouldDestroy = false;
   
-  Projectile(int x, int y, PVector mouseVector) {
-     direction = mouseVector.copy();
-     originX = x;
-     originY = y;
-     w = 10;
-     h = 10;
-     duration = 1000;
-     shouldDestroy = false;
+  Projectile(Coordinate positionInput, int radiusInput, int durationInput, int velocityInput) {
+     createTick = tick;
+     duration = durationInput;
+     velocity = velocityInput;
+     position = new Coordinate(positionInput.xGet(),positionInput.yGet());
+     radius = radiusInput;
+     setDirection();
   }
   
+  public Coordinate getPosition(){return position;}
+  
+  private void render(){
+     circle(position.xGet(),position.yGet(),radius);
+  }
+  
+  public void doThings(){
+    move(); 
+    checkCollisions();
+    checkTimeOut();
+    render();
+  }
+  
+  private void checkCollisions(){
+
+  }
+  
+  private void checkTimeOut(){if(tick - createTick > duration){shouldDestroy = true;}}
+  
+  private void setDirection(){
+     xmom = (mouseX-(width/2))*velocity;
+     ymom = (mouseY-(height/2))*velocity;    
+     float deltaMagnitude = sqrt(xmom*xmom + ymom*ymom);
+     xmom = velocity * xmom/deltaMagnitude;
+     ymom = velocity * ymom/deltaMagnitude;
+  }
+  
+  public boolean shouldRemove(){return shouldDestroy;}
+  
   void move() {
-     originX = originX + (int)(direction.x / 30);
-     originY = originY + (int)(direction.y / 30);
-     duration -= 1;
-    if (duration <= 0) {
-       shouldDestroy = true; 
-    }
+    position.move(xmom,ymom);
   }
   
 }

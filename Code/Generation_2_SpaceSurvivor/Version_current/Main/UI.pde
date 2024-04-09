@@ -97,7 +97,6 @@ class UI {
        if (mouseButton == LEFT) {
          selectedDifficulty = 1;
          difficulty=false;
-         //restart();
          return;
        }
        
@@ -139,7 +138,7 @@ class UI {
        if (mouseButton == LEFT) {
            paused=false;
            dead=false;
-           restart();
+           stopGame();
            return;
        }
     } else {
@@ -152,7 +151,6 @@ class UI {
   void update(Player p1){
     health = p1.health;
     score = p1.points;
-    rollstart = p1.rollstart;
     aTick = p1.aTick;
     if(health <= 0){
       dead = true;
@@ -161,43 +159,42 @@ class UI {
   
   void healthbar(Camera cam){
     fill(48,25,52);
-    rect(cam.x - 500 / scale, cam.y - 470 / scale, 42, 100/scale);
-    for(int i=0;i<health;i++){
+    rect(cam.x - 1000 , cam.y - 470*2, 42, 100*2);
+    for(int i=0;i<2*health;i++){
        fill(0,255,255);
-       image(healthBarSegment, cam.x - 500 / scale, cam.y - 470 / scale + i / scale);
-       //ellipse(cam.x - 500/scale,cam.y-470/scale + i*75/scale,25/scale,25/scale);
+       image(healthBarSegment, cam.x - 1000, cam.y - 470*2  + i );
     }
   } 
   
   void score(Camera cam){
     textAlign(CENTER);
     textSize(100);
-    text( score,cam.x,cam.y+470/scale);
+    text( score,cam.x,cam.y+470*2);
   }
   
   void deathscreen(Camera cam){
     text("You're Dead", cam.x,cam.y - 100);
     buttonHover(state.DEAD);
-    image(exitButtonImage, p1.x-180, p1.y);
-    image(restartButtonImage, p1.x-180, p1.y + 200);
+    image(exitButtonImage, p1.xGet()-180, p1.yGet());
+    image(restartButtonImage, p1.xGet()-180, p1.yGet() + 200);
   }
   
   void mainmenu(Camera cam) {
     buttonHover(state.MAINMENU);
     textSize(100);
     text("SPACE SURVIVORS", cam.x - 400,cam.y - 400);
-    image(beginButtonImage, p1.x-180, p1.y-200);
-    image(exitButtonImage, p1.x-180, p1.y);
-    image(optionsButtonImage, p1.x-180, p1.y + 200);
+    image(beginButtonImage, p1.xGet()-180, p1.yGet()-200);
+    image(exitButtonImage, p1.xGet()-180, p1.yGet());
+    image(optionsButtonImage, p1.xGet()-180, p1.yGet() + 200);
     textSize(50);
   }
   
   void pausescreen(Camera cam){  
     //text("Paused", cam.x,cam.y);
     buttonHover(state.PAUSED);
-    image(optionsButtonImage, p1.x-180, p1.y-200);
-    image(exitButtonImage, p1.x-180, p1.y);
-    image(restartButtonImage, p1.x-180, p1.y + 200);
+    image(optionsButtonImage, p1.xGet()-180, p1.yGet()-200);
+    image(exitButtonImage, p1.xGet()-180, p1.yGet());
+    image(restartButtonImage, p1.xGet()-180, p1.yGet() + 200);
     textSize(50);
     //text("press r to restart", cam.x, cam.y+50/scale);
     textSize(100);
@@ -207,13 +204,13 @@ class UI {
   
   void optionsscreen(Camera cam) {
     buttonHover(state.OPTIONS);
-    image(difficultyButtonImage, p1.x-180, p1.y-200);
+    image(difficultyButtonImage, p1.xGet()-180, p1.yGet()-200);
   }
   
   void difficultyscreen(Camera cam) {
     buttonHover(state.DIFFICULTY);
-    image(normalButtonImage, p1.x-180, p1.y);
-    image(insaneButtonImage, p1.x-180, p1.y+200);
+    image(normalButtonImage, p1.xGet()-180, p1.yGet());
+    image(insaneButtonImage, p1.xGet()-180, p1.yGet()+200);
   }
   
   void cooldowns(Camera cam,Player p1){
@@ -222,14 +219,7 @@ class UI {
       aBright = 1;
     }
     fill((int)((float)255*aBright),0,0);
-    rect(cam.x + 500/scale,cam.y-470/scale,25/scale,25/scale);
-    
-    float rBright = ((float)(tick - rollstart))/(float)p1.Rcd;
-    if(rBright>1){
-      rBright = 1;
-    }
-    fill(0,0,(int)((float)255*rBright));
-    rect(cam.x + 500/scale,cam.y-470/scale + 75/scale,25/scale,25/scale);
-      
+    rect(cam.x + 1000,cam.y-940,50,50);
+     
   }
 }

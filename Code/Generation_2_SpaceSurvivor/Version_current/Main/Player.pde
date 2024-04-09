@@ -1,41 +1,26 @@
 class Player{
   //Player characteristics
-  float health;
-  int points;
-  float x;
-  float y;
-  float r;
+  float health = 100;
+  int points = 0;
+  Coordinate position;
+  float r = 25;
   float control = 1;
-  float xmom;
-  float ymom;
-  long ptick;
-  long previousTick=0;
+  float xmom = 0.0;
+  float ymom = 0.0;
+  long ptick = 0;
+  long previousTick= tick;
   
   //Damage cooldowns
-  boolean vuln;
+  boolean vuln = false;
   long dTick;
-  int grace;
   
-  //Roll attributes
-  float rollboost;
-  int rolllength; 
-  int Rcd;
-  long rollstart;
-  boolean rolling;
-  boolean rw;
-  boolean ra;
-  boolean rs;
-  boolean rd;
-
   //Attack attributes
-  boolean bAoncd;
-  boolean attacking;
+  boolean bAoncd = false;
+  boolean attacking = true;
   int bAcd;
   long aTick;
   int bAlen;
   
-  //Animation counter 
-  int animCounter = 0;
   PImage player;
   
   int knockbackCD=500;
@@ -45,40 +30,38 @@ class Player{
   boolean knockbackOnCD = false;
   boolean knockbackActive = false;
   
+  Weapons weaponSystem = new Weapons();
+  
   Player(float startingX, float startingY,PImage inplayer){
-    x = startingX;
-    y = startingY;
-    xmom = 0.0;
-    ymom = 0.0;
-    r = 25.0;
-    points = 0; 
-    grace = 100;
-    vuln = true;
-    bAoncd = false;
-    attacking = false;
-    ptick=0;
+    position = new Coordinate(startingX, startingY);
     previousTick = tick;
     aTick = 0;
     bAcd = 75;
     bAlen = 20;
-    rollboost =3;
-    rolllength = 50;
-    Rcd = 100;
-    player = inplayer;
-    health = 100;
+    player = inplayer; 
   }
+  
+  public void doThings(boolean[] keyspressed){
+    updatecds();
+    move(keyspressed);
+    weaponSystem.doThings(keyspressed,position);
+    if(keyspressed[5]){basicAttack();}
+    render();
+  }
+  
+  public float xGet(){return position.xGet();}
+  
+  public float yGet(){return position.yGet();}
   
   void render(){
     fill(255, 165, 0);
-    ellipse(x- 25, y, 10, 10);
-    image(player,x-50,y-50);
+    image(player,position.xGet()-50,position.yGet()-50);
   }
   
   //Currently works frame to frame, need to switch over to tick based!
   void move(boolean[] keyspressed){
-    x +=xmom;
-    y +=ymom;
-    if(!rolling){
+    position.move(xmom,ymom);
+    if(true){
       if(keyspressed[0]){
         ymom -= control;
       }
@@ -122,11 +105,6 @@ class Player{
          r = 25;
        }
      }
-     if(!vuln){
-       if(tick-dTick > grace){
-         vuln = true;
-       }
-     } 
      if(knockbackOnCD){
        if(tick - knockbackTriggerTime>knockbackCD){
          knockbackOnCD = false;
@@ -155,21 +133,14 @@ class Player{
     points += point;
   }
     
-  
-  void roll(boolean[] keyspressed){
-    if(tick-Rcd >rollstart){
-      rollstart = tick;
-      rolling = true;
-      rw = keyspressed[0];
-      ra = keyspressed[1];
-      rs = keyspressed[2];
-      rd = keyspressed[3];
-    }
-  }
-  
-  void basicAttack(float mpx, float mpy){
-      xmom = (mpx-x)/10;
-      ymom = (mpy-y)/10;
+  void basicAttack(){
+    
+     if(tick -aTick < bAcd){return;}
+
+     float mpx = (mouseX-(width/2))*2;
+     float mpy = (mouseY-(height/2))*2;
+      xmom = (mpx)/10;
+      ymom = (mpy)/10;
       r = 100;
       aTick = tick;
       bAcd = 75;
