@@ -28,10 +28,10 @@ public class Menus{
         difficultyPage.doThings();
         return;
       case PAUSE : 
-        pauseScreen.doThings(keyspressed);
+        pauseScreen.doThings();
         return;      
       case DEATH : 
-        deathScreen.doThings(keyspressed);
+        deathScreen.doThings();
         return;
       case WIN : 
         winScreen.doThings();

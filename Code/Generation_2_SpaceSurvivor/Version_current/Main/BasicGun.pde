@@ -9,6 +9,12 @@ public class BasicGun extends Weapon{
 
   }
   
+  public void justDrawThings(){
+    for(Projectile bullet : bullets){
+      bullet.render(); 
+    }
+  }
+  
   @Override
   public void doThings(Coordinate positionInput,boolean[] keyspressed){
     manageBullets();
@@ -27,7 +33,7 @@ public class BasicGun extends Weapon{
   
   private void bulletFire(Coordinate positionInput){
     if(tick - previousShotTick < cooldown){return;}
-    bullets.add(new Projectile(positionInput,10,150,20,player,5,new Colour(50,0,255),true));
+    bullets.add(new Projectile(positionInput,10,150,20,5,new Colour(50,0,255),true));
     previousShotTick = tick;
   }
   

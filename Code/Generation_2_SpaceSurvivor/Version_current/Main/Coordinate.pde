@@ -23,9 +23,10 @@ public class Coordinate{
   }
   
   public void setRandomOnCircle(int mapSize){
-    int r = random.nextInt() % mapSize;
+    float r = random.nextInt() % mapSize;
     float theta = (random.nextInt()%314)/100;
     x = r * sin(theta);
     y = r * cos(theta);
+    println(x,y);
   }
 }

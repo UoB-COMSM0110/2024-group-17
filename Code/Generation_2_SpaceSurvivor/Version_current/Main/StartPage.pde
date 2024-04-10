@@ -1,4 +1,4 @@
-public class StartPage{
+public class StartPage extends Screen{
   PImage beginButtonImage;
   PImage beginButtonImage1;
   PImage beginButtonImage2;
@@ -9,7 +9,6 @@ public class StartPage{
   PImage optionsButtonImage1;    
   PImage optionsButtonImage2;    
   Menus menus; 
-  boolean musicStarted = true;
   SoundFile startMusic;
   
   StartPage(Menus menusInput, Main main){
@@ -27,17 +26,10 @@ public class StartPage{
   
   public void doThings(){
     background(0);
-    for (int i = 0; i < 1000; i++) {
-      fill(255);
-      stroke(255);
-      ellipse((int)starsX[i], (int)starsY[i], 1, 1);
-    }
+    drawStars();
     cam.move(0,0);
     camera(camMat, cam.x,cam.y,0.5,0.5);
-    if(!musicStarted){
-      startMusic.play();
-      musicStarted = true;
-    }
+
     checkBegin();
     checkOptions();
     checkExit(); 
@@ -46,6 +38,7 @@ public class StartPage{
   
   private void drawButtons(){
     textSize(100);
+    fill(255);
     text("SPACE SURVIVORS", cam.x - 400,cam.y - 400);
     image(beginButtonImage, cam.x-180, cam.y-200);
     image(optionsButtonImage, cam.x-180, cam.y);

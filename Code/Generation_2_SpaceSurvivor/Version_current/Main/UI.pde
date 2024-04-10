@@ -11,6 +11,7 @@ class UI {
     cam = camInput;
     player = playerInput;
     healthBarSegment = loadImage("data/health_bar_segment.png");
+    healthBarSegment.resize(81,200);
   }
   
   public void doThings(){
@@ -28,9 +29,9 @@ class UI {
   
   void healthbar(){
     fill(48,25,52);
-    rect(cam.x - 1000 , cam.y - 470*2, 42, 100*2);
+    rect(cam.x - 1200 , cam.y + 470, 42*2, 100*4);
     for(int i=0;i<2*health;i++){
-       image(healthBarSegment, cam.x - 1000, cam.y - 470*2  + i );
+       image(healthBarSegment, cam.x - 1200, cam.y + 470  + i );
     }
   } 
   

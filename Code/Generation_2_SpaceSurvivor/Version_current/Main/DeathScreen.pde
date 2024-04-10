@@ -20,18 +20,17 @@ class DeathScreen extends Screen{
     
   }
   
-  public void doThings(boolean[] keyspressed){
+  public void doThings(){
     if(!deathMusicPlaying){playMusic();}
-    mainDrawLoop(keyspressed);
+    justDrawLoop();
     drawButtons();
   }
   
-  public void mainDrawLoop(boolean[] keyspressed){
+  public void justDrawLoop(){
      background(0);
-     updateStarPositions();
      drawStars();
      camera(camMat, cam.x,cam.y,0.5,0.5); 
-     map.doThings(keyspressed);
+     map.justDrawThings();
   }
   
   private void playMusic(){

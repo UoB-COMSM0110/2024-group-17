@@ -4,21 +4,19 @@ class Projectile {
   long createTick;
   long duration;
   int radius;
-  float damage;
+  int damage;
   Colour colour;
   float velocity;
   Coordinate position;
   boolean shouldDestroy = false;
   boolean dieOnHit;
+
   
-  Player player;
-  
-  Projectile(Coordinate positionInput, int radiusInput, int durationInput, float velocityInput, Player playerInput, float damageInput, Colour colourInput, boolean dieOnHitInput) {
+  Projectile(Coordinate positionInput, int radiusInput, int durationInput, float velocityInput, int damageInput, Colour colourInput, boolean dieOnHitInput) {
      dieOnHit = dieOnHitInput;
      colour = colourInput;
      damage = damageInput;
      createTick = tick;
-     player = playerInput;
      duration = durationInput;
      velocity = velocityInput;
      position = new Coordinate(positionInput.xGet(),positionInput.yGet());
@@ -34,25 +32,36 @@ class Projectile {
   }
   
   public void doThings(ArrayList<Collideable> allObjects){
-    move(); 
+    move();
     checkCollisions(allObjects);
     checkTimeOut();
-    render();
+    //render();
   }
   
   private void checkCollisions(ArrayList<Collideable> allObjects){
-
+     for(Collideable object : allObjects){
+       float sqrDistanceBetween = sqrDistanceBetween(object);
+       if(sqrDistanceBetween < (object.getRadius() + radius)*(object.getRadius() + radius)){
+         object.dealDamage(damage);
+         if(dieOnHit){shouldDestroy = true;}
+         object.alertGroup();
+       }
+     }
   }
   
-  private void checkTimeOut(){if(tick - createTick > duration){shouldDestroy = true;println("time to die");}}
+  private float sqrDistanceBetween(Collideable object){
+   return (object.xGet() - position.xGet())*(object.xGet() - position.xGet()) + (object.yGet() - position.yGet())*(object.yGet() - position.yGet());
+  }
+  
+  private void checkTimeOut(){if(tick - createTick > duration){shouldDestroy = true;}}
   
   private void setDirection(){
     if(velocity==0){xmom=0;ymom=0;return;}
      xmom = (mouseX-(width/2))*velocity;
      ymom = (mouseY-(height/2))*velocity;    
      float deltaMagnitude = sqrt(xmom*xmom + ymom*ymom);
-     xmom = velocity * xmom/deltaMagnitude + player.xmomGet();
-     ymom = velocity * ymom/deltaMagnitude + player.ymomGet();
+     xmom = velocity * xmom/deltaMagnitude;
+     ymom = velocity * ymom/deltaMagnitude;
   }
   
   public boolean shouldRemove(){return shouldDestroy;}

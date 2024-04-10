@@ -16,7 +16,7 @@ boolean[] keyspressed = new boolean[50];
 Random rand = new Random();
 
 public long tick;
-
+public long pTime;
 public double[] starsX = new double[1000];
 public double[] starsY = new double[1000];
 public int[] starCloseness = new int[1000];

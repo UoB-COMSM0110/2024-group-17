@@ -9,6 +9,15 @@ public class RocketLauncher extends Weapon{
     cooldown = 300;
   }
   
+  public void justDrawThings(){
+    for(Projectile projectile : projectiles){
+       projectile.render();
+    }
+    for(Projectile explosion : explosions){
+      explosion.render(); 
+    }
+  }
+  
   @Override
   public void doThings(Coordinate positionInput,boolean[] keyspressed){
     manageExplosions();
@@ -21,7 +30,7 @@ public class RocketLauncher extends Weapon{
        Projectile projectile = projectiles.get(i);
        projectile.doThings(allObjects);
        if(projectile.shouldRemove()){
-           explosions.add(new Projectile(projectile.getPosition(),200,100,0,player,1, new Colour(255, 165, 0),false));
+           explosions.add(new Projectile(projectile.getPosition(),200,100,0,1, new Colour(255, 165, 0),false));
            projectiles.remove(projectile);
        }
     }
@@ -39,7 +48,7 @@ public class RocketLauncher extends Weapon{
   
   public void rocketFire(Coordinate positionInput){
     if(tick - previousShotTick < cooldown){return;}
-    projectiles.add(new Projectile(positionInput,10,150,10,player,20,new Colour(255, 165, 0),true));
+    projectiles.add(new Projectile(positionInput,10,150,18,20,new Colour(255, 165, 0),true));
     previousShotTick = tick;
   }
   

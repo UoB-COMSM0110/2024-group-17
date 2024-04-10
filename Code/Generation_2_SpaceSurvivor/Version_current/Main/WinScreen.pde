@@ -6,5 +6,9 @@ class WinScreen{
     menu = menuInput; 
   }
   
-  public void doThings(){return;}
+  public void doThings(){
+    map.drawThings
+  
+  
+  }
 }

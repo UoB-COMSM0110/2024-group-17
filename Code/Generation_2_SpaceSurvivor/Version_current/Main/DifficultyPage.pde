@@ -17,6 +17,8 @@ public class DifficultyPage extends Screen{
   }
   
    public void doThings(){
+    background(0);
+    drawStars();
     checkNormal();
     checkInsane();
     drawButtons();

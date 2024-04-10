@@ -2,17 +2,20 @@ class Enemy implements Collideable{
   
   int state = 0;
   int difficulty;
+  int health = 10;
   Spawner home;
   Coordinate position;
   ArrayList<Enemy> localGroup;
+  ArrayList<Collideable> allStructures;
   
-  int r = 50;
-  float Vx;
-  float Vy;
+  int radius = 20;
+  float Vx = 0;
+  float Vy = 0;
   float Vmag;
   float speed;
+  float control = 0.1;
   
-  int bounce=0;
+  int bounce=10;
   int damage;
   long ptick;
   boolean shouldRemove = false;
@@ -21,15 +24,23 @@ class Enemy implements Collideable{
   float dely;
   float dist;
       
-  Enemy(float startingX, float startingY,int difficultyInput, ArrayList<Enemy> localGroupInput){
-   localGroup = localGroupInput;
-   position = new Coordinate( startingX,startingY);
-   ptick=0;
-   difficulty = difficultyInput;
-   setStats();
+  Enemy(float startingX, float startingY, int difficultyInput, ArrayList<Enemy> localGroupInput, Spawner homeInput, ArrayList<Collideable> allStructuresInput, int startingState){
+    state = startingState;
+    allStructures = allStructuresInput;
+    home = homeInput;
+    localGroup = localGroupInput;
+    position = new Coordinate( startingX,startingY+1);
+    ptick=0;
+    difficulty = difficultyInput;
+    setStats();
   }
   
-  public int getRadius(){return r;}
+  public void dealDamage(int damage){
+     health -= damage;
+     if(health<=0){shouldRemove = true;}
+  }
+  
+  public int getRadius(){return radius;}
   
   public float xGet(){return position.xGet();}
   
@@ -38,7 +49,7 @@ class Enemy implements Collideable{
   public void doThings(Player p1){
     switch (state){
       case 0 : 
-        passive();
+        passive(p1);
         break;
       case 1 : 
         active(p1);
@@ -50,18 +61,23 @@ class Enemy implements Collideable{
        // alerting();
         break;
     }
+    move();
+    checkStructureCollision();
     render();
   }
   
-  private void passive(){
-    updateVector(position.xGet(),position.yGet());
+  private void passive(Player p1){
+    updateVector(p1.xGet(),p1.yGet());
+    if(dist<400){alertGroup();}
+    updateVector(home.xGet(),home.yGet());
     chase();
   }
   
   private void active(Player p1){
     updateVector(p1.xGet(),p1.yGet());
     chase();
-    //collideTest(p1);
+    collideTest(p1);
+    if(dist>2000){state = 0;}
   }
   
   private void setStats(){
@@ -81,7 +97,7 @@ class Enemy implements Collideable{
   }
       
   private void render(){
-    image(enemyImage,position.xGet() - 50,position.yGet() - 50); 
+    image(enemyImage,position.xGet() - radius,position.yGet() - radius); 
   }
   
    private void updateVector(float xTarget, float yTarget){
@@ -90,91 +106,89 @@ class Enemy implements Collideable{
      dist = sqrt(delx*delx + dely*dely);
    }
   
-  /*
+
   private void collideTest(Player p1){
-    if(dist < (r + p1.r)){
-      //Collision detected
-      //p1.xmom -= delx * 1/dist * bounce ;
-      //p1.ymom -= dely * 1/dist * bounce ;
+    if(dist < (radius + p1.getRadius())){
+      p1.xmom -= delx * 1/dist * bounce ;
+      p1.ymom -= dely * 1/dist * bounce ;
       if(p1.attacking){
          shouldRemove = true;
          p1.kill(1);
          return;
       }
       if(p1.vuln){
-        p1.damaged(1+(3*selectedDifficulty));
+        p1.damaged(damage);
       }
     }
   }
-  /
-  */
   
   private void chase(){
-    float deltaVx=0;
-    float deltaVy=0;
+    
+    float deltaVx=0.01;
+    float deltaVy=0.01;
+    
     for(Enemy otherEnemy : localGroup){
       if(!otherEnemy.equals(this)){
         float xOther = otherEnemy.xGet();
         float yOther = otherEnemy.yGet();
-        float dist = sqrt((position.xGet() - xOther)*(position.xGet() -xOther) + (position.yGet() -yOther)*(position.xGet() - yOther));
-        if(dist <500){
+        float distance = sqrt((position.xGet() - xOther)*(position.xGet() -xOther) + (position.yGet() -yOther)*(position.yGet() - yOther));
+        if(distance <500){
           deltaVx-=(otherEnemy.Vx-Vx)*0.0005;
           deltaVy-=(otherEnemy.Vy-Vy)*0.0005;        
         }
-        if(dist<100){
-          deltaVx +=500000*(position.xGet()-xOther)/(dist*dist*dist); 
-          deltaVy +=500000*(position.yGet()-yOther)/(dist*dist*dist); 
+        if(distance<100 && distance!=0.0){
+          deltaVx +=500000*(position.xGet()-xOther)/(distance*distance*distance); 
+          deltaVy +=500000*(position.yGet()-yOther)/(distance*distance*distance); 
         }
-        /*
-        if(abs(otherEnemy.Bearing-Bearing) < 0.3){
-          deltaVx -=5*(x-otherEnemy.x)/(dist); 
-          deltaVy -=5*(y-otherEnemy.y)/(dist); 
+        
+        if(dist<500 && distance!=0.0){
+          deltaVx -=5*(position.xGet()-xOther)/(distance); 
+          deltaVy -=5*(position.yGet()-yOther)/(distance); 
         }
-        */
+        
       }
     }
     
-    deltaVx+=(-delx)*1;
-    deltaVy+=(-dely)*1;
-    
+    deltaVx+=(-delx);
+    deltaVy+=(-dely);
     float deltaVmag =sqrt(deltaVx*deltaVx+deltaVy*deltaVy); 
 
-    deltaVx = deltaVx/deltaVmag;
-    deltaVy = deltaVy/deltaVmag;
+    deltaVx = control*deltaVx/deltaVmag;
+    deltaVy = control*deltaVy/deltaVmag;
 
     Vx+=deltaVx;
     Vy+=deltaVy;
-    
+  }
+  
+  private void move(){
     Vmag = sqrt(Vx*Vx+Vy*Vy);
-    
+    Vx = Vx/Vmag;    
     Vy = Vy/Vmag;
-    Vx = Vx/Vmag;
-    /*
-    if(knockMod<1){
-      x +=(Vx)*Speed*-knockMod*800/(dist);   
-      y +=(Vy)*Speed*-knockMod*800/(dist); 
-    }
-    */
-    position.setPosition((Vx)*speed,(Vy)*speed);  
+  
+    position.move((Vx)*speed,(Vy)*speed); 
   }
 
-  
-  
-  /*
-  
-  void updateRock(weaponsystem w1){
-     Rx = x-w1.wx;
-     Ry = y-w1.wy;
-     dis = sqrt(Rx*Rx + Ry*Ry);
-  }
-  
-  void collTest(weaponsystem w1,int ra){
-    if(dis < (r + ra)){
-      w1.hit();
-      shouldRemove = true;
-      p1.kill(1);
-      return;
+  private void checkStructureCollision(){
+    for(Collideable structure : allStructures){
+      float sqrDistanceBetween = sqrDistanceBetween(structure);
+      if( sqrDistanceBetween < (structure.getRadius() + radius)*(structure.getRadius() + radius)){
+        
+         float xNormalVector = structure.xGet() - position.xGet();
+         float yNormalVector = structure.yGet() - position.yGet();
+         float magnitudeNormalVector = sqrt(xNormalVector*xNormalVector+yNormalVector*yNormalVector);
+         xNormalVector = xNormalVector/magnitudeNormalVector;
+         yNormalVector = yNormalVector/magnitudeNormalVector;         
+         Vx -= 5 * xNormalVector;
+         Vy -= 5 * yNormalVector;
+      }
     }
   }
-  */
+  
+  public void alertGroup(){
+    home.alertAllBoids(); 
+  }
+  
+  private float sqrDistanceBetween(Collideable object){
+    return (object.xGet() - position.xGet())*(object.xGet() - position.xGet()) + (object.yGet() - position.yGet())*(object.yGet() - position.yGet());
+  }
 }

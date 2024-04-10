@@ -19,6 +19,16 @@ public class Weapons{
     }
   }
   
+  public void justDrawThings(){
+     if(launcherActive){
+      launcher.justDrawThings();
+    }
+    if(gunActive){
+      gun.justDrawThings(); 
+    }
+    
+  }
+  
   
   
   

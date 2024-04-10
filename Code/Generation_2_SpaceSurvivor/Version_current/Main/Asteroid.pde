@@ -1,32 +1,58 @@
 public class Asteroid implements Collideable{
   private int radius;
   private int mapSize;
-  private float scale;
+  private int health;
   private Coordinate position;
   private Random random = new Random();
+  public boolean shouldDestroy = false;
+  ArrayList<Collideable> allStructures;
   
-  Asteroid(int mapSizeInput){
+  Asteroid(int mapSizeInput, ArrayList<Collideable> allStructuresInput){
+    allStructures = allStructuresInput;
     mapSize = mapSizeInput;
     initializeRandom();
-   
+  }
+  
+  public void dealDamage(int damage){
+    health-=damage;
+    if(health<=0){shouldDestroy = true;}
   }
   
   public void doThings(){
     render();
-    
   }
   
   private void initializeRandom(){
     radius = random.nextInt()%300 + 100;
+    health = radius * 10;
     position = new Coordinate(0,0);
+   
     position.setRandomOnCircle(mapSize);
-    
+    while(!uniquePosition()){
+        position.setRandomOnCircle(mapSize);
+    }
   }
   
-  private void render(){
+  public boolean uniquePosition(){
+    for(Collideable structure : allStructures){
+      float sqrDistanceBetween = sqrDistanceBetween(structure);
+      if( sqrDistanceBetween < (structure.getRadius() + radius)*(structure.getRadius() + radius)){    
+        return false;
+      }
+    }
+    return true;
+  }
+  
+  private float sqrDistanceBetween(Collideable object){
+    return (object.xGet() - position.xGet())*(object.xGet() - position.xGet()) + (object.yGet() - position.yGet())*(object.yGet() - position.yGet());
+  }  
+
+  public void render(){
     fill(100);
     circle(position.xGet(),position.yGet(),radius); 
   }
+  
+  public void alertGroup(){}
   
   public int getRadius(){return radius;}
   

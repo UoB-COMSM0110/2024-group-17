@@ -3,7 +3,7 @@ class Player{
   float health = 100;
   int points = 0;
   Coordinate position;
-  float r = 25;
+  float radius = 25;
   float control = 1;
   float xmom = 0.0;
   float ymom = 0.0;
@@ -11,7 +11,7 @@ class Player{
   long previousTick= tick;
   
   //Damage cooldowns
-  boolean vuln = false;
+  boolean vuln = true;
   long dTick;
   
   //Attack attributes
@@ -21,14 +21,9 @@ class Player{
   long aTick;
   int bAlen;
   
-  PImage player = loadImage("player_ufo.png");
+  ArrayList<Collideable> allStructures;
   
-  int knockbackCD=500;
-  int knockbackMag=-2;
-  int knockbackTime=50;
-  long knockbackTriggerTime=0;
-  boolean knockbackOnCD = false;
-  boolean knockbackActive = false;
+  PImage player = loadImage("player_ufo.png");
   
   double[] trailX = new double[15];
   double[] trailY = new double[15];
@@ -36,7 +31,8 @@ class Player{
   Weapons weaponSystem;
   UI userInterface;
   
-  Player(float startingX, float startingY,ArrayList<Collideable> allObjects,Camera cam){
+  Player(float startingX, float startingY,ArrayList<Collideable> allObjects,Camera cam,ArrayList<Collideable> allStructuresInput){
+    allStructures = allStructuresInput;
     position = new Coordinate(startingX, startingY);
     weaponSystem = new Weapons(this,allObjects);
     userInterface = new UI(this,cam);
@@ -51,11 +47,11 @@ class Player{
     cam.move(position.xGet(),position.yGet());
     updatecds();
     move(keyspressed);
+    checkStructureCollision();
     updateTrail();
     drawTrail();
     weaponSystem.doThings(keyspressed,position);
     if(keyspressed[5]){basicAttack();}
-    userInterface.doThings();
     render();
   }
   
@@ -67,7 +63,11 @@ class Player{
   
   public float ymomGet(){return ymom;}
   
+  public float getRadius(){return radius;}
+  
   void render(){
+    userInterface.doThings();
+    weaponSystem.justDrawThings();
     fill(255, 165, 0);
     image(player,position.xGet()-50,position.yGet()-50);
   }
@@ -113,15 +113,14 @@ class Player{
     }
     if(ymom<0.1 && ymom>-0.1){
       ymom = 0;
-    }
-    
+    }  
    }
        
   void updatecds(){
      if(attacking){
        if(tick-aTick > bAlen){
          attacking = false;
-         r = 25;
+         radius = 25;
        }
      }
      if(health<100){
@@ -143,17 +142,35 @@ class Player{
     points += point;
   }
   
-    
   void basicAttack(){
      if(tick -aTick < bAcd){return;}
       float mpx = (mouseX-(width/2))*2;
       float mpy = (mouseY-(height/2))*2;
       xmom = (mpx)/10;
       ymom = (mpy)/10;
-      r = 100;
+      radius = 100;
       aTick = tick;
       bAcd = 75;
       attacking = true;
+  }
+  
+    private void checkStructureCollision(){
+    for(Collideable structure : allStructures){
+      float sqrDistanceBetween = sqrDistanceBetween(structure);
+      if( sqrDistanceBetween < (structure.getRadius() + radius)*(structure.getRadius() + radius)){         println("collision detected");
+         float xNormalVector = structure.xGet() - position.xGet();
+         float yNormalVector = structure.yGet() - position.yGet();
+         float magnitudeNormalVector = sqrt(xNormalVector*xNormalVector+yNormalVector*yNormalVector);
+         xNormalVector = xNormalVector/magnitudeNormalVector;
+         yNormalVector = yNormalVector/magnitudeNormalVector;         
+         xmom -= 10 * xNormalVector;
+         ymom -= 10 * yNormalVector;
+      }
+    }
+  }
+  
+  private float sqrDistanceBetween(Collideable object){
+    return (object.xGet() - position.xGet())*(object.xGet() - position.xGet()) + (object.yGet() - position.yGet())*(object.yGet() - position.yGet());
   }
  
 }

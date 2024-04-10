@@ -2,7 +2,6 @@ public class PlayingScreen extends Screen{
   Map currentMap;
   Menus menu;
   Main main;
-  long ptime;
   
   PlayingScreen(Menus menuInput, Main mainInput){
     menu = menuInput; 
@@ -25,15 +24,15 @@ public class PlayingScreen extends Screen{
   
   public void newGame(int difficultyInput, Camera cam){
     tick = 0;
-    ptime = millis();
+    pTime = millis();
     currentMap = new Map(difficultyInput, main, cam);  
   }
   
   public Map getMap(){return currentMap;}
   
   void setTicks(){
-    tick +=floor((millis() - ptime)/10);
-    ptime = millis();
+    tick +=floor((millis() - pTime)/10);
+    pTime = millis();
   }
   
 }
