@@ -30,6 +30,9 @@ class Player{
   boolean knockbackOnCD = false;
   boolean knockbackActive = false;
   
+  double[] trailX = new double[15];
+  double[] trailY = new double[15];
+  
   Weapons weaponSystem;
   UI userInterface;
   
@@ -45,8 +48,11 @@ class Player{
   }
   
   public void doThings(boolean[] keyspressed){
+    cam.move(position.xGet(),position.yGet());
     updatecds();
     move(keyspressed);
+    updateTrail();
+    drawTrail();
     weaponSystem.doThings(keyspressed,position);
     if(keyspressed[5]){basicAttack();}
     userInterface.doThings();
@@ -64,6 +70,23 @@ class Player{
   void render(){
     fill(255, 165, 0);
     image(player,position.xGet()-50,position.yGet()-50);
+  }
+  
+  void updateTrail() {
+    for (int i = trailX.length - 1; i > 0; i--) {
+      trailX[i] = trailX[i - 1];
+      trailY[i] = trailY[i - 1];
+    }
+    trailX[0] = position.xGet() - 20;
+    trailY[0] = position.yGet() - 5;
+  }
+
+  void drawTrail() {
+    for (int i = 1; i < 15; i++) {
+      fill(255, 165, 0);
+      stroke(255, 165, 0);
+      ellipse((int)trailX[i], (int)trailY[i], 15 - i, 15 - i);
+    }
   }
   
   //Currently works frame to frame, need to switch over to tick based!

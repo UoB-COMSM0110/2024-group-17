@@ -1,5 +1,5 @@
 public class Map{
-  int radius;
+  int radius = 10000;
   int difficulty;
   long timeLeft;
   long previousTick;
@@ -8,12 +8,13 @@ public class Map{
  // Gateway gateway;
   boolean isTimePassing = false;;
   ArrayList<Collideable> allObjects = new ArrayList<Collideable> ();
-  //Player player = new Player(0,0,allObjects);
+  Player player;
   SoundFile gameMusic;
   
   
-  Map(int difficultyInput, Main main){
+  Map(int difficultyInput, Main main, Camera cam){
     gameMusic = new SoundFile(main,"GameMusic.wav"); 
+    player = new Player(0,0,allObjects,cam);
     gameMusic.play();
     difficulty = difficultyInput;
     generateRandomAsteroids(); 
@@ -24,8 +25,9 @@ public class Map{
     isTimePassing = true;
   }
   
-  public void doThings(){
+  public void doThings(boolean[] keyspressed){
     setTime();
+    player.doThings(keyspressed);
     for(Asteroid asteroid : asteroids){
       asteroid.doThings();
     }

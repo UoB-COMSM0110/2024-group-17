@@ -1,4 +1,4 @@
-class PauseScreen{
+class PauseScreen extends Screen{
   Menus menu;
   PImage exitButtonImage;  
   PImage exitButtonImage1;
@@ -8,7 +8,8 @@ class PauseScreen{
   PImage optionsButtonImage2;  
   PImage restartButtonImage;
   PImage restartButtonImage1;  
-  PImage restartButtonImage2;  
+  PImage restartButtonImage2; 
+  Map map;
   
   PauseScreen(Menus menuInput){
     menu = menuInput; 
@@ -20,14 +21,28 @@ class PauseScreen{
     restartButtonImage1 = loadImage("data/restart_button_1.png"); 
  }
   
-  public void doThings(){return;}
+  public void doThings(boolean[] keyspressed){
+      mainDrawLoop(keyspressed);
+      drawButtons();
+   }
+   
+   public void mainDrawLoop(boolean[] keyspressed){
+     background(0);
+     updateStarPositions();
+     drawStars();
+     camera(camMat, cam.x,cam.y,0.5,0.5); 
+     map.doThings(keyspressed); 
+  }
   
   private void drawButtons(){
     camera(camMat, cam.x,cam.y,1,1);
-    image(optionsButtonImage, p1.xGet()-180, p1.yGet()-200);
-    image(exitButtonImage, p1.xGet()-180, p1.yGet());
-    image(restartButtonImage, p1.xGet()-180, p1.yGet() + 200);
-    noLoop();
+    image(optionsButtonImage, cam.x-180, cam.y-200);
+    image(exitButtonImage, cam.x-180, cam.y);
+    image(restartButtonImage,cam.x-180,cam.y + 200);
+  }
+  
+  public void setMap(Map mapInput){
+    map = mapInput; 
   }
   
 }

@@ -41,7 +41,7 @@ class UI {
   }
   
   void cooldowns(){
-    float aBright = ((float)(tick - aTick))/(float)p1.bAcd;
+    float aBright = ((float)(tick - aTick))/(float)player.bAcd;
     if(aBright>1){
       aBright = 1;
     }

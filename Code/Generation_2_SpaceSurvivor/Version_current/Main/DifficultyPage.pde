@@ -1,4 +1,4 @@
-public class DifficultyPage{
+public class DifficultyPage extends Screen{
   PImage normalImage;
   PImage normalImage1;
   PImage normalImage2;
@@ -32,9 +32,8 @@ public class DifficultyPage{
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 + 100) && mouseY < (height / 2 + 150)) {
        insaneImage = insaneImage2; 
        if (mouseButton == LEFT) {
-         selectedDifficulty = 1;
+         menu.newGame(1);
          menu.switchScreen(Page.PLAYING);
-         startGame(1);
          return;
        }
        
@@ -47,9 +46,8 @@ public class DifficultyPage{
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2) && mouseY < (height / 2 + 50)) {
        normalImage = normalImage2; 
        if (mouseButton == LEFT) {
-         selectedDifficulty =0;
+         menu.newGame(0);
          menu.switchScreen(Page.PLAYING);
-         startGame(0);
          return;
        }
     } else {

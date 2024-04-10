@@ -61,7 +61,7 @@ class Enemy implements Collideable{
   private void active(Player p1){
     updateVector(p1.xGet(),p1.yGet());
     chase();
-    collideTest(p1);
+    //collideTest(p1);
   }
   
   private void setStats(){
@@ -90,6 +90,7 @@ class Enemy implements Collideable{
      dist = sqrt(delx*delx + dely*dely);
    }
   
+  /*
   private void collideTest(Player p1){
     if(dist < (r + p1.r)){
       //Collision detected
@@ -105,6 +106,8 @@ class Enemy implements Collideable{
       }
     }
   }
+  /
+  */
   
   private void chase(){
     float deltaVx=0;

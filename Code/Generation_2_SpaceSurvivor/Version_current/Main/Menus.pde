@@ -1,19 +1,25 @@
 public class Menus{
 
   DifficultyPage difficultyPage = new DifficultyPage(this);
-  PauseScreen  pauseScreen= new PauseScreen(this);
   OptionsScreen optionsScreen = new OptionsScreen(this);
   WinScreen winScreen = new WinScreen(this);
+  PlayingScreen playingScreen;
+  PauseScreen  pauseScreen= new PauseScreen(this);
   DeathScreen deathScreen;
   StartPage startPage;
   Page activePage = Page.START;
   
-  Menus(Main main){
+  Map currentMap;
+  Camera cam;
+  
+  Menus(Main main, Camera camInput){
+      cam = camInput;
       startPage = new StartPage(this,main);
       deathScreen = new DeathScreen(this,main);
-  }
+      playingScreen = new PlayingScreen(this,main);
   
-  public void doThings(){
+  }
+  public void doThings(boolean[] keyspressed){
     switch(activePage){
       case START : 
         startPage.doThings();
@@ -22,21 +28,36 @@ public class Menus{
         difficultyPage.doThings();
         return;
       case PAUSE : 
-        pauseScreen.doThings();
+        pauseScreen.doThings(keyspressed);
         return;      
       case DEATH : 
-        deathScreen.doThings();
+        deathScreen.doThings(keyspressed);
         return;
       case WIN : 
         winScreen.doThings();
         return;        
-       case PLAYING : 
-         return;
+      case PLAYING : 
+        playingScreen.doThings(keyspressed);
+        return;
     }
   }
   
   public void switchScreen(Page nextPage){
     activePage = nextPage; 
+  }
+  
+  public void pauseGame(){
+     pauseScreen.setMap(playingScreen.getMap());
+     switchScreen(Page.PAUSE);
+  }
+  
+  public void deathOverlay(){
+     deathScreen.setMap(playingScreen.getMap()); 
+     switchScreen(Page.DEATH);
+  }
+  
+  public void newGame(int difficulty){
+    playingScreen.newGame(difficulty, cam); 
   }
   
   public boolean isPlaying(){ 

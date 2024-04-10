@@ -1,46 +1,25 @@
-
 import java.util.Random;
 import java.util.Collections;
 import processing.sound.*;
-SoundFile file;
-
-SoundFile GameMusic;
-SoundFile DeathMusic;
-
-//All image files
 import processing.awt.PGraphicsJava2D;
+
 public PImage player;
 public PImage enemyImage;
 public PImage weaponrocket;
 public PImage explo;
 
-//Global variables:
-Player p1;
-Menus menu;
-int selectedDifficulty;
-Camera cam;
 PMatrix2D camMat = new PMatrix2D();
+Camera cam;
+Menus menu;
 boolean[] keyspressed = new boolean[50];
+
 Random rand = new Random();
-boolean is_shoot = false;
 
-long ptime;
 public long tick;
-public Map map;
 
-ArrayList<Collideable> allObjects = new ArrayList<>();
-
-double[] starsX = new double[1000];
-double[] starsY = new double[1000];
-int[] starCloseness = new int[1000];
-double[] trailX = new double[15];
-double[] trailY = new double[15];
-
-boolean hasStarted = false;
-boolean StartMusicPlaying = false;
-boolean GameMusicPlaying = false;
-boolean DeathMusicPlaying = false;
-int knockbackModifier =1;
+public double[] starsX = new double[1000];
+public double[] starsY = new double[1000];
+public int[] starCloseness = new int[1000];
 
 
 //SETUP FUNCTION: called once
@@ -51,19 +30,10 @@ void setup(){
    
   setupImages();
   makeStars();
-  tick = 0;
-  ptime = millis();
-  cam = new Camera(0,0);
-  menu = new Menus(this);
-} 
 
-public void makeStars(){
-  for (int i = 0; i < 1000; i++) {
-     starsX[i] = rand.nextInt(1280);
-     starsY[i] = rand.nextInt(1024);
-     starCloseness[i] = rand.nextInt(10);
-  }
-}
+  cam = new Camera(0,0);
+  menu = new Menus(this, cam);
+} 
 
 void setupImages(){
   enemyImage =loadImage("data/enemy_walk_1.png");
@@ -73,95 +43,16 @@ void setupImages(){
   explo = loadImage("exp.png");
 }
 
-void setticks(){
- tick +=floor((millis() - ptime)/10);
- ptime = millis();
-}
-
-public void startGame(int difficulty){  
-  cam = new Camera(0,0);
-  p1 = new Player(0,0,allObjects,cam);
-  //map = new Map()
-  ptime = millis();
+public void makeStars(){
+  for (int i = 0; i < 1000; i++) {
+     starsX[i] = rand.nextInt(1280);
+     starsY[i] = rand.nextInt(1024);
+     starCloseness[i] = rand.nextInt(10);
+  }
 }
 
 void draw(){
-  background(0);
-  drawStars();
-  if(!menu.isPlaying()){
-    menu.doThings();
-  }
-  else{
-    gameplayLoop();
-  }
-}
-
-void updateStarPositions() {
-  for (int i = 0; i < 1000; i++) {
-    if (keyspressed[3] == true) {
-     starsX[i] -= starCloseness[i] * 0.01;
-    }
-    if (keyspressed[1] == true) {
-      starsX[i] += starCloseness[i] * 0.01;
-    }
-    if (keyspressed[2] == true) {
-     starsY[i] -= starCloseness[i] * 0.01;
-    }
-    if (keyspressed[0] == true){
-      starsY[i] += starCloseness[i] * 0.01;
-    }     
-  }
-}
-
-void drawStars(){
- for (int i = 0; i < 1000; i++) {
-    fill(255);
-    stroke(255);
-    ellipse((int)starsX[i], (int)starsY[i], 1, 1);
-  } 
-}
-
-void updateTrail() {
-  for (int i = trailX.length - 1; i > 0; i--) {
-      trailX[i] = trailX[i - 1];
-      trailY[i] = trailY[i - 1];
-  }
-  trailX[0] = p1.xGet() - 20;
-  trailY[0] = p1.yGet() - 5;
-}
-
-void drawTrail() {
-  for (int i = 1; i < 15; i++) {
-    fill(255, 165, 0);
-    stroke(255, 165, 0);
-    ellipse((int)trailX[i], (int)trailY[i], 15 - i, 15 - i);
-  }
-}
-
-void gameplayLoop(){
-  setticks();
-  background(0);
-  updateStarPositions();
-  
-  cam.move(p1.xGet(),p1.yGet());
-  camera(camMat, cam.x,cam.y,0.5,0.5);
-  
-  updateTrail();
-  drawTrail();
-  
-  p1.doThings(keyspressed);
-  if(p1.isDead()){map.stopMusic();menu.switchScreen(Page.DEATH);}
- // map.doThings();
-}
-
-void die(){
-  if(!DeathMusicPlaying){
-    GameMusic.stop();
-    GameMusicPlaying = false;
-    DeathMusic.play();
-    DeathMusicPlaying = true;
-  }
-  camera(camMat, cam.x,cam.y,0.5,0.5);
+  menu.doThings(keyspressed);
 }
 
 void mousePressed(){
@@ -210,11 +101,10 @@ void keyPressed(){
     key = 0;
     switch (menu.activePage){
        case PLAYING : 
-         menu.switchScreen(Page.PAUSE);
+         menu.pauseGame();
          return;
        case PAUSE : 
-         loop();
-         menu.switchScreen(Page.PAUSE);
+         menu.switchScreen(Page.PLAYING);
          return;
        case DEATH : 
           exit();

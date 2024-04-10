@@ -1,4 +1,4 @@
-class OptionsScreen{
+class OptionsScreen extends Screen{
   Menus menu;
   
   OptionsScreen(Menus menuInput){
