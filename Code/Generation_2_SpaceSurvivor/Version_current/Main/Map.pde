@@ -6,26 +6,34 @@ public class Map{
   ArrayList<Replicator> replicators;
   ArrayList<Asteroid> asteroids;
   ArrayList<Collideable> allStructures = new ArrayList<Collideable>();
- // Gateway gateway;
+  Gateway gateway;
   boolean isTimePassing = false;;
   ArrayList<Collideable> allObjects = new ArrayList<Collideable> ();
   Minimap minimap;
+  Tutorial tutorial;
   Player player;
   SoundFile gameMusic;
+  UI userInterface;
+  public int numberReplicatorsDestroyed = 0;
+  LowPass lowPass;
   
   
   Map(int difficultyInput, Main main, Camera cam){
+    lowPass = new LowPass(main);
     gameMusic = new SoundFile(main,"GameMusic.wav"); 
-    player = new Player(0,0,allObjects,cam,allStructures);
+    player = new Player(0,0,allObjects,allStructures);
     gameMusic.play();
     difficulty = difficultyInput;
     generateRandomAsteroids(); 
     generateRandomReplicators(); 
-    minimap = new Minimap(replicators,player,radius);
-   // gateway = new Gateway();
-    timeLeft = 30000;
-    previousTick = tick;
+    minimap = new Minimap(replicators,player,radius,this);
+    userInterface = new UI(this,cam,difficulty);
+    gateway = new Gateway(this);
+    tutorial = new Tutorial(difficulty,cam,this);
+    timeLeft = 20000;
+    previousTick = 0;
     isTimePassing = true;
+    flyingSoundEffect.play();
   }
   
   public void justDrawThings(){
@@ -33,9 +41,14 @@ public class Map{
       asteroid.render();
     }
     for(Replicator replicator : replicators){
-      replicator.render();
+      replicator.justDraw();
     }
+    gateway.renderBottomLayer();
     player.render();
+    if(gateway.getPortalStatus()){gateway.renderPortal();}
+    minimap.drawMap(keyspressed[4]);
+    userInterface.doThings();
+    tutorial.doThings(keyspressed);
   }
   
   public void doThings(boolean[] keyspressed){
@@ -50,20 +63,38 @@ public class Map{
       }
     }
     boolean allDestroyed = true;
+    numberReplicatorsDestroyed=0;
     for(int i = replicators.size()-1;i>=0;i--){
       Replicator replicator = replicators.get(i);
       replicator.doThings();
       if(replicator.isDestroyed){
-        allDestroyed = false;
         allObjects.remove(replicator);
         allStructures.remove(replicator);
-      }
+        numberReplicatorsDestroyed++;
+      }else{allDestroyed = false;}
     }
     if(allDestroyed){
-      menu.switchScreen(Page.WIN);
+      gateway.setPortalStatus(true);
     }
+    gateway.doThings(keyspressed);
     player.doThings(keyspressed);
-    minimap.drawMap();
+    updateMusic();
+    if(player.isDead() || (timeLeft < 0 && difficulty!=-1)){gameMusic.stop();menu.die();}
+    if(gateway.getPortalStatus()){gateway.renderPortal();}
+    minimap.drawMap(keyspressed[4]);
+    userInterface.doThings();
+    tutorial.doThings(keyspressed);
+    previousTick = tick;
+  }
+  
+  private void updateMusic(){
+    if(!flyingSoundEffect.isPlaying()){
+      flyingSoundEffect.play();
+      lowPass.process(flyingSoundEffect,player.getSpeed()*10 + 100);
+      return;
+    }
+    lowPass.freq(player.getSpeed()*10 + 100);
+    
   }
   
   public void stopMusic(){
@@ -71,10 +102,11 @@ public class Map{
   }
   
   public void setTime(){
-     timeLeft = (tick - previousTick);
+     timeLeft -= (tick - previousTick);
+     if(timeLeft <= 19900){gateway.setPortalStatus(false);}
   }
   
-  public long getTime(){
+  public long timeRemaining(){
     return  timeLeft;
   }
   

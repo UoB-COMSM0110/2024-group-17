@@ -3,9 +3,6 @@ class PauseScreen extends Screen{
   PImage exitButtonImage;  
   PImage exitButtonImage1;
   PImage exitButtonImage2;
-  PImage optionsButtonImage; 
-  PImage optionsButtonImage1;    
-  PImage optionsButtonImage2;  
   PImage restartButtonImage;
   PImage restartButtonImage1;  
   PImage restartButtonImage2; 
@@ -13,32 +10,24 @@ class PauseScreen extends Screen{
   
   PauseScreen(Menus menuInput){
     menu = menuInput; 
-    optionsButtonImage2 = loadImage("data/options_button_2.png");
-    optionsButtonImage1 = loadImage("data/options_button_1.png"); 
+    restartButtonImage2 = loadImage("data/restart_button_2.png");
+    restartButtonImage1 = loadImage("data/restart_button_1.png");   
     exitButtonImage1 = loadImage("data/exit_button_1.png");
     exitButtonImage2 = loadImage("data/exit_button_2.png");
  }
   
   public void doThings(){
-      justDrawLoop();
-      checkOptions();
-      checkExit();
+      justDrawLoop(map);
+      checkButtons(false);
       drawButtons();
       pTime = millis();
    }
-   
-   public void justDrawLoop(){
-     background(0);
-     drawStars();
-     camera(camMat, cam.x,cam.y,0.5,0.5); 
-     map.justDrawThings(); 
-  }
   
   private void drawButtons(){
     textSize(100);
     fill(255);
     text("PAUSED", cam.x-32,cam.y - 200);
-    image(optionsButtonImage, cam.x-180, cam.y);
+    image(restartButtonImage, cam.x-180, cam.y);
     image(exitButtonImage, cam.x-180, cam.y+200);
     textSize(50);
   }
@@ -47,22 +36,33 @@ class PauseScreen extends Screen{
     map = mapInput; 
   }
   
-    private void checkOptions(){
+   private void checkRestart(boolean isClick){
      if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2) && mouseY < (height / 2 + 50)){
-       optionsButtonImage = optionsButtonImage2; 
-       if (mouseButton == LEFT) {
+       restartButtonImage = restartButtonImage2; 
+       if (isClick) {
+         map.gameMusic.stop();
+         menu.startPage.startMusic.play();
+         menu.switchScreen(Page.START,menu.startPage);
        }
        
     } else {
-       optionsButtonImage = optionsButtonImage1; 
+       restartButtonImage = restartButtonImage1; 
     }
     
   }
+  @Override 
+  public void checkButtons(boolean isClick){
+    //TODO below!1
+    // checkResume(isClick);
+    checkRestart(isClick);
+    checkExit(isClick);
+  }
+
   
-  private void checkExit(){
+  private void checkExit(boolean isClick){
      if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 + 100) && mouseY < (height / 2 + 150)) {
        exitButtonImage = exitButtonImage2; 
-       if (mouseButton == LEFT) {
+       if (isClick) {
          exit();
        }
     } else {

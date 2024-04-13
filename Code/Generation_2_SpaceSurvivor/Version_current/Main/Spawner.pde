@@ -69,6 +69,7 @@ public class Spawner{
       } 
    }
    
+   
    public void pacifyAllBoids(){
      startingState = 0;
    }

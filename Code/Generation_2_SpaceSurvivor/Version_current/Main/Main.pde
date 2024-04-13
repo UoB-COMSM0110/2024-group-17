@@ -21,14 +21,26 @@ public double[] starsX = new double[1000];
 public double[] starsY = new double[1000];
 public int[] starCloseness = new int[1000];
 
+SoundFile bumpSound;
+SoundFile explosionSound;
+SoundFile hitmarkerSound;
+SoundFile launcherFire;
+SoundFile playerDamageSound;
+SoundFile portalIdleSound;
+SoundFile portalTravelSound;
+SoundFile replicatorDestroyed;
+SoundFile shotgunSound;
+SoundFile flyingSoundEffect;
 
 //SETUP FUNCTION: called once
 void setup(){
   ellipseMode(RADIUS);
+  textAlign(CENTER);
   size(1280,1024,P2D);
   frameRate(50);
    
   setupImages();
+  setupSounds();
   makeStars();
 
   cam = new Camera(0,0);
@@ -41,6 +53,23 @@ void setupImages(){
   weaponrocket= loadImage("rock.png");
   weaponrocket.resize(50,50);
   explo = loadImage("exp.png");
+}
+
+void setupSounds(){
+ bumpSound = new SoundFile(this,"bumpSound.wav"); 
+ explosionSound = new SoundFile(this,"explosionSound.wav");
+ hitmarkerSound = new SoundFile(this,"hitmarkerSound.wav");
+ hitmarkerSound.amp(0.6);
+ launcherFire = new SoundFile(this,"launcherFire.wav");
+ playerDamageSound = new SoundFile(this,"playerDamageSound.wav");
+ playerDamageSound.amp(0.2);
+ portalIdleSound = new SoundFile(this,"portalIdleSound.wav");
+ portalTravelSound = new SoundFile(this,"portalTravelSound.wav");
+ replicatorDestroyed = new SoundFile(this,"replicatorDestroyed.wav");
+ replicatorDestroyed.amp(0.8);
+ shotgunSound = new SoundFile(this,"shotgunSound.wav");  
+ flyingSoundEffect = new SoundFile(this, "flyingSoundEffect.wav");
+ flyingSoundEffect.amp(0.2);
 }
 
 public void makeStars(){
@@ -67,6 +96,7 @@ void mousePressed(){
 void mouseReleased(){
   if(mouseButton == LEFT){
     keyspressed[6]=false;
+    menu.doClick();
   }
   if(mouseButton == RIGHT){
     keyspressed[5]=false;
@@ -75,22 +105,22 @@ void mouseReleased(){
 
 //Code for registering presses
 void keyPressed(){
-  if(key == 'w'){
+  if(key == 'w'|| key == 'W'){
     keyspressed[0] = true;
   }
-  if(key == 'a'){
+  if(key == 'a'|| key == 'A'){
     keyspressed[1] = true;
   }  
-  if(key == 's'){
+  if(key == 's'|| key == 'S'){
     keyspressed[2] = true;
   }
-  if(key == 'd'){
+  if(key == 'd'|| key == 'D'){
     keyspressed[3] = true;
   }
   if(keyCode ==TAB){
     keyspressed[4] = true;  
   }
-  if (key == 'e'){
+  if (key == 'e'|| key == 'E'){
      keyspressed[7] = true;
   }
   if(key == ' '){
@@ -104,7 +134,7 @@ void keyPressed(){
          menu.pauseGame();
          return;
        case PAUSE : 
-         menu.switchScreen(Page.PLAYING);
+         menu.switchScreen(Page.PLAYING,menu.playingScreen);
          return;
        case DEATH : 
           exit();
@@ -115,19 +145,22 @@ void keyPressed(){
 }
 
 void keyReleased(){
-  if(key == 'w'){
+  if(key == 'w' || key == 'W'){
     keyspressed[0] = false;
   }
-  if(key == 'a'){
+  if(key == 'a'|| key == 'A'){
     keyspressed[1] = false;
   }
-  if(key == 's'){
+  if(key == 's'|| key == 'S'){
     keyspressed[2] = false;
   }
-  if(key == 'd'){
+  if(key == 'd'|| key == 'D'){
     keyspressed[3] = false;
   }
-  if(key == 'e'){
+  if(keyCode ==TAB){
+    keyspressed[4] = false;  
+  }
+  if(key == 'e'|| key == 'E'){
     keyspressed[7] = false;
   }
   if(key == ' '){

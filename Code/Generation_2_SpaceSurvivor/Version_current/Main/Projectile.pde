@@ -10,9 +10,11 @@ class Projectile {
   Coordinate position;
   boolean shouldDestroy = false;
   boolean dieOnHit;
+  Player player;
 
   
-  Projectile(Coordinate positionInput, int radiusInput, int durationInput, float velocityInput, int damageInput, Colour colourInput, boolean dieOnHitInput) {
+  Projectile(Coordinate positionInput, Player playerInput, int radiusInput, int durationInput, float velocityInput, int damageInput, Colour colourInput, boolean dieOnHitInput ,  float spread ) {
+     player = playerInput;
      dieOnHit = dieOnHitInput;
      colour = colourInput;
      damage = damageInput;
@@ -21,7 +23,7 @@ class Projectile {
      velocity = velocityInput;
      position = new Coordinate(positionInput.xGet(),positionInput.yGet());
      radius = radiusInput;
-     setDirection();
+     setDirection(spread);
   }
   
   public Coordinate getPosition(){return position;}
@@ -43,6 +45,7 @@ class Projectile {
        float sqrDistanceBetween = sqrDistanceBetween(object);
        if(sqrDistanceBetween < (object.getRadius() + radius)*(object.getRadius() + radius)){
          object.dealDamage(damage);
+         println("hit!");
          if(dieOnHit){shouldDestroy = true;}
          object.alertGroup();
        }
@@ -55,18 +58,32 @@ class Projectile {
   
   private void checkTimeOut(){if(tick - createTick > duration){shouldDestroy = true;}}
   
-  private void setDirection(){
+  private void setDirection(float spread){
     if(velocity==0){xmom=0;ymom=0;return;}
-     xmom = (mouseX-(width/2))*velocity;
-     ymom = (mouseY-(height/2))*velocity;    
+     xmom = (mouseX  -(width/2));
+     ymom = (mouseY  -(height/2));    
+     if(spread != 0){modifySpread(spread);}
      float deltaMagnitude = sqrt(xmom*xmom + ymom*ymom);
      xmom = velocity * xmom/deltaMagnitude;
      ymom = velocity * ymom/deltaMagnitude;
   }
   
+  private void modifySpread(float spread){
+    float distance = distanceFromPlayer();
+    println(distance);
+    xmom+= (rand.nextInt()%spread) * distance/100;
+    ymom+= (rand.nextInt()%spread) * distance/100;
+  }
+  
+  private float distanceFromPlayer(){
+     float xPlayer = player.xGet();
+     float yPlayer = player.yGet();
+     return sqrt( (xmom - xPlayer + cam.x)*(xmom - xPlayer + cam.x) + (ymom - yPlayer + cam.y)*(ymom - yPlayer + cam.y));   
+  }
+  
   public boolean shouldRemove(){return shouldDestroy;}
   
-  void move() {
+  void move(){
     position.move(xmom,ymom);
   }
   

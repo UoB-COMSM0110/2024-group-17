@@ -1,6 +1,13 @@
 public abstract class Screen{
+  Map currentMap;
+   public void setMap(Map mapInput){currentMap = mapInput;}
   
-  
+   public void justDrawLoop(Map map){
+     background(0);
+     drawStars();
+     camera(camMat, cam.x,cam.y,0.5,0.5); 
+     map.justDrawThings(); 
+  }
   
   void updateStarPositions() {
     for (int i = 0; i < 1000; i++) {
@@ -27,5 +34,12 @@ public abstract class Screen{
     } 
   }
   
+  public void clickButton(){
+    checkButtons(true); 
+  }
+  
+  public void checkButtons(boolean isClick){
+    
+  }
   
 }

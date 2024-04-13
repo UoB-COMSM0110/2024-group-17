@@ -29,36 +29,39 @@ public class StartPage extends Screen{
     drawStars();
     cam.move(0,0);
     camera(camMat, cam.x,cam.y,0.5,0.5);
-
-    checkBegin();
-    checkOptions();
-    checkExit(); 
+    checkButtons(false);
     drawButtons();
   }
   
   private void drawButtons(){
     textSize(100);
     fill(255);
-    text("SPACE SURVIVORS", cam.x - 400,cam.y - 400);
+    text("SPACE SURVIVORS", cam.x-30,cam.y - 400);
     image(beginButtonImage, cam.x-180, cam.y-200);
     image(optionsButtonImage, cam.x-180, cam.y);
     image(exitButtonImage, cam.x-180, cam.y+200);
     textSize(50);
   }
+  @Override
+  public void checkButtons(boolean isClick){
+    checkBegin(isClick);
+    checkOptions(isClick);
+    checkExit(isClick); 
+  }
 
-  private void checkBegin(){
+  private void checkBegin(boolean isClick){
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50)) {
        beginButtonImage = beginButtonImage2; 
-       if (mouseButton == LEFT) {
-         menus.switchScreen(Page.DIFFICULTY);
+       if (isClick) {
+         menus.switchScreen(Page.DIFFICULTY,menu.difficultyPage);
        }
     } else{beginButtonImage = beginButtonImage1;}
   }
   
-  private void checkOptions(){
+  private void checkOptions(boolean isClick){
      if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2) && mouseY < (height / 2 + 50)){
        optionsButtonImage = optionsButtonImage2; 
-       if (mouseButton == LEFT) {
+       if (isClick) {
        }
        
     } else {
@@ -67,10 +70,10 @@ public class StartPage extends Screen{
     
   }
   
-  private void checkExit(){
+  private void checkExit(boolean isClick){
      if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 + 100) && mouseY < (height / 2 + 150)) {
        exitButtonImage = exitButtonImage2; 
-       if (mouseButton == LEFT) {
+       if (isClick) {
          exit();
        }
     } else {

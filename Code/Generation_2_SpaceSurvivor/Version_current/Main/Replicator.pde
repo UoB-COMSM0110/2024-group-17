@@ -5,7 +5,7 @@ public class Replicator implements Collideable{
    Player player;
    Spawner spawner;
    int radius=50;
-   int health=200;
+   int health=100;
    int mapSize;
    int difficulty;
    boolean isDestroyed = false;
@@ -17,6 +17,7 @@ public class Replicator implements Collideable{
      allObjects = allObjectsInput;
      mapSize = mapSizeInput;
      difficulty = difficultyInput;
+     if(difficulty == -1){health = 20;}
      position = new Coordinate(0,0);
      position.setRandomOnCircle(mapSize);
      while(!uniquePosition()){
@@ -25,25 +26,30 @@ public class Replicator implements Collideable{
      spawner = new Spawner(boids,position,difficulty,allObjectsInput,allStructures);
    }
    
-   public boolean uniquePosition(){
+  public boolean uniquePosition(){
     for(Collideable structure : allStructures){
-      float sqrDistanceBetween = sqrDistanceBetween(structure);
+      float sqrDistanceBetween = sqrDistanceBetween(structure.getPosition());
       if( sqrDistanceBetween < (structure.getRadius() + radius)*(structure.getRadius() + radius)){    
         return false;
       }
     }
+    if(sqrDistanceBetween(new Coordinate(0,0))< 8500000){return false;}
     return true;
   }
   
-  private float sqrDistanceBetween(Collideable object){
-    return (object.xGet() - position.xGet())*(object.xGet() - position.xGet()) + (object.yGet() - position.yGet())*(object.yGet() - position.yGet());
+  private float sqrDistanceBetween(Coordinate otherPosition){
+    return (otherPosition.xGet() - position.xGet())*(otherPosition.xGet() - position.xGet()) + (otherPosition.yGet() - position.yGet())*(otherPosition.yGet() - position.yGet());
   }  
-
    
    public void dealDamage(int damage){
       health -= damage;
+      hitmarkerSound.play();
       println(health);
-      if(health<=0){isDestroyed = true;}
+      if(health<=0){
+        player.getPoints(50);
+        if(!replicatorDestroyed.isPlaying()){replicatorDestroyed.play();}
+        isDestroyed = true;
+      }
    }
      
   public void alertGroup(){}
@@ -52,7 +58,10 @@ public class Replicator implements Collideable{
   
   public float yGet(){return position.yGet();}
    
-   public int getRadius(){return radius;}
+  public int getRadius(){return radius;}
+     
+  public Coordinate getPosition(){return position;}
+
    
    public void doThings(){
      for(int i=boids.size()-1;i>=0;i--){
@@ -61,11 +70,19 @@ public class Replicator implements Collideable{
        if(boid.shouldRemove){
           boids.remove(boid);
           allObjects.remove(boid);
+          player.getPoints(1);
        }     
      }
      if(!isDestroyed){
        spawner.doThings();
        render();
+     }
+   }
+   
+   public void justDraw(){
+     render(); 
+     for(Enemy boid : boids){
+       boid.render();   
      }
    }
    

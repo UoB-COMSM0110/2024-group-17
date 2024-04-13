@@ -35,16 +35,17 @@ public class Asteroid implements Collideable{
   
   public boolean uniquePosition(){
     for(Collideable structure : allStructures){
-      float sqrDistanceBetween = sqrDistanceBetween(structure);
+      float sqrDistanceBetween = sqrDistanceBetween(structure.getPosition());
       if( sqrDistanceBetween < (structure.getRadius() + radius)*(structure.getRadius() + radius)){    
         return false;
       }
     }
+    if(sqrDistanceBetween(new Coordinate(0,0))< 5000000){return false;}
     return true;
   }
   
-  private float sqrDistanceBetween(Collideable object){
-    return (object.xGet() - position.xGet())*(object.xGet() - position.xGet()) + (object.yGet() - position.yGet())*(object.yGet() - position.yGet());
+  private float sqrDistanceBetween(Coordinate otherPosition){
+    return (otherPosition.xGet() - position.xGet())*(otherPosition.xGet() - position.xGet()) + (otherPosition.yGet() - position.yGet())*(otherPosition.yGet() - position.yGet());
   }  
 
   public void render(){
@@ -58,6 +59,9 @@ public class Asteroid implements Collideable{
   
   public float xGet(){return position.xGet();}
   
-  public float yGet(){return position.yGet();}
+  public float yGet(){return position.yGet();} 
+  
+  public Coordinate getPosition(){return position;}
+
   
 }

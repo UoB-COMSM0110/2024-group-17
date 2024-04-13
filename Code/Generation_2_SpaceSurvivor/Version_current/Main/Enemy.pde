@@ -2,7 +2,7 @@ class Enemy implements Collideable{
   
   int state = 0;
   int difficulty;
-  int health = 10;
+  int health = 12;
   Spawner home;
   Coordinate position;
   ArrayList<Enemy> localGroup;
@@ -37,6 +37,7 @@ class Enemy implements Collideable{
   
   public void dealDamage(int damage){
      health -= damage;
+    // hitmarkerSound.play();
      if(health<=0){shouldRemove = true;}
   }
   
@@ -44,7 +45,10 @@ class Enemy implements Collideable{
   
   public float xGet(){return position.xGet();}
   
-  public float yGet(){return position.yGet();}
+  public float yGet(){return position.yGet();}  
+  
+  public Coordinate getPosition(){return position;}
+
   
   public void doThings(Player p1){
     switch (state){
@@ -82,6 +86,10 @@ class Enemy implements Collideable{
   
   private void setStats(){
     switch (difficulty){
+       case -1 : 
+        speed = 5;
+        damage = 2;
+        break;
       case 0 : 
         speed = 7;
         damage = 5;
@@ -89,6 +97,7 @@ class Enemy implements Collideable{
       case 1:
         speed = 15;
         damage = 10;
+        health = 20;
         break;
       default:
         speed=0;
@@ -109,16 +118,12 @@ class Enemy implements Collideable{
 
   private void collideTest(Player p1){
     if(dist < (radius + p1.getRadius())){
-      p1.xmom -= delx * 1/dist * bounce ;
-      p1.ymom -= dely * 1/dist * bounce ;
       if(p1.attacking){
          shouldRemove = true;
          p1.kill(1);
          return;
       }
-      if(p1.vuln){
-        p1.damaged(damage);
-      }
+      if(p1.vuln){p1.damaged(damage);}
     }
   }
   

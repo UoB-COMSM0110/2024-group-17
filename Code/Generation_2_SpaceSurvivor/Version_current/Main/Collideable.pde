@@ -4,4 +4,5 @@ public interface Collideable{
   float xGet();
   float yGet();
   void alertGroup();
+  public Coordinate getPosition();
 }

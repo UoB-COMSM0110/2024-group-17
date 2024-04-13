@@ -18,7 +18,7 @@ public class BasicGun extends Weapon{
   @Override
   public void doThings(Coordinate positionInput,boolean[] keyspressed){
     manageBullets();
-    if(keyspressed[6]){bulletFire(positionInput);}  
+    if(keyspressed[6]){shotgunFire(positionInput);}  
   }
   
   private void manageBullets(){
@@ -33,8 +33,33 @@ public class BasicGun extends Weapon{
   
   private void bulletFire(Coordinate positionInput){
     if(tick - previousShotTick < cooldown){return;}
-    bullets.add(new Projectile(positionInput,10,150,20,5,new Colour(50,0,255),true));
+    bullets.add(new Projectile(positionInput,player,10,350,20,6,new Colour(50,0,255),true,0));
     previousShotTick = tick;
+  }
+  
+  private void shotgunFire(Coordinate positionInput){
+
+    cooldown = 100;
+    if(tick - previousShotTick < cooldown){return;}
+    shotgunSound.play();
+    playerImpulse(-40.0);
+    for(int i = 0 ; i< 10; i++){
+      bullets.add(new Projectile(positionInput,player,5,60,25,4,new Colour(50,0,255),true,30));
+    }
+    previousShotTick = tick;
+    
+
+  }
+  
+  private void playerImpulse(float magnitude){
+      float mpx = (mouseX-(width/2));
+      float mpy = (mouseY-(height/2));
+      float mpMag = sqrt(mpx*mpx + mpy*mpy);
+      player.xmom = magnitude * (mpx)/mpMag;
+      player.ymom = magnitude * (mpy)/mpMag;
+    // player.impulse(xmom,ymom);
+    
+    
   }
   
   

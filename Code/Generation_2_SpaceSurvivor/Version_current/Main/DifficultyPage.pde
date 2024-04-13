@@ -19,23 +19,43 @@ public class DifficultyPage extends Screen{
    public void doThings(){
     background(0);
     drawStars();
-    checkNormal();
-    checkInsane();
+    checkButtons(false);
     drawButtons();
+  }
+  
+  @Override
+  public void checkButtons(boolean isClick){
+     checkTutorial(isClick);
+     checkNormal(isClick);
+     checkInsane(isClick);
   }
   
   private void drawButtons(){
   camera(camMat, cam.x,cam.y,0.5,0.5);
+    text("TUTORIAL",cam.x-30,cam.y - 100);
     image(normalImage, cam.x-180, cam.y);
     image(insaneImage, cam.x-180, cam.y+200);
+    textSize(80);
+    fill(255);
+    text("SELECT DIFFICULTY", cam.x-30,cam.y - 400);
+  }
+  
+  private void checkTutorial(boolean isClick){
+    if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 - 100) && mouseY < (height / 2 - 50)) {
+       if (isClick) {
+         menu.newGame(-1);
+         return;
+       }
+       
+    } else {
+    }
   }
 
-  private void checkInsane(){
+  private void checkInsane(boolean isClick){
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2 + 100) && mouseY < (height / 2 + 150)) {
        insaneImage = insaneImage2; 
-       if (mouseButton == LEFT) {
+       if (isClick) {
          menu.newGame(1);
-         menu.switchScreen(Page.PLAYING);
          return;
        }
        
@@ -44,12 +64,11 @@ public class DifficultyPage extends Screen{
     }
   }
   
-  private void checkNormal(){
+  private void checkNormal(boolean isClick){
     if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2) && mouseY < (height / 2 + 50)) {
        normalImage = normalImage2; 
-       if (mouseButton == LEFT) {
+       if (isClick) {
          menu.newGame(0);
-         menu.switchScreen(Page.PLAYING);
          return;
        }
     } else {

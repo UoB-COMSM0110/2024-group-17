@@ -8,13 +8,17 @@ public class Menus{
   DeathScreen deathScreen;
   StartPage startPage;
   Page activePage = Page.START;
+  Screen activeScreen = startPage;
   
   Map currentMap;
   Camera cam;
+  Main main;
   
-  Menus(Main main, Camera camInput){
+  Menus(Main mainInput, Camera camInput){
+      main = mainInput;
       cam = camInput;
       startPage = new StartPage(this,main);
+      activeScreen = startPage;
       deathScreen = new DeathScreen(this,main);
       playingScreen = new PlayingScreen(this,main);
   
@@ -42,28 +46,50 @@ public class Menus{
     }
   }
   
-  public void switchScreen(Page nextPage){
+  public void startGamge(Map mapInput){
+    currentMap = mapInput;
+    switchScreen(Page.START,playingScreen);
+  }
+  
+  public void switchScreen(Page nextPage, Screen nextScreen){
+    activeScreen = nextScreen;
     activePage = nextPage; 
   }
   
   public void pauseGame(){
      pauseScreen.setMap(playingScreen.getMap());
-     switchScreen(Page.PAUSE);
+     switchScreen(Page.PAUSE,pauseScreen);
   }
   
-  public void deathOverlay(){
+  public void winGame(){
+     winScreen.setMap(playingScreen.getMap());
+     switchScreen(Page.WIN,winScreen);
+  }
+  
+  public void die(){
      deathScreen.setMap(playingScreen.getMap()); 
-     switchScreen(Page.DEATH);
+     deathScreen.deathMusic.play();
+     switchScreen(Page.DEATH,deathScreen);
   }
   
   public void newGame(int difficulty){
-    playingScreen.newGame(difficulty, cam); 
+    currentMap = new Map(difficulty,main,cam);
+    startPage.startMusic.stop();
+    playingScreen.setMap(currentMap);
+    tick = 0;
+    pTime = millis();
+    switchScreen(Page.PLAYING,playingScreen);
   }
   
   public boolean isPlaying(){ 
     if(activePage != Page.PLAYING){
       return false;
     }else{return true;}
+  }
+  
+  public void doClick(){
+    activeScreen.clickButton(); 
+    //startPage.clickButton();
   }
   
 }

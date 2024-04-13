@@ -2,6 +2,7 @@ public class Coordinate{
   private float x;
   private float y;
   private Random random = new Random();
+  private boolean shouldDraw = true;
   
   Coordinate(float xInput, float yInput){
     x = xInput;
@@ -29,4 +30,14 @@ public class Coordinate{
     y = r * cos(theta);
     println(x,y);
   }
+  
+  public void randomModify(float spread){
+    x += random.nextInt() % spread;
+    y += random.nextInt() % spread;
+    
+    
+  }
+  
+  public void setNotDraw(){shouldDraw = false;}
+  public boolean shouldDraw(){return shouldDraw;}
 }
