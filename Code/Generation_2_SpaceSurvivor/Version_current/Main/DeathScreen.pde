@@ -19,6 +19,7 @@ class DeathScreen extends Screen{
   }
   
   public void doThings(){
+    cursor(ARROW);
     checkButtons(false);
     justDrawLoop(currentMap);
     drawButtons();

@@ -17,6 +17,7 @@ class PauseScreen extends Screen{
  }
   
   public void doThings(){
+      cursor(ARROW);
       justDrawLoop(map);
       checkButtons(false);
       drawButtons();

@@ -7,6 +7,7 @@ class WinScreen extends Screen{
   }
   
   public void doThings(){
+    cursor(ARROW);
     background(0);
     drawStars();
     camera(camMat, cam.x,cam.y,0.5,0.5); 

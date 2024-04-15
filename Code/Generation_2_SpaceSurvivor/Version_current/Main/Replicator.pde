@@ -6,6 +6,7 @@ public class Replicator implements Collideable{
    Spawner spawner;
    int radius=50;
    int health=100;
+   int maxHealth;
    int mapSize;
    int difficulty;
    boolean isDestroyed = false;
@@ -18,6 +19,7 @@ public class Replicator implements Collideable{
      mapSize = mapSizeInput;
      difficulty = difficultyInput;
      if(difficulty == -1){health = 20;}
+     maxHealth = health;
      position = new Coordinate(0,0);
      position.setRandomOnCircle(mapSize);
      while(!uniquePosition()){
@@ -88,6 +90,12 @@ public class Replicator implements Collideable{
    public void render(){
       fill(255,0,0);
       circle(position.xGet(),position.yGet(),radius);
+      if(health<maxHealth){
+        noFill();
+        rect(position.xGet()-50,position.yGet() + 70,100,10);
+        fill(255,0,0);
+        rect(position.xGet()-50,position.yGet() + 70,100 * health/maxHealth,10);
+      }
    }
   
 }
