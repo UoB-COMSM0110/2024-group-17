@@ -31,7 +31,7 @@ public class RocketLauncher extends Weapon{
        projectile.doThings(allObjects);
        if(projectile.shouldRemove()){
            explosions.add(new Projectile(projectile.getPosition(),player,100,50,0,1, new Colour(255, 165, 0),false,0));
-           explosionSound.play();
+           explosionSound.trigger();
            projectiles.remove(projectile);
        }
     }
@@ -49,7 +49,7 @@ public class RocketLauncher extends Weapon{
   
   public void rocketFire(Coordinate positionInput){
     if(tick - previousShotTick < cooldown){return;}
-    launcherFire.play();
+    launcherFire.trigger();
     projectiles.add(new Projectile(positionInput,player,7,150,18,20,new Colour(255, 165, 0),true,0));
     previousShotTick = tick;
   }

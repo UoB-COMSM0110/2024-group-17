@@ -21,7 +21,6 @@ class Minimap{
       if(!replicator.isDestroyed){
         float x = minimapSize * replicator.xGet() / mapSize - 1125;
         float y = minimapSize * replicator.yGet() / mapSize - 875;
-        println("replicator position : ",x,y);
         replicatorPositions.add(new Coordinate(x,y));
       }
     }

@@ -90,7 +90,7 @@ class UI {
   private void drawExtractionPointer(){
     float xPoint = map.player.xGet() - map.player.xGet()/2;
     float yPoint = map.player.yGet() - map.player.yGet()/2;
-    if(abs(map.player.xGet()) < 700 && abs(map.player.yGet()) < 700){println(map.player.xGet(),map.player.yGet());return;}
+    if(abs(map.player.xGet()) < 700 && abs(map.player.yGet()) < 700){return;}
     float pointMagnitude = sqrt(xPoint*xPoint + yPoint*yPoint);
     float xPoint1 = 600*  xPoint/pointMagnitude;
     float yPoint1 = 600*  yPoint/pointMagnitude;
@@ -102,7 +102,6 @@ class UI {
     float yPoint3 = 580*  yPoint/pointMagnitude;
     xPoint3 = (xPoint3*cos(-PI/20)-yPoint3*sin(-PI/20));
     yPoint3 = (xPoint3*sin(-PI/20) + yPoint3*cos(-PI/20));
-    println("its happening", xPoint, yPoint);
     triangle(map.player.xGet() - xPoint1,map.player.yGet() - yPoint1,map.player.xGet() - xPoint2,map.player.yGet() - yPoint2,map.player.xGet() - xPoint3,map.player.yGet() - yPoint3 );
   }
 }

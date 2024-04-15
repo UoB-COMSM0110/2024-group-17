@@ -12,17 +12,15 @@ public class Map{
   Minimap minimap;
   Tutorial tutorial;
   Player player;
-  SoundFile gameMusic;
+  AudioPlayer gameMusic;
   UI userInterface;
   public int numberReplicatorsDestroyed = 0;
-  LowPass lowPass;
   
   
-  Map(int difficultyInput, Main main, Camera cam){
-    lowPass = new LowPass(main);
-    gameMusic = new SoundFile(main,"GameMusic.wav"); 
+  Map(int difficultyInput, Camera cam){
+    gameMusic = minim.loadFile("GameMusic.wav"); 
     player = new Player(0,0,allObjects,allStructures);
-    gameMusic.play();
+    //gameMusic.loop();
     difficulty = difficultyInput;
     generateRandomAsteroids(); 
     generateRandomReplicators(); 
@@ -33,7 +31,7 @@ public class Map{
     timeLeft = 20000;
     previousTick = 0;
     isTimePassing = true;
-    flyingSoundEffect.play();
+    flyingSoundEffect.loop();
   }
   
   public void justDrawThings(){
@@ -79,7 +77,7 @@ public class Map{
     gateway.doThings(keyspressed);
     player.doThings(keyspressed);
     updateMusic();
-    if(player.isDead() || (timeLeft < 0 && difficulty!=-1)){gameMusic.stop();menu.die();}
+    if(player.isDead() || (timeLeft < 0 && difficulty!=-1)){gameMusic.pause();menu.die();}
     if(gateway.getPortalStatus()){gateway.renderPortal();}
     minimap.drawMap(keyspressed[4]);
     userInterface.doThings();
@@ -88,22 +86,16 @@ public class Map{
   }
   
   private void updateMusic(){
-    if(!flyingSoundEffect.isPlaying()){
-      flyingSoundEffect.play();
-      lowPass.process(flyingSoundEffect,player.getSpeed()*10 + 100);
-      return;
-    }
-    lowPass.freq(player.getSpeed()*10 + 100);
-    
+     rateControl.value.setLastValue((player.getSpeed()+40)/30);
   }
   
   public void stopMusic(){
-    gameMusic.stop();
+    gameMusic.pause();
   }
   
   public void setTime(){
      timeLeft -= (tick - previousTick);
-     if(timeLeft <= 19900){gateway.setPortalStatus(false);}
+     if(timeLeft <= 19900 && timeLeft >= 19700){gateway.setPortalStatus(false);}
   }
   
   public long timeRemaining(){

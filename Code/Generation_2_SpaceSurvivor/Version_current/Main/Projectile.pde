@@ -45,7 +45,6 @@ class Projectile {
        float sqrDistanceBetween = sqrDistanceBetween(object);
        if(sqrDistanceBetween < (object.getRadius() + radius)*(object.getRadius() + radius)){
          object.dealDamage(damage);
-         println("hit!");
          if(dieOnHit){shouldDestroy = true;}
          object.alertGroup();
        }

@@ -19,7 +19,7 @@ public class Menus{
       cam = camInput;
       startPage = new StartPage(this,main);
       activeScreen = startPage;
-      deathScreen = new DeathScreen(this,main);
+      deathScreen = new DeathScreen(this);
       playingScreen = new PlayingScreen(this,main);
   
   }
@@ -73,8 +73,8 @@ public class Menus{
   }
   
   public void newGame(int difficulty){
-    currentMap = new Map(difficulty,main,cam);
-    startPage.startMusic.stop();
+    currentMap = new Map(difficulty,cam);
+    startPage.startMusic.pause();
     playingScreen.setMap(currentMap);
     tick = 0;
     pTime = millis();

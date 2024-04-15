@@ -1,7 +1,9 @@
 import java.util.Random;
 import java.util.Collections;
-import processing.sound.*;
 import processing.awt.PGraphicsJava2D;
+import ddf.minim.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
 
 public PImage player;
 public PImage enemyImage;
@@ -21,16 +23,21 @@ public double[] starsX = new double[1000];
 public double[] starsY = new double[1000];
 public int[] starCloseness = new int[1000];
 
-SoundFile bumpSound;
-SoundFile explosionSound;
-SoundFile hitmarkerSound;
-SoundFile launcherFire;
-SoundFile playerDamageSound;
-SoundFile portalIdleSound;
-SoundFile portalTravelSound;
-SoundFile replicatorDestroyed;
-SoundFile shotgunSound;
-SoundFile flyingSoundEffect;
+
+Minim minim;
+AudioSample  bumpSound;
+AudioSample  explosionSound;
+AudioSample  hitmarkerSound;
+AudioSample  launcherFire;
+AudioSample  playerDamageSound;
+AudioSample  portalTravelSound;
+AudioSample  replicatorDestroyed;
+AudioSample  shotgunSound;
+FilePlayer  portalIdleSound;
+FilePlayer  flyingSoundEffect;
+TickRate rateControl;
+TickRate rateControlPortal;
+AudioOutput out;
 
 //SETUP FUNCTION: called once
 void setup(){
@@ -56,20 +63,24 @@ void setupImages(){
 }
 
 void setupSounds(){
- bumpSound = new SoundFile(this,"bumpSound.wav"); 
- explosionSound = new SoundFile(this,"explosionSound.wav");
- hitmarkerSound = new SoundFile(this,"hitmarkerSound.wav");
- hitmarkerSound.amp(0.6);
- launcherFire = new SoundFile(this,"launcherFire.wav");
- playerDamageSound = new SoundFile(this,"playerDamageSound.wav");
- playerDamageSound.amp(0.2);
- portalIdleSound = new SoundFile(this,"portalIdleSound.wav");
- portalTravelSound = new SoundFile(this,"portalTravelSound.wav");
- replicatorDestroyed = new SoundFile(this,"replicatorDestroyed.wav");
- replicatorDestroyed.amp(0.8);
- shotgunSound = new SoundFile(this,"shotgunSound.wav");  
- flyingSoundEffect = new SoundFile(this, "flyingSoundEffect.wav");
- flyingSoundEffect.amp(0.2);
+ minim = new Minim(this);
+ bumpSound =  minim.loadSample("bumpSound.wav",512); 
+ explosionSound = minim.loadSample("explosionSound.wav",512);
+ hitmarkerSound = minim.loadSample("hitmarkerSound.wav",512);
+ launcherFire = minim.loadSample("launcherFire.wav",512);
+ playerDamageSound = minim.loadSample("playerDamageSound.wav",512);
+ portalIdleSound = new FilePlayer( minim.loadFileStream("portalIdleSound.wav") );
+ portalTravelSound = minim.loadSample("portalTravelSound.wav",512);
+ replicatorDestroyed = minim.loadSample("replicatorDestroyed.wav",512);
+ shotgunSound = minim.loadSample("shotgunSound.wav",512);  
+ flyingSoundEffect = new FilePlayer( minim.loadFileStream("flyingSoundEffect.wav") );
+ rateControl = new TickRate(1.f);
+ rateControl.setInterpolation( true );
+ out = minim.getLineOut();
+ rateControlPortal = new TickRate(1.f);
+ rateControlPortal.setInterpolation( true );
+ flyingSoundEffect.patch(rateControl).patch(out);
+ portalIdleSound.patch(rateControlPortal).patch(out);
 }
 
 public void makeStars(){

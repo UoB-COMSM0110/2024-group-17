@@ -9,11 +9,11 @@ public class StartPage extends Screen{
   PImage optionsButtonImage1;    
   PImage optionsButtonImage2;    
   Menus menus; 
-  SoundFile startMusic;
+  AudioPlayer startMusic;
   
   StartPage(Menus menusInput, Main main){
     menus = menusInput;
-    startMusic = new SoundFile(main,"TitleScreen.wav");
+    startMusic = minim.loadFile("TitleScreen.wav");
     startMusic.play();
     beginButtonImage1 = loadImage("data/start_button_1.png");
     beginButtonImage2 = loadImage("data/start_button_2.png");

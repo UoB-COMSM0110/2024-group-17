@@ -119,7 +119,6 @@ class Player{
   void updatecds(){
      if(attacking && tick-aTick > bAlen){attacking = false;}
      if(health<100){
-       println(tick,previousTick);
        health += ((float)(tick-previousTick))*0.05;
      }
      previousTick = tick;
@@ -130,7 +129,7 @@ class Player{
   void damaged(int dam){
     health-=dam;
     vuln = true;
-    playerDamageSound.play();
+    playerDamageSound.trigger();
     //dTick = tick;
   }
   
@@ -161,7 +160,7 @@ class Player{
          yNormalVector = yNormalVector/magnitudeNormalVector;         
          xmom -= 10 * xNormalVector;
          ymom -= 10 * yNormalVector;
-         bumpSound.play();
+         bumpSound.trigger();
       }
     }
   }

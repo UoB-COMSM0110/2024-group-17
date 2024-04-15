@@ -1,6 +1,6 @@
 class DeathScreen extends Screen{
   Menus menu;
-  SoundFile deathMusic;
+  AudioPlayer deathMusic;
   PImage exitButtonImage;
   PImage exitButtonImage1;
   PImage exitButtonImage2;  
@@ -8,8 +8,8 @@ class DeathScreen extends Screen{
   PImage restartButtonImage1;  
   PImage restartButtonImage2;   
   
-  DeathScreen(Menus menuInput,Main main){
-    deathMusic = new SoundFile(main,"DeathMusic.wav");
+  DeathScreen(Menus menuInput){
+    deathMusic = minim.loadFile("DeathMusic.wav");
     menu = menuInput; 
     exitButtonImage1 = loadImage("data/exit_button_1.png");
     exitButtonImage2 = loadImage("data/exit_button_2.png");
@@ -43,7 +43,7 @@ class DeathScreen extends Screen{
      if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2) && mouseY < (height / 2 + 50)){
        restartButtonImage = restartButtonImage2; 
        if (isClick) {
-         deathMusic.stop();
+         deathMusic.pause();
          menu.startPage.startMusic.play();
          menu.switchScreen(Page.START,menu.startPage);
        }

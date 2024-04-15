@@ -37,7 +37,7 @@ class Enemy implements Collideable{
   
   public void dealDamage(int damage){
      health -= damage;
-    // hitmarkerSound.play();
+     hitmarkerSound.trigger();
      if(health<=0){shouldRemove = true;}
   }
   

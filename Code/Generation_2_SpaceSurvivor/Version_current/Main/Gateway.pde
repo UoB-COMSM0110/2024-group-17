@@ -7,7 +7,7 @@ public class Gateway{
   float playerDistance = 100000;
    
   Gateway(Map mapInput){
-    portalTravelSound.play();
+    portalTravelSound.trigger();
     map = mapInput;
     
   }
@@ -22,14 +22,15 @@ public class Gateway{
       }else{
         amp = 500/(playerDistance);
       }
-      portalIdleSound.amp(amp);
+    rateControlPortal.value.setLastValue(amp);
     }
   }
   
   public void setPortalStatus(boolean bool){
     portalActive = bool;
     firstTime = firstTime && bool;
-    if(bool == true){if(!portalIdleSound.isPlaying()){portalIdleSound.play();}}
+    if(portalActive&&!portalIdleSound.isLooping()){portalIdleSound.loop();}
+    
   }
   
   public boolean getPortalStatus(){return portalActive;}
@@ -45,7 +46,7 @@ public class Gateway{
   private void updateExtract(boolean[] keyspressed){
     playerDistance = sqrt(sqrDistanceBetween(map.player.getPosition()));
     if(keyspressed[8] && portalActive && !firstTime && playerDistance <= 300 ){
-       portalTravelSound.play();
+       portalTravelSound.trigger();
        shouldExtract = true;     
     }
   }

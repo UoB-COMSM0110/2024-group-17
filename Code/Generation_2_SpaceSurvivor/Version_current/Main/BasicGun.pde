@@ -41,7 +41,7 @@ public class BasicGun extends Weapon{
 
     cooldown = 100;
     if(tick - previousShotTick < cooldown){return;}
-    shotgunSound.play();
+    shotgunSound.trigger();
     playerImpulse(-40.0);
     for(int i = 0 ; i< 10; i++){
       bullets.add(new Projectile(positionInput,player,5,60,25,4,new Colour(50,0,255),true,30));

@@ -43,11 +43,10 @@ public class Replicator implements Collideable{
    
    public void dealDamage(int damage){
       health -= damage;
-      hitmarkerSound.play();
-      println(health);
+      hitmarkerSound.trigger();
       if(health<=0){
         player.getPoints(50);
-        if(!replicatorDestroyed.isPlaying()){replicatorDestroyed.play();}
+        replicatorDestroyed.trigger();
         isDestroyed = true;
       }
    }

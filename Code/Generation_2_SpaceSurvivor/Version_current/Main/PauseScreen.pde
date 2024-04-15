@@ -40,7 +40,7 @@ class PauseScreen extends Screen{
      if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2) && mouseY < (height / 2 + 50)){
        restartButtonImage = restartButtonImage2; 
        if (isClick) {
-         map.gameMusic.stop();
+         map.gameMusic.pause();
          menu.startPage.startMusic.play();
          menu.switchScreen(Page.START,menu.startPage);
        }
