@@ -20,7 +20,7 @@ public class Map{
   Map(int difficultyInput, Camera cam){
     gameMusic = minim.loadFile("GameMusic.wav"); 
     player = new Player(0,0,allObjects,allStructures);
-    //gameMusic.loop();
+    gameMusic.loop();
     difficulty = difficultyInput;
     generateRandomAsteroids(); 
     generateRandomReplicators(); 

@@ -88,15 +88,15 @@ class Enemy implements Collideable{
     switch (difficulty){
        case -1 : 
         speed = 5;
-        damage = 2;
+        damage = 4;
         break;
       case 0 : 
         speed = 7;
-        damage = 5;
+        damage = 7;
         break;
       case 1:
         speed = 15;
-        damage = 10;
+        damage = 20;
         health = 20;
         break;
       default:
@@ -122,8 +122,12 @@ class Enemy implements Collideable{
          shouldRemove = true;
          p1.kill(1);
          return;
+      } 
+      if(p1.vuln){
+        p1.damaged(damage);
+        p1.xmom -= delx * 1/dist * bounce ;
+        p1.ymom -= dely * 1/dist * bounce ;
       }
-      if(p1.vuln){p1.damaged(damage);}
     }
   }
   
