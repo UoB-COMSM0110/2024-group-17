@@ -7,13 +7,13 @@ public class Asteroid implements Collideable{
   private Random random = new Random();
   public boolean shouldDestroy = false;
   ArrayList<Collideable> allStructures;
-  PImage asteroidImg;
+  PImage asteroidImage;
   
   Asteroid(int mapSizeInput, ArrayList<Collideable> allStructuresInput){
+    asteroidImage = loadImage("data/asteroidwithmap.png");
     allStructures = allStructuresInput;
     mapSize = mapSizeInput;
     initializeRandom();
-    asteroidImg = loadImage("data/asteroidwithmap.png");
   }
   
   public void dealDamage(int damage){
@@ -39,7 +39,7 @@ public class Asteroid implements Collideable{
   private void updateImageSize() {
      if (radius != lastUsedRadius && radius >0) {
        int diameter = radius * 2;
-       asteroidImg.resize(diameter, diameter);
+       asteroidImage.resize(diameter, diameter);
        lastUsedRadius = radius; // Update lastUsedRadius after resizing
      }
   }
@@ -63,9 +63,10 @@ public class Asteroid implements Collideable{
     fill(100);
     updateImageSize();
     //imageMode(CENTER);
-    float imageX = position.xGet() - asteroidImg.width / 2;
-    float imageY = position.yGet() - asteroidImg.height / 2;
-    image(asteroidImg ,imageX, imageY);
+    //float imageX = position.xGet() - asteroidImage.width / 2;
+    //float imageY = position.yGet() - asteroidImage.height / 2;
+    circle(position.xGet(),position.yGet(),radius); 
+    image(asteroidImage, position.xGet() - radius - 10, position.yGet() - radius - 10, radius * 2.1, radius * 2.1);
   }
   
   public void alertGroup(){}
