@@ -129,9 +129,13 @@ class UI {
       text("Return to The Gateway for extraction.",cam.x+1200,cam.y - 850); 
       drawExtractionPointer();
     }else{
-      textSize(35);
+      textSize(60);
       fill(255);
-      text("Destroy Boid Replicators: " + map.numberReplicatorsDestroyed +"/" + map.replicators.size(),cam.x+1200,cam.y - 850);      
+      text("Destroy the red ", cam.x+1100,cam.y - 870);      
+      fill(255, 0, 0);
+      text("Boid Replicators", cam.x + 1100, cam.y - 800);
+      fill(255);
+      text(map.numberReplicatorsDestroyed +"/" + map.replicators.size(), cam.x + 1200, cam.y - 835);
     }
    textAlign(CENTER);
   }

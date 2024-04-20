@@ -6,8 +6,10 @@ public class Asteroid implements Collideable{
   private Random random = new Random();
   public boolean shouldDestroy = false;
   ArrayList<Collideable> allStructures;
+  PImage asteroidImage;
   
   Asteroid(int mapSizeInput, ArrayList<Collideable> allStructuresInput){
+    asteroidImage = loadImage("data/asteroidwithmap.png");
     allStructures = allStructuresInput;
     mapSize = mapSizeInput;
     initializeRandom();
@@ -51,6 +53,7 @@ public class Asteroid implements Collideable{
   public void render(){
     fill(100);
     circle(position.xGet(),position.yGet(),radius); 
+    image(asteroidImage, position.xGet() - radius - 10, position.yGet() - radius - 10, radius * 2.1, radius * 2.1);
   }
   
   public void alertGroup(){}
