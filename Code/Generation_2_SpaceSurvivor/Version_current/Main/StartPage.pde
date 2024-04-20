@@ -8,6 +8,7 @@ public class StartPage extends Screen{
   PImage optionsButtonImage; 
   PImage optionsButtonImage1;    
   PImage optionsButtonImage2;    
+  PImage logo;
   Menus menus; 
   AudioPlayer startMusic;
   
@@ -21,6 +22,7 @@ public class StartPage extends Screen{
     exitButtonImage2 = loadImage("data/exit_button_2.png");
     optionsButtonImage2 = loadImage("data/options_button_2.png");
     optionsButtonImage1 = loadImage("data/options_button_1.png");
+    logo = loadImage("data/spacegamelogo.png");
   }
   
   
@@ -36,7 +38,9 @@ public class StartPage extends Screen{
   private void drawButtons(){
     textSize(100);
     fill(255);
-    text("SPACE SURVIVORS", cam.x-30,cam.y - 400);
+    logo.resize(800, 300);
+    image(logo, cam.x-430,cam.y - 650);
+    
     image(beginButtonImage, cam.x-180, cam.y-200);
     image(optionsButtonImage, cam.x-180, cam.y);
     image(exitButtonImage, cam.x-180, cam.y+200);

@@ -10,8 +10,8 @@ class PauseScreen extends Screen{
   
   PauseScreen(Menus menuInput){
     menu = menuInput; 
-    restartButtonImage2 = loadImage("data/restart_button_2.png");
-    restartButtonImage1 = loadImage("data/restart_button_1.png");   
+    restartButtonImage2 = loadImage("data/button_menu_2.png");
+    restartButtonImage1 = loadImage("data/button_menu_1.png");   
     exitButtonImage1 = loadImage("data/exit_button_1.png");
     exitButtonImage2 = loadImage("data/exit_button_2.png");
  }
