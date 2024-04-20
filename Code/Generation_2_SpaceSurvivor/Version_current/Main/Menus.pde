@@ -76,6 +76,7 @@ public class Menus{
     currentMap = new Map(difficulty,cam);
     startPage.startMusic.pause();
     playingScreen.setMap(currentMap);
+    isPause = false;
     tick = 0;
     pTime = millis();
     switchScreen(Page.PLAYING,playingScreen);
