@@ -67,11 +67,11 @@ class Enemy implements Collideable{
   private void setStats(){
     switch (difficulty){
       case 0 : 
-        speed = 7;
+        speed = 4;
         damage = 5;
         break;
       case 1:
-        speed = 15;
+        speed = 9;
         damage = 10;
         break;
       default:
