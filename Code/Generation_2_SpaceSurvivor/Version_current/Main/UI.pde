@@ -131,7 +131,7 @@ class UI {
     }else{
       textSize(60);
       fill(255);
-      text("Destroy the red ", cam.x+1100,cam.y - 870);      
+      text("Destroy the flashing ", cam.x+1100,cam.y - 870);      
       fill(255, 0, 0);
       text("Boid Replicators", cam.x + 1100, cam.y - 800);
       fill(255);

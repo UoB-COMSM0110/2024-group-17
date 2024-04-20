@@ -63,10 +63,10 @@ public class Asteroid implements Collideable{
     fill(100);
     updateImageSize();
     //imageMode(CENTER);
-    //float imageX = position.xGet() - asteroidImage.width / 2;
-    //float imageY = position.yGet() - asteroidImage.height / 2;
+    float imageX = position.xGet() - asteroidImage.width / 2;
+    float imageY = position.yGet() - asteroidImage.height / 2;
     circle(position.xGet(),position.yGet(),radius); 
-    image(asteroidImage, position.xGet() - radius - 10, position.yGet() - radius - 10, radius * 2.1, radius * 2.1);
+    image(asteroidImage, imageX, imageY);
   }
   
   public void alertGroup(){}

@@ -108,7 +108,7 @@ public class Tutorial{
   private void goKill(){
     textSize(50);
     fill(255);
-    text("Thats all the controls\nDestroy those red boid replicators!\nGood luck soldier",xCoord,yCoord); 
+    text("Thats all the controls\nDestroy those boid replicators!\nYou can see them as red dots on your map.\nGood luck soldier",xCoord,yCoord); 
     if(!wait(500,hasWaitedMoving)){return;}
     map.userInterface.setMissionInfoActive();
     step++; 
