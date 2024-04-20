@@ -103,12 +103,12 @@ public class Tutorial{
       if(keyspressed[7]){hasRocketlaunched = true;}
       else{return;}
     }
-    if(wait(100,hasWaitedRocketlauncher)){step++;}        
+    if(wait(200,hasWaitedRocketlauncher)){step++;}        
   }
   private void goKill(){
     textSize(50);
     fill(255);
-    text("Thats all the controls\nGood luck soldier",xCoord,yCoord); 
+    text("Thats all the controls\nDestroy those red boid replicators!\nGood luck soldier",xCoord,yCoord); 
     if(!wait(500,hasWaitedMoving)){return;}
     map.userInterface.setMissionInfoActive();
     step++; 

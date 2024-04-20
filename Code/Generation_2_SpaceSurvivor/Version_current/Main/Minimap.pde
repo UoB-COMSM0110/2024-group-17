@@ -3,7 +3,7 @@ class Minimap{
   ArrayList<Replicator> replicators;
   Player player;
   float mapSize;
-  int minimapSize = 100;
+  int minimapSize = 150;
   Map map;
   
   boolean hasPressedTab = false;

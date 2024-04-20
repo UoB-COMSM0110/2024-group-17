@@ -95,9 +95,8 @@ class Enemy implements Collideable{
         damage = 7;
         break;
       case 1:
-        speed = 15;
-        damage = 20;
-        health = 20;
+        speed = 12;
+        damage = 10;
         break;
       default:
         speed=0;
