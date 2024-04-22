@@ -14,6 +14,10 @@ At the start of the development process, we had an in-person meeting where we ea
 
 ### Use Case Specification:
 
+### Use Case Diagram:
+
+![SpaceUseCaseDiagram](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/34966264-9622-4e63-b96e-904f9d99bee5)
+
 #### User Stories:
 
 As the developers of the game, we want to make a game that is actually good, with elements that are cohesive and engaging to implement. We want to use tech which interests us and we haven’t used before, to make us better developers.
