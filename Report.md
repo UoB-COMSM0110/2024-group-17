@@ -34,6 +34,11 @@ After identifying our stakeholders, we found a number of issues which would mold
 	
 (system architecture, class diagrams, behavioural diagrams)
 
+Class Diagram
+
+![spaceSurvivorsUML](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/f8d427c6-dab1-4b3d-bca8-b38d252cfbc6)
+
+
 ## Implementation (750 Words)
 
 (describe implementation of the game, in particular the three challenges) 
