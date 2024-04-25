@@ -138,12 +138,12 @@ Our project followed an agile development approach, which enabled us to swiftly 
 ### Tools and Technologies Used
 Once our main ideas were confirmed, we completed the initial phase of the development process and move to the iterative development part. In this phase, we start to work on the major features of game. During this phase, serval tools are used to develop the game.
 
-**Version Control System:**
+#### Version Control System:
 We chose GitHub as our version control system due to its powerful features that facilitate collaborative work. This platform enabled seamless integration and coordination across our development team.
 
 The branching and merging features of GitHub allowed us to manage different versions of the game effectively. Each team member was allocated their own branch, enabling us to work independently without altering the main project code. This approach facilitated the simultaneous development of various features. Once these features were thoroughly tested, we merged them into the main project code, ensuring smooth and efficient integration of new functionalities.
 
-**Project Management Tools:**
+### Project Management Tools:
 To manage our game development, we choose Kanban board as our management tool.
 
 As mentioned above, we split the development process into serval different tasks. These tasks been posted onto Kanban board and each team members will sign their names with task to confirm which tasks they want to do. After the task is completed, team members will draw a line to the “Completed” column to act as workflow of the Kanban board. In addition, the flexibility of the Kanban allowed us to add and remove task easily. If any team members have a new idea during development, we can easily treat it to a new task and post it onto Kanban board.
