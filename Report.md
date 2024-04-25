@@ -133,6 +133,44 @@ Next, we did some Black-box testing, we tested all possible processes that a use
 
 ## Process (750 Words)
 
-(teamwork, how did we work together)
+Our project followed an agile development approach, which enabled us to swiftly establish a minimum viable product. This rapid progress allowed us to shift our focus towards enhancing the game's quality and refining our prototype further. We break down the hole development process into serval different tasks, which allow each team members to focus on part of game and still maintaining a cohesive vision for the final product.
+
+### Tools and Technologies Used
+Once our main ideas were confirmed, we completed the initial phase of the development process and move to the iterative development part. In this phase, we start to work on the major features of game. During this phase, serval tools are used to develop the game.
+
+**Version Control System:**
+We chose GitHub as our version control system due to its powerful features that facilitate collaborative work. This platform enabled seamless integration and coordination across our development team.
+
+The branching and merging features of GitHub allowed us to manage different versions of the game effectively. Each team member was allocated their own branch, enabling us to work independently without altering the main project code. This approach facilitated the simultaneous development of various features. Once these features were thoroughly tested, we merged them into the main project code, ensuring smooth and efficient integration of new functionalities.
+
+**Project Management Tools:**
+To manage our game development, we choose Kanban board as our management tool.
+
+As mentioned above, we split the development process into serval different tasks. These tasks been posted onto Kanban board and each team members will sign their names with task to confirm which tasks they want to do. After the task is completed, team members will draw a line to the “Completed” column to act as workflow of the Kanban board. In addition, the flexibility of the Kanban allowed us to add and remove task easily. If any team members have a new idea during development, we can easily treat it to a new task and post it onto Kanban board.
+
+### Team roles and responsibilities
+Our team was composed of four members, each with distinct roles that were crucial for the successful development of game. 
+
+Freya: Lead developer
+As the main developer, Freya was responsible for writing the core skeleton of our game. Her role was pivotal in implementing most of the game features, turn our ideas into actual code and functional gameplay elements. Her technical skills were important in addressing the technical problems during the development process.
+
+Isaac: Team Manager and UI Designer
+Issac, serving as the team manager, was tasked with collecting and refining the game concepts. He developed the project plan and timelines, ensuring that all of us were keep engage with the task. In addition, Issac took on the role of UI designer, he designs most of the UI of our game.
+
+Haoyu: Analyst
+Haoyu’s role is to act as an analyst during the development process. His role was crucial in evaluating our game by using some techniques to make sure the quality of game and performance met our standards. His analytical skills helped us could quickly found something that we need from questionnaire.
+
+Daolin: Content Developer
+Daolin was responsible for creating the game repo and producing a promotional game video. His role focused on articulating the features to potential users and stakeholders. Additionally, the asset inside the game was found by Daolin.
+
+### Reflection on Teamwork
+During the hole development process, our team members keep a opening communication, which make us could react with feedback very quickly. This openness reduces misunderstanding about the game project among team members.
+
+Due to the effective distribution of team roles, our team was able to develop the game efficiently. However, because the communication and workload problem, there were some overlapping during the development process.
+
+One of the challenges was cause by communication. Daolin accidentally push a new version of game to Isaac’s branch and didn’t confirm with Isaac. Therefore, when Issac pushes his code to GitHub, there is a conflict on Isaac’s branch and ruin his branch. In the end, we solved this problem by reset the branch head into a early version of code.
+
+In conclude, this project taught us how to run a game develop project as a team. Although we have a successful game project, but we still need to improve our teamwork skill. More structured working flow could accelerate our development process and make a better game project.
+
 
 ## Conclusion (500 Words)
