@@ -63,73 +63,58 @@ Our main three challenges are:
 
 ## Evaluation (750 Words)
 
-(1 quant, 1 qual, description of how code was tested)
-
-We have made a questionnaire in the workshop and invited n(number of people) people to answer the questionnaire after they had played our game. They will give a mark from 1-5 to the 10 questions in the questionnaire. They questions is mainly about usability, easy of learning and system complexity. The statistical results shows that (sorry I don’t have the data so I cant write this part)(maybe like: the mean mark of question 1 is 5 and it shows a strong evidence of easy to use of our game ??) .
-
-From our user stories, we knew we wanted our game to appeal to two categories of gamer: those who wanted to have a more casual experience (similar to Vampire Survivors, the game we used for inspiration), and those who wanted to really test their skills (such as competitive gamers). We decided to implement these two levels through the introduction of two difficulty levels: ‘Normal’ and ‘Insane’. There are relatively few differences between these modes, which we feel puts the game in the category of “easy to learn, hard to master”. The ‘Normal’ difficulty has reduced amounts of enemies which move at a lower speed, and the player also has more health. This makes the game more relaxing to play, while still posing enough of a challenge that the game feels satisfying and the player feels they are getting more skilled.
-
-The ‘Insane’ difficulty, on the other hand, is where we intend for players to really test their skills, and it was a challenge to make the mode not feel ‘unfair’. This mode features extremely large numbers of enemies that move very quickly, while the player moves more slowly and movement options are more limited. We wanted this mode of the game to feel more satisfying and appear more engrossing to watch and play.
+From our user stories, we knew we wanted our game to appeal to two categories of gamer: those who wanted to have a more casual experience, and those who wanted to really test their skills. We decided to implement these two levels through the introduction of two difficulty levels: ‘Normal’ and ‘Insane’. 
 
 With these two difficulty levels in place, we decided to conduct qualitative and quantitative analyses. This would allow us to see whether the ‘Normal’ difficulty of the game was approachable to casual gamers, and whether the ‘Insane’ mode of the game was too much of a step up in difficulty or not.
 
 We also conducted these analyses at multiple stages of development; before the Easter break, and after. Over the Easter break, we used the results of the first analyses we did and used them to inform our game design decisions during our sprints. The methodology of these evaluations is shown below:
+
 ### Qualitative Analysis
+
 #### Think Aloud Evaluation
 When we created our first prototype, we conducted a think aloud evaluation where users would play our game, and explain their thought processes throughout. Afterwards, we asked users about their general thoughts about their gameplay experience, and what they felt could be improved upon. 
-Overall Feedback from Think Aloud Evaluation:
-Negatives - people seemed to think the game’s controls were unintuitive. The objective of the game was not adequately explained to the player, and the players were not made aware of weaponry and the movement options at their disposal. Many felt that the UI elements were not clear, and frequently asked what different parts of the UI represented.
-Positives - people seemed to think the concept of the game was interesting, and once they understood the controls, the game was engaging and fun.
-This early feedback for our game was immensely useful for us. It helped us realise that while the concept and gameplay of our game was interesting and engaging, there was a lot more we could do to make the users feel more comfortable playing. In its early state, the game is mechanically sound but is not exactly “pick-up-and-play”, which we immediately sought to act upon in later revisions.
+
+<em>Overall Feedback from Think Aloud Evaluation:</em>
+
+<strong>Negatives</strong> - people seemed to think the game’s controls were unintuitive. The objective of the game was not adequately explained to the player, and the players were not made aware of weaponry and the movement options at their disposal. Many felt that the UI elements were not clear, and frequently asked what different parts of the UI represented.
+
+<strong>Positives</strong> - people seemed to think the concept of the game was interesting, and once they understood the controls, the game was engaging and fun.
+
+This early feedback for our game was immensely useful for us. It helped us realise that while the concept and gameplay of our game was interesting and engaging, there was a lot more we could do to make the users feel more comfortable playing.
+
 #### Heuristic Evaluation
-In our Heuristic Analysis, which focussed greatly on the accessibility of our project from the perspective of software design best practices, we learned even more useful information which would help develop our game moving forward:
-User #1:
-H1: Liked the menu with usefully highlighted buttons
-H2: Liked the intuitive nature of the health bar
-H3: This user felt the game was extremely difficult to begin with, and thought the games difficulty should start slower at first to let the user get a feel for the game before it gets more difficult
-H1: The user felt elements of the UI needed some work; felt the purpose of some elements of the UI was unclear
-H10: No documentation or tooltips, which would make the game very difficult to get into for someone who does not game frequently.
-User #2:
+In our Heuristic Analysis, which focussed greatly on the accessibility of our project from the perspective of software design best practices, we learned even more useful information which would help develop our game moving forward.
 
-Our first method of quantitative analysis was the System Usability Scale (SUS). We asked ten users to play the game on two different difficulty levels: ‘Normal’ and ‘Insane’ (our low and high difficulties). After playing the game, we asked the users to fill in the SUS questionnaire, which asks the following questions, to which the user would respond by selecting to what extent they agree with the statements presented to them:
+<strong>H1</strong>: Liked the menu with usefully highlighted buttons;The user felt elements of the UI needed some work; felt the purpose of some elements of the UI was unclear
 
--I think I would like to use this system frequently
+<strong>H2</strong>: Liked the intuitive nature of the health bar
 
--I found the system unnecessarily complex
+<strong>H3</strong>: This user felt the game was extremely difficult to begin with, and thought the games difficulty should start slower at first to let the user get a feel for the game before it gets more difficult
 
--I thought the system was easy to use
+<strong>H10</strong>: No documentation or tooltips, which would make the game very difficult to get into for someone who does not game frequently.
 
--I think I would need the support of a technical person to be able to use this system
+After the heuristic analysis, we focussed on improving the most common complaints about our game; namely, that the game was extremely difficult in ‘Insane’ mode, the objective of the game was not obvious, and the UI was unintuitive. 
 
--I found the various functions in this system were well integrated
+### Quantitative analysis
 
--I thought there was too much inconsistency in this system
+We had used two questionnaires in the workshop and invited people to answer the questionnaires after they had played our game in two different levels.
 
--I would imagine that most people would learn to use this system very quickly
+#### System Usability Scale (SUS)
+Our first method of quantitative analysis was the System Usability Scale (SUS)(details see appendix). 
 
--I found the system very cumbersome to use
+The results shows a significant difference between ‘Normal’ and ‘Insane’ mode ( Z(9)=2.209, <em>p</em><0.05 ) ( M<sub>Normal</sub>=68.25, M<sub>Insane</sub>=63.75 ).  The ‘Insane’ mode score was lower than we were expecting, but provided us with great insight of the changes that needed to be made, when we made comparisons between the ‘Normal’ and ‘Insane’ modes. We were excited to see that the overall SUS scores were quite similar to the average( M=68 ), meaning we had created a consistent experience across difficulties. This meant that our UI redesign had been effective, much more than if we had not gathered feedback before implementing new features.
 
--I felt very confident using this system
+#### NASA Task Load Index (NASA-TLX)
+The second method of quantitative analysis was the NASA Task Load Index (NASA-TLX).
 
--I needed to learn a lot of things before I could get going with this system
+The result (the mean average of the NASA-TLX total workload scores for the individual members) of the related w-test shows that there was not a significant difference between ‘Normal’ and ‘Insane’ mode ( Z(3)=1.604, <em>p</em>>0.05 ) ( M<sub>Normal</sub>=22.0, M<sub>Insane</sub>=52.50 ). These result might be caused by small sample size. At least, the mean scores of two different level suggesting that our difficulty design may be effective on workload, though it didn't have a statistical conclusion.
 
-
-The result (the mean average of the SUS scores for the individual members) for the ‘Normal’ mode of the system was 68.25, and the result for the ‘Insane’ difficulty option was 63.75. 
-The result for the ‘Normal’ mode of the system was above the average score for a SUS evaluation, which means our product, at least in this mode, can be considered to be usable. 
-The ‘Insane’ mode score was lower than we were expecting, but provided us with great insight of the changes that needed to be made, when we made comparisons between the ‘Normal’ and ‘Insane’ modes. Among the things we adjusted were:
-Normal Mode:
-Increased enemy and speed in lower difficulties
-Insane Mode:
-Lowered enemy frequency and speed in higher difficulties
-System-Wide:
-Added tooltips to help users learn the controls of the game from the start
-Added documentation for the game as well as a tutorial to help players get to grips with the game’s mechanics before playing
-Cleaned up the UI of the game to make it more intuitive
-How code was tested
+### How code was tested
 We use two different testing models to test our codes.
-The first is the White-box testing, we have done this kind of testing by ourself. Once we finished a function block of the game, we tried to run every line of the code, and make sure they were working correctly. To make sure the program run as a complete whole, we also tested possible interactions between every block in the project by following the logical paths .
-Next, we did some Black-box testing, we tested all possible processes that a user might do in the game. Also, we tested some common problems in the program, like keyboard conflict and illegal input. We invited people from other groups to play our game, told them to play our game in an irrational way and tried to find out bugs in our game.
 
+The first is the White-box testing, we have done this kind of testing by ourself. Once we finished a function block of the game, we tried to run every line of the code, and make sure they were working correctly. 
+
+Next, we did some Black-box testing, we tested all possible processes that a user might do in the game. Also, we tested some common problems in the program, like keyboard conflict and illegal input.
 
 ## Process (750 Words)
 
@@ -174,3 +159,52 @@ In conclude, this project taught us how to run a game develop project as a team.
 
 
 ## Conclusion (500 Words)
+
+## Appendix
+### Difficulty levels design
+The ‘Normal’ difficulty has reduced amounts of enemies which move at a lower speed, and the player also has more health. This makes the game more relaxing to play, while still posing enough of a challenge that the game feels satisfying and the player feels they are getting more skilled.
+
+The ‘Insane’ difficulty, on the other hand, is where we intend for players to really test their skills, and it was a challenge to make the mode not feel ‘unfair’. This mode features extremely large numbers of enemies that move very quickly, while the player moves more slowly and movement options are more limited. We wanted this mode of the game to feel more satisfying and appear more engrossing to watch and play.
+
+### System Usability Scale(SUS)
+After playing the game, we asked the users to fill in the SUS questionnaire, which asks the following questions, to which the user would respond by selecting to what extent they agree with the statements presented to them:
+
+-I think I would like to use this system frequently
+
+-I found the system unnecessarily complex
+
+-I thought the system was easy to use
+
+-I think I would need the support of a technical person to be able to use this system
+
+-I found the various functions in this system were well integrated
+
+-I thought there was too much inconsistency in this system
+
+-I would imagine that most people would learn to use this system very quickly
+
+-I found the system very cumbersome to use
+
+-I felt very confident using this system
+
+-I needed to learn a lot of things before I could get going with this system
+### NASA-TLX 
+The NASA-TLX was used to assess workloads, the total workload is divided into six subjective subscales:
+
+Mental Demand:
+How much mental and perceptual activity was required? Was the task easy or demanding, simple or complex?
+
+Physical Demand:
+How much physical activity was required? Was the task easy or demanding, slack or strenuous?
+
+Temporal Demand:
+How much time pressure did you feel due to the pace at which the tasks or task elements occurred? Was the pace slow or rapid?
+
+Performance:
+How successful were you in performing the task? How satisfied were you with your performance?
+
+Effort:
+How hard did you have to work (mentally and physically) to accomplish your level of performance?
+
+Frustration:
+How irritated, stressed, and annoyed versus content, relaxed, and complacent did you feel during the task?
