@@ -42,14 +42,14 @@ public class StartPage extends Screen{
     image(logo, cam.x-430,cam.y - 650);
     
     image(beginButtonImage, cam.x-180, cam.y-200);
-    image(optionsButtonImage, cam.x-180, cam.y);
+    //image(optionsButtonImage, cam.x-180, cam.y);
     image(exitButtonImage, cam.x-180, cam.y+200);
     textSize(50);
   }
   @Override
   public void checkButtons(boolean isClick){
     checkBegin(isClick);
-    checkOptions(isClick);
+    //checkOptions(isClick);
     checkExit(isClick); 
   }
 

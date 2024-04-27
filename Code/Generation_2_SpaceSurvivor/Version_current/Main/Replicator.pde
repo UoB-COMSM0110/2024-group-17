@@ -72,6 +72,11 @@ public class Replicator implements Collideable{
      
   public Coordinate getPosition(){return position;}
 
+  public void drawBoids(){
+    for(Enemy boid : boids){
+       boid.render(); 
+    }
+  }
    
    public void doThings(){
      for(int i=boids.size()-1;i>=0;i--){

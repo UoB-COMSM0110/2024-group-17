@@ -39,7 +39,10 @@ public class Map{
       asteroid.render();
     }
     for(Replicator replicator : replicators){
-      replicator.justDraw();
+      if(!replicator.isDestroyed){
+        replicator.justDraw();
+        replicator.drawBoids();
+      }
     }
     gateway.renderBottomLayer();
     player.render();

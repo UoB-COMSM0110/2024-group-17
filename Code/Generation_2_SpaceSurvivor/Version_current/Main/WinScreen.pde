@@ -47,6 +47,7 @@ class WinScreen extends Screen{
      if (mouseX > (width / 2 - 100) && mouseX < (width / 2 + 75) && mouseY > (height / 2) && mouseY < (height / 2 + 50)){
        restartButtonImage = restartButtonImage2; 
        if (isClick) {
+         currentMap.gameMusic.pause();
          menu.startPage.startMusic.play();
          menu.switchScreen(Page.START,menu.startPage);
        }
