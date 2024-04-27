@@ -19,6 +19,7 @@ Random rand = new Random();
 
 public long tick;
 public long pTime;
+public boolean isPause = false;
 public double[] starsX = new double[1000];
 public double[] starsY = new double[1000];
 public int[] starCloseness = new int[1000];
@@ -146,6 +147,7 @@ void keyPressed(){
          return;
        case PAUSE : 
          menu.switchScreen(Page.PLAYING,menu.playingScreen);
+         isPause = false;
          return;
        case DEATH : 
           exit();
