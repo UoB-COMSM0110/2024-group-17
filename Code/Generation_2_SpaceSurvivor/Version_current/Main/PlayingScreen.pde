@@ -20,7 +20,7 @@ public class PlayingScreen extends Screen{
      camera(camMat, cam.x,cam.y,0.5,0.5); 
      currentMap.doThings(keyspressed);
      if(currentMap.gateway.shouldExtract){menu.winGame();}
-     drawCursor();
+     //drawCursor();
   }
   
   private void drawCursor(){

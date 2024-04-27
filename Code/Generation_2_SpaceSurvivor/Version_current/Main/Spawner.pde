@@ -24,14 +24,7 @@ public class Spawner{
    }
    
    public void doThings(){
-     if(!isStartup){
-       if(tick-previousSpawnTick>stableSpawnCD && boids.size()<populationCap){spawn();}
-     }else{
-       startUp();
-       if(tick-startTick>=12000){
-         isStartup = false; 
-       }
-     } 
+     startUp();
      if(boids.isEmpty()){pacifyAllBoids();}
    }
    
