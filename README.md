@@ -34,11 +34,34 @@ As a normal gamer, I want a game that is easy to learn. I want nice graphics, an
 
 After identifying our stakeholders, we found a number of issues which would mold our development process. The first of which relates to how we can make our game cater to people who have limited experience playing computer games, and those who have a limited time to experience them (i.e. those marking our work). It became clear that the most important characteristic our game should have is it should be very intuitive. Having analysed the use cases, I found the main way to do this was to have as much instruction as possible for the player, and provide multiple difficulty options for the user to choose from. Instructions could just be added to the main menu for players to read, but in this case, we have decided to provide tips to the player as they play the game to guide them through their first playthrough, so they can get the hang of it. We also thought it would be a good idea to provide explicit hints to the player relating to the objective of the game, such as drawing attention to the timer, and warnings about the enemies about to come onto the screen. We realised that while it would be nice to make the game as aesthetically pleasing as possible, it will be more important to make it obvious to players what each icon represents, and the objective of the game at the same time.
 
-## Design (750 Words)
-	
+## Design (750 Words)	
 (system architecture, class diagrams, behavioural diagrams)
 
-Class Diagram
+### System architecture
+In the realm of video game development, architecture is not merely a framework—it is the foundation that supports every aspect of the game's creation and execution. Our game is built on a carefully planned architecture that balances complexity with performance. This architecture is designed to facilitate smooth gameplay experiences while accommodating future expansions and updates.
+
+### Game Engine
+Our game is designed by Processing as need. Processing's architecture enables us to seamlessly integrate visual elements and game logic, ensuring that creative and technical components coexist harmoniously. Based on this framework, we were able to build the program effectively, allowing each team member to seamlessly accommodate and implement complex game mechanics.
+
+#### Game Component
+There are several core components and supportive components in our game.
+
+##### Core Component
+Our 'main' class serves as the central hub of our game, functioning as the game manager. It is pivotal in facilitating player interaction and managing core gameplay mechanics. This class includes essential methods such as ‘keyPressed’ and ‘keyReleased’ to handle player inputs, enabling responsive gameplay. Additionally, it contains methods specifically designed to manage camera movements, enhancing the player's visual experience during the game. These methods ensure smooth transitions and adjustments of the camera's perspective, crucial for maintaining engagement and providing a dynamic viewing angle.
+
+Another fundamental component of our game architecture is the 'Screen' abstract class. It encapsulates a crucial method, ‘justDrawLoop’, which is continuously executed to redraw the screen during gameplay. This method ensures that the game's visual elements are updated in real-time, maintaining fluidity and responsiveness. Building upon this abstract class, various specific screen states extend 'Screen' to display different types of information to the player. These derived classes tailor the user interface to reflect diverse game scenarios and feedback, enhancing the player's interaction and experience with the game.
+
+'Collideable' abstract class is also a core component of our architecture. Though this class primarily contains a set of variables and a single method, dealDamage, its importance cannot be understated. It serves as the foundation for collision detection in our game. We implement collisions by defining each game object as a circle and detecting overlaps in their radii to determine a collision. Classes that extend 'Collideable', such as 'Enemy' and 'Asteroid', inherit this collision detection capability, allowing these objects to interact dynamically within the game environment. This feature is crucial for enhancing gameplay realism and interaction, providing a more engaging and challenging experience for players.
+
+The 'Player' class is a crucial component of our game architecture, encapsulating all player-related states such as health, speed, and the weapons system. This class serves as the central interface for player interactions, connecting seamlessly with other game elements like the Map and Weapons. By managing these interactions, the 'Player' class ensures that player actions are effectively translated into game responses, providing a cohesive and responsive gaming experience. This integration is essential for maintaining game dynamics and enabling players to navigate and interact with the game world smoothly.
+
+##### supportive components
+There are some supportive components that support some features of our game, such as Spawner, Colour and Replicator. These elements have been meticulously designed to be visually engaging and challenging, ensuring a fun and captivating gaming experience.
+
+#### User Interface
+The user interface (UI) in our game is meticulously crafted to be both user-friendly and visually appealing, enhancing the overall player experience. On the playing screen, all available player abilities are conveniently displayed at the bottom right corner, each accompanied by a gradient cooldown bar that visually represents the readiness of each ability. Additionally, mission objectives are prominently displayed in eye-catching text on the upper right side of the screen. This strategic placement ensures that players can easily access and understand their goals without distraction, facilitating a smooth and engaging gameplay experience.
+
+## Class Diagram
 
 ![spaceSurvivorsUML](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/f8d427c6-dab1-4b3d-bca8-b38d252cfbc6)
 
