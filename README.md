@@ -46,7 +46,7 @@ Our game is designed by Processing as need. Processing's architecture enables us
 #### Game Component
 There are several core components and supportive components in our game.
 
-##### Core Component
+#### Core Component
 Our 'main' class serves as the central hub of our game, functioning as the game manager. It is pivotal in facilitating player interaction and managing core gameplay mechanics. This class includes essential methods such as ‘keyPressed’ and ‘keyReleased’ to handle player inputs, enabling responsive gameplay. Additionally, it contains methods specifically designed to manage camera movements, enhancing the player's visual experience during the game. These methods ensure smooth transitions and adjustments of the camera's perspective, crucial for maintaining engagement and providing a dynamic viewing angle.
 
 Another fundamental component of our game architecture is the 'Screen' abstract class. It encapsulates a crucial method, ‘justDrawLoop’, which is continuously executed to redraw the screen during gameplay. This method ensures that the game's visual elements are updated in real-time, maintaining fluidity and responsiveness. Building upon this abstract class, various specific screen states extend 'Screen' to display different types of information to the player. These derived classes tailor the user interface to reflect diverse game scenarios and feedback, enhancing the player's interaction and experience with the game.
@@ -55,10 +55,10 @@ Another fundamental component of our game architecture is the 'Screen' abstract 
 
 The 'Player' class is a crucial component of our game architecture, encapsulating all player-related states such as health, speed, and the weapons system. This class serves as the central interface for player interactions, connecting seamlessly with other game elements like the Map and Weapons. By managing these interactions, the 'Player' class ensures that player actions are effectively translated into game responses, providing a cohesive and responsive gaming experience. This integration is essential for maintaining game dynamics and enabling players to navigate and interact with the game world smoothly.
 
-##### supportive components
+#### Supportive Components
 There are some supportive components that support some features of our game, such as Spawner, Colour and Replicator. These elements have been meticulously designed to be visually engaging and challenging, ensuring a fun and captivating gaming experience.
 
-#### User Interface
+### User Interface
 The user interface (UI) in our game is meticulously crafted to be both user-friendly and visually appealing, enhancing the overall player experience. On the playing screen, all available player abilities are conveniently displayed at the bottom right corner, each accompanied by a gradient cooldown bar that visually represents the readiness of each ability. Additionally, mission objectives are prominently displayed in eye-catching text on the upper right side of the screen. This strategic placement ensures that players can easily access and understand their goals without distraction, facilitating a smooth and engaging gameplay experience.
 
 ## Class Diagram
