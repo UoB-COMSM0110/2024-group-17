@@ -4,6 +4,20 @@
 
 ![TeamPhoto](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/615dc998-de39-4980-b73a-0b89b2777f09)
 
+### Team roles and responsibilities (Left to Right)
+Our team was composed of four members, each with distinct roles that were crucial for the successful development of game. 
+
+Freya: Lead developer
+As the main developer, Freya was responsible for writing the core skeleton of our game. Her role was pivotal in implementing most of the game features, turn our ideas into actual code and functional gameplay elements. Her technical skills were important in addressing the technical problems during the development process.
+
+Isaac: Team Manager and Asset Designer
+Isaac, serving as the team manager, was tasked with collecting and refining the game concepts. He developed the project plan and timelines, ensuring that all of us kept engaged with the task. In addition, Isaac took on the role of Asset Designer, hand-making most of the assets in the game.
+
+Haoyu: Analyst
+Haoyu’s role is to act as an analyst during the development process. His role was crucial in evaluating our game by using some techniques to make sure the quality of game and performance met our standards. His analytical skills helped us could quickly found something that we need from questionnaire.
+
+Daolin: Content Developer
+Daolin was responsible for creating the game repo and producing a promotional game video. His role focused on articulating the features to potential users and stakeholders. Additionally, the asset inside the game was found by Daolin.
 
 ## Introduction (250 Words)
 	
@@ -193,20 +207,6 @@ To manage our game development, we choose Kanban board as our management tool.
 
 As mentioned above, we split the development process into serval different tasks. These tasks been posted onto Kanban board and each team members will sign their names with task to confirm which tasks they want to do. After the task is completed, team members will draw a line to the “Completed” column to act as workflow of the Kanban board. In addition, the flexibility of the Kanban allowed us to add and remove task easily. If any team members have a new idea during development, we can easily treat it to a new task and post it onto Kanban board.
 
-### Team roles and responsibilities
-Our team was composed of four members, each with distinct roles that were crucial for the successful development of game. 
-
-Freya: Lead developer
-As the main developer, Freya was responsible for writing the core skeleton of our game. Her role was pivotal in implementing most of the game features, turn our ideas into actual code and functional gameplay elements. Her technical skills were important in addressing the technical problems during the development process.
-
-Isaac: Team Manager and UI Designer
-Issac, serving as the team manager, was tasked with collecting and refining the game concepts. He developed the project plan and timelines, ensuring that all of us were keep engage with the task. In addition, Issac took on the role of UI designer, he designs most of the UI of our game.
-
-Haoyu: Analyst
-Haoyu’s role is to act as an analyst during the development process. His role was crucial in evaluating our game by using some techniques to make sure the quality of game and performance met our standards. His analytical skills helped us could quickly found something that we need from questionnaire.
-
-Daolin: Content Developer
-Daolin was responsible for creating the game repo and producing a promotional game video. His role focused on articulating the features to potential users and stakeholders. Additionally, the asset inside the game was found by Daolin.
 
 ### Reflection on Teamwork
 During the hole development process, our team members keep a opening communication, which make us could react with feedback very quickly. This openness reduces misunderstanding about the game project among team members.
