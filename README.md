@@ -93,6 +93,8 @@ We addressed these challenges in the following ways:
 
 ### Movement:
 
+![reactivetrailsandparallax](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/49fac5eb-a0f7-4125-98a1-96ad2ff52040)
+
 With the player at the centre of the screen, with our original background effects, it was difficult for players to get accustomed to controlling the player. While the player was moving around the play area, this was not communicated effectively to the user, making the game less intuitive. We addressed this problem in two ways:
 
 #### Dynamic Backgrounds
