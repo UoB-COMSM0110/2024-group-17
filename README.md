@@ -2,6 +2,8 @@
 
 ![spacegamelogo](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/01ad03bd-76e4-4197-b228-c6468f39c393)
 
+![TeamPhoto](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/615dc998-de39-4980-b73a-0b89b2777f09)
+
 
 ## Introduction (250 Words)
 	
