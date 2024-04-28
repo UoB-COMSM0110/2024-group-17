@@ -8,15 +8,19 @@
 Our team was composed of four members, each with distinct roles that were crucial for the successful development of game. 
 
 Freya: Lead developer
+
 As the main developer, Freya was responsible for writing the core skeleton of our game. Her role was pivotal in implementing most of the game features, turn our ideas into actual code and functional gameplay elements. Her technical skills were important in addressing the technical problems during the development process.
 
 Isaac: Team Manager and Asset Designer
+
 Isaac, serving as the team manager, was tasked with collecting and refining the game concepts. He developed the project plan and timelines, ensuring that all of us kept engaged with the task. In addition, Isaac took on the role of Asset Designer, hand-making most of the assets in the game.
 
 Haoyu: Analyst
+
 Haoyu’s role is to act as an analyst during the development process. His role was crucial in evaluating our game by using some techniques to make sure the quality of game and performance met our standards. His analytical skills helped us could quickly found something that we need from questionnaire.
 
 Daolin: Content Developer
+
 Daolin was responsible for creating the game repo and producing a promotional game video. His role focused on articulating the features to potential users and stakeholders. Additionally, the asset inside the game was found by Daolin.
 
 ## Introduction (250 Words)
