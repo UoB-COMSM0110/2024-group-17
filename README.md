@@ -105,6 +105,8 @@ When the player moves, a trail is left behind them, which we found to be the mos
 
 ### Artificial Intelligence:
 
+![swarmingboidspassive](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/dc2ca9b6-803d-4a32-b382-b9b7e249a801)
+
 To make the AI in our game more immersive and ‘organic’ we decided to use a boid flocking AI system. This is where we found the name for our alien enemies! This was a major undertaking, as boid AI systems have multiple advanced states of behaviour.
 
 #### Flocks, Herds and Schools
