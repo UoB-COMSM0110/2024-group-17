@@ -1,5 +1,8 @@
 # Space Survivors – Team 17
 
+![spacegamelogo](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/01ad03bd-76e4-4197-b228-c6468f39c393)
+
+
 ## Introduction (250 Words)
 	
 (Describe the game, what it is based on, and what makes it novel) 
