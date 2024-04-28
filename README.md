@@ -89,6 +89,34 @@ Our main three challenges are:
 - How do we make the enemies feel intelligent and organic?
 - How do we handle large quantities of enemies in a computationally efficient manner?
 
+We addressed these challenges in the following ways:
+
+### Movement:
+
+With the player at the centre of the screen, with our original background effects, it was difficult for players to get accustomed to controlling the player. While the player was moving around the play area, this was not communicated effectively to the user, making the game less intuitive. We addressed this problem in two ways:
+
+#### Dynamic Backgrounds
+
+We wanted to convey movement in space in an intuitive way that would not break immersion. Furthermore, it was important to us that the system made sense in the context of the game, and provide a sense that the actions of the player were part of a large universe. This was done by simulating parallax in the stars in the background, so different stars seem to be further away than others, and as such translate at different speeds. This was done in a computationally efficient way that had minimal effect on performance, as the starfield is only generated once during the startup of the game, and is randomly generated once each time.
+
+#### Reactive Trails
+
+When the player moves, a trail is left behind them, which we found to be the most intuitive way to let the player know what is going on. The trail reacts to both direction and velocity, so the boost mechanic of the game, a large part of the overall movement system, was made much more apparent after its implementation. Like the starfield effect, the initialisation of the trail is only executed once per playthrough, meaning this feature also has a minimal impact on performance, saving as much processing power as possible for advanced AI systems.
+
+### Artificial Intelligence:
+
+To make the AI in our game more immersive and ‘organic’ we decided to use a boid flocking AI system. This is where we found the name for our alien enemies! This was a major undertaking, as boid AI systems have multiple advanced states of behaviour.
+
+#### Flocks, Herds and Schools
+
+All boids start in a passive state at the start of the game. If the player moves within 500 on-screen pixels of any boid in a group, or attacks any member of the group, all boids in the ‘flock’ will change to an attacking state. This provides a great effect where the enemies seem to be ‘minding their own business’ when the player is around them, unless they are attacked.
+
+Furthermore, if the player is being chased by any boids and manages to escape (by moving over 1000 pixels away from them), individual boids will return to a passive state. If the player manages to destroy all boids of a group, new spaws of boids in that group will also be passive.
+
+Another further layer of complexity arises when determining the spawn rates of new boids. 
+We feel that the inherent biological nature and behaviour of our boid spawning system makes the game much more immersive. It gives the feeling that the player is intruding on the natural life-cycle of indigenous creatures, which only adds to the intrigue of the universe we’ve created.
+
+
 ## Evaluation (750 Words)
 
 From our user stories, we knew we wanted our game to appeal to two categories of gamer: those who wanted to have a more casual experience, and those who wanted to really test their skills. We decided to implement these two levels through the introduction of two difficulty levels: ‘Normal’ and ‘Insane’. 
