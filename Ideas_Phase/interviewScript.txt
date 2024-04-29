@@ -1,0 +1,52 @@
+Script:
+
+Skit - done 
+(What - me?) + (no)
+
+My Script:
+
+based on + twist
+
+Challenge #1 :
+Intuitive movement system
+
+
+Our first challenge was to impliment an intuitive movement system when the camera is fixed and
+following the player from that isometric perspecitve. When the camera is fixed to the player, it almost seems
+like the world is moving around the player, and not the other way around, which breaks immersion. 
+The first trick we came up with was to actually ahve the 
+camera object itself lag slightly behind the player. The camera isnt fixed to the player exactly, it has its own
+expoential acceleration system, which helps the player feel their acceleration. The next aspect added was a momentum
+based movement system. Instead of pressing W and having the player move at a fixed velocity, their acceleration is the 
+static parameter. The next step was to add some reference points - the stars in the background, that all move the opposite
+diretin to the players travel at different speed depending on how "far away" they are. Provides a reference frame for the 
+movement, but also creates a sense of scale, and helps the players feel like they are in deep space. The final
+feature for statisfying movement was to add the rocket trail to the players movement. to help feel like they are really pushing
+themselves thorugh space
+
+Challenge #2 :
+Collision detection
+efficient collision detection is vital for these sorts of games. There can up hundreds upon hundred of objects all searching for
+collisions at the same time, which can really add up when you only have 1/60 of a second. Thats why all of our game objects
+are actyally just circles. With circles all you have to check is that the distance between the objects is greater than
+the sum of their radii - and you can speed this up even further if you cut out the square rooting from the distance, and 
+compare the square distance with the square sum of the radii. then once a collision is detected, an impulse is added to the 
+moving objects momentum directly opposite to the vector between the two objects centres.
+
+Challenge #3 : 
+Boid Behavior
+The final challenge was getting interesting Boid behaviour, and this was done in a few ways. First is the flocking
+algorithm, where each boid is aware of all of the other boids in its flock, and tries to match their travel direction, 
+whilst also trying not to collide with each other, and also trying to approach their focal point be that the player, or 
+their home replicator. This was very tricky to actually impliment as it required many very small magic number paramenters
+to be tweaked until they were just right, but it makes the boids feel like real and intelligent creatures. The next feature
+is their spawning algorithm which spawns according to a logistic curve based on their current populaiton. This is how
+real populations change over time in the wild, and was also tricky to impliment due to its impacts on both game 
+balance and feel. The final aspect was the aggressive/passive paragidm. The boids all start of passive and can be
+triggered to become aggressive to wards the player, and this made necessary the focal point feature of the boid movment
+described earlier. This also means even more checks on the players distance, which really could have impacted performance
+if not done correctly. 
+
+
+
+
