@@ -45,7 +45,7 @@ public class Spawner{
    }
    
    private int populationGoal(){
-       return floor( 500.0/(1.0 + exp((-0.0004* (float)(tick-startTick-10000)))));      
+       return floor( 7500.0/(1.0 + exp((-0.0004* (float)(tick-startTick-10000)))));      
    }
   
    private void spawn(){

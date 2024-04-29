@@ -6,6 +6,7 @@ class PauseScreen extends Screen{
   PImage restartButtonImage;
   PImage restartButtonImage1;  
   PImage restartButtonImage2; 
+  PImage controlsImage;
   Map map;
   
   PauseScreen(Menus menuInput){
@@ -14,6 +15,7 @@ class PauseScreen extends Screen{
     restartButtonImage1 = loadImage("data/button_menu_1.png");   
     exitButtonImage1 = loadImage("data/exit_button_1.png");
     exitButtonImage2 = loadImage("data/exit_button_2.png");
+    controlsImage = loadImage("data/controlsimage.png");
  }
   
   public void doThings(){
@@ -29,6 +31,8 @@ class PauseScreen extends Screen{
     textSize(100);
     fill(255);
     text("PAUSED", cam.x-32,cam.y - 200);
+    controlsImage.resize(600, 600);
+    image(controlsImage, cam.x - 1000, cam.y - 250);
     image(restartButtonImage, cam.x-180, cam.y);
     image(exitButtonImage, cam.x-180, cam.y+200);
     textSize(50);
