@@ -1,28 +1,5 @@
 # Space Survivors – Team 17
 
-![spacegamelogo](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/01ad03bd-76e4-4197-b228-c6468f39c393)
-
-![TeamPhoto](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/615dc998-de39-4980-b73a-0b89b2777f09)
-
-### Team roles and responsibilities (Left to Right)
-Our team was composed of four members, each with distinct roles that were crucial for the successful development of game. 
-
-### Freya: Lead developer
-
-As the main developer, Freya was responsible for writing the core skeleton of our game. Her role was pivotal in implementing most of the game features, turn our ideas into actual code and functional gameplay elements. Her technical skills were important in addressing the technical problems during the development process.
-
-### Isaac: Team Manager and Asset Designer
-
-Isaac, serving as the team manager, was tasked with collecting and refining the game concepts. He developed the project plan and timelines, ensuring that all of us kept engaged with the task. In addition, Isaac took on the role of Asset Designer, hand-making most of the assets in the game.
-
-### Haoyu: Analyst
-
-Haoyu’s role is to act as an analyst during the development process. His role was crucial in evaluating our game by using some techniques to make sure the quality of game and performance met our standards. His analytical skills helped us could quickly found something that we need from questionnaire.
-
-### Daolin: Content Developer
-
-Daolin was responsible for creating the game repo and producing a promotional game video. His role focused on articulating the features to potential users and stakeholders. Additionally, the asset inside the game was found by Daolin.
-
 ## Introduction (250 Words)
 	
 (Describe the game, what it is based on, and what makes it novel) 
@@ -57,34 +34,11 @@ As a normal gamer, I want a game that is easy to learn. I want nice graphics, an
 
 After identifying our stakeholders, we found a number of issues which would mold our development process. The first of which relates to how we can make our game cater to people who have limited experience playing computer games, and those who have a limited time to experience them (i.e. those marking our work). It became clear that the most important characteristic our game should have is it should be very intuitive. Having analysed the use cases, I found the main way to do this was to have as much instruction as possible for the player, and provide multiple difficulty options for the user to choose from. Instructions could just be added to the main menu for players to read, but in this case, we have decided to provide tips to the player as they play the game to guide them through their first playthrough, so they can get the hang of it. We also thought it would be a good idea to provide explicit hints to the player relating to the objective of the game, such as drawing attention to the timer, and warnings about the enemies about to come onto the screen. We realised that while it would be nice to make the game as aesthetically pleasing as possible, it will be more important to make it obvious to players what each icon represents, and the objective of the game at the same time.
 
-## Design (750 Words)	
+## Design (750 Words)
+	
 (system architecture, class diagrams, behavioural diagrams)
 
-### System architecture
-In the realm of video game development, architecture is not merely a framework—it is the foundation that supports every aspect of the game's creation and execution. Our game is built on a carefully planned architecture that balances complexity with performance. This architecture is designed to facilitate smooth gameplay experiences while accommodating future expansions and updates.
-
-### Game Engine
-Our game is designed by Processing as need. Processing's architecture enables us to seamlessly integrate visual elements and game logic, ensuring that creative and technical components coexist harmoniously. Based on this framework, we were able to build the program effectively, allowing each team member to seamlessly accommodate and implement complex game mechanics.
-
-#### Game Component
-There are several core components and supportive components in our game.
-
-#### Core Component
-Our 'main' class serves as the central hub of our game, functioning as the game manager. It is pivotal in facilitating player interaction and managing core gameplay mechanics. This class includes essential methods such as ‘keyPressed’ and ‘keyReleased’ to handle player inputs, enabling responsive gameplay. Additionally, it contains methods specifically designed to manage camera movements, enhancing the player's visual experience during the game. These methods ensure smooth transitions and adjustments of the camera's perspective, crucial for maintaining engagement and providing a dynamic viewing angle.
-
-Another fundamental component of our game architecture is the 'Screen' abstract class. It encapsulates a crucial method, ‘justDrawLoop’, which is continuously executed to redraw the screen during gameplay. This method ensures that the game's visual elements are updated in real-time, maintaining fluidity and responsiveness. Building upon this abstract class, various specific screen states extend 'Screen' to display different types of information to the player. These derived classes tailor the user interface to reflect diverse game scenarios and feedback, enhancing the player's interaction and experience with the game.
-
-'Collideable' abstract class is also a core component of our architecture. Though this class primarily contains a set of variables and a single method, dealDamage, its importance cannot be understated. It serves as the foundation for collision detection in our game. We implement collisions by defining each game object as a circle and detecting overlaps in their radii to determine a collision. Classes that extend 'Collideable', such as 'Enemy' and 'Asteroid', inherit this collision detection capability, allowing these objects to interact dynamically within the game environment. This feature is crucial for enhancing gameplay realism and interaction, providing a more engaging and challenging experience for players.
-
-The 'Player' class is a crucial component of our game architecture, encapsulating all player-related states such as health, speed, and the weapons system. This class serves as the central interface for player interactions, connecting seamlessly with other game elements like the Map and Weapons. By managing these interactions, the 'Player' class ensures that player actions are effectively translated into game responses, providing a cohesive and responsive gaming experience. This integration is essential for maintaining game dynamics and enabling players to navigate and interact with the game world smoothly.
-
-#### Supportive Components
-There are some supportive components that support some features of our game, such as Spawner, Colour and Replicator. These elements have been meticulously designed to be visually engaging and challenging, ensuring a fun and captivating gaming experience.
-
-### User Interface
-The user interface (UI) in our game is meticulously crafted to be both user-friendly and visually appealing, enhancing the overall player experience. On the playing screen, all available player abilities are conveniently displayed at the bottom right corner, each accompanied by a gradient cooldown bar that visually represents the readiness of each ability. Additionally, mission objectives are prominently displayed in eye-catching text on the upper right side of the screen. This strategic placement ensures that players can easily access and understand their goals without distraction, facilitating a smooth and engaging gameplay experience.
-
-## Class Diagram
+Class Diagram
 
 ![spaceSurvivorsUML](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/f8d427c6-dab1-4b3d-bca8-b38d252cfbc6)
 
@@ -106,38 +60,6 @@ Our main three challenges are:
 - How do we convey a satisfying sense of movement when the player is fixed at the centre of the screen?
 - How do we make the enemies feel intelligent and organic?
 - How do we handle large quantities of enemies in a computationally efficient manner?
-
-We addressed these challenges in the following ways:
-
-### Movement:
-
-![reactivetrailsandparallax](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/49fac5eb-a0f7-4125-98a1-96ad2ff52040)
-
-With the player at the centre of the screen, with our original background effects, it was difficult for players to get accustomed to controlling the player. While the player was moving around the play area, this was not communicated effectively to the user, making the game less intuitive. We addressed this problem in two ways:
-
-#### Dynamic Backgrounds
-
-We wanted to convey movement in space in an intuitive way that would not break immersion. Furthermore, it was important to us that the system made sense in the context of the game, and provide a sense that the actions of the player were part of a large universe. This was done by simulating parallax in the stars in the background, so different stars seem to be further away than others, and as such translate at different speeds. This was done in a computationally efficient way that had minimal effect on performance, as the starfield is only generated once during the startup of the game, and is randomly generated once each time.
-
-#### Reactive Trails
-
-When the player moves, a trail is left behind them, which we found to be the most intuitive way to let the player know what is going on. The trail reacts to both direction and velocity, so the boost mechanic of the game, a large part of the overall movement system, was made much more apparent after its implementation. Like the starfield effect, the initialisation of the trail is only executed once per playthrough, meaning this feature also has a minimal impact on performance, saving as much processing power as possible for advanced AI systems.
-
-### Artificial Intelligence:
-
-![swarmingboidspassive](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/dc2ca9b6-803d-4a32-b382-b9b7e249a801)
-
-To make the AI in our game more immersive and ‘organic’ we decided to use a boid flocking AI system. This is where we found the name for our alien enemies! This was a major undertaking, as boid AI systems have multiple advanced states of behaviour.
-
-#### Flocks, Herds and Schools
-
-All boids start in a passive state at the start of the game. If the player moves within 500 on-screen pixels of any boid in a group, or attacks any member of the group, all boids in the ‘flock’ will change to an attacking state. This provides a great effect where the enemies seem to be ‘minding their own business’ when the player is around them, unless they are attacked.
-
-Furthermore, if the player is being chased by any boids and manages to escape (by moving over 1000 pixels away from them), individual boids will return to a passive state. If the player manages to destroy all boids of a group, new spaws of boids in that group will also be passive.
-
-Another further layer of complexity arises when determining the spawn rates of new boids. 
-We feel that the inherent biological nature and behaviour of our boid spawning system makes the game much more immersive. It gives the feeling that the player is intruding on the natural life-cycle of indigenous creatures, which only adds to the intrigue of the universe we’ve created.
-
 
 ## Evaluation (750 Words)
 
@@ -211,6 +133,20 @@ To manage our game development, we choose Kanban board as our management tool.
 
 As mentioned above, we split the development process into serval different tasks. These tasks been posted onto Kanban board and each team members will sign their names with task to confirm which tasks they want to do. After the task is completed, team members will draw a line to the “Completed” column to act as workflow of the Kanban board. In addition, the flexibility of the Kanban allowed us to add and remove task easily. If any team members have a new idea during development, we can easily treat it to a new task and post it onto Kanban board.
 
+### Team roles and responsibilities
+Our team was composed of four members, each with distinct roles that were crucial for the successful development of game. 
+
+Freya: Lead developer
+As the main developer, Freya was responsible for writing the core skeleton of our game. Her role was pivotal in implementing most of the game features, turn our ideas into actual code and functional gameplay elements. Her technical skills were important in addressing the technical problems during the development process.
+
+Isaac: Team Manager and UI Designer
+Issac, serving as the team manager, was tasked with collecting and refining the game concepts. He developed the project plan and timelines, ensuring that all of us were keep engage with the task. In addition, Issac took on the role of UI designer, he designs most of the UI of our game.
+
+Haoyu: Analyst
+Haoyu’s role is to act as an analyst during the development process. His role was crucial in evaluating our game by using some techniques to make sure the quality of game and performance met our standards. His analytical skills helped us could quickly found something that we need from questionnaire.
+
+Daolin: Content Developer
+Daolin was responsible for creating the game repo and producing a promotional game video. His role focused on articulating the features to potential users and stakeholders. Additionally, the asset inside the game was found by Daolin.
 
 ### Reflection on Teamwork
 During the hole development process, our team members keep a opening communication, which make us could react with feedback very quickly. This openness reduces misunderstanding about the game project among team members.
@@ -272,58 +208,3 @@ How hard did you have to work (mentally and physically) to accomplish your level
 
 Frustration:
 How irritated, stressed, and annoyed versus content, relaxed, and complacent did you feel during the task?
-Welcome to Team 17, comprised of:
-
-# Daolin Zhang, ht23051@bristol.ac.uk, HankeXian
-# Isaac Scott, du23937@bristol.ac.uk, ijgs02
-# Freya Fewtrell, do20075@bristol.ac.uk, fewtz 
-# Haoyu Zhu, cu23510@bristol.ac.uk, haidanorz
-
-
-For full information of Game ideas, Paper prototyping and Team Photo - see the Ideas_Phase folder.
-
-![](https://github.com/UoB-COMSM0110/2024-group-17/blob/main/Ideas_Phase/spacegame.gif)
-
-Game One - Stealth Melee
-
-Idea:
-Top down stealth combat game, where our protagonist insists on not using guns. As such they have to find
-creative and stealthy ways to close the distance to their enemies, where being caught out in the open means
-certain death.
-
-Game inspo:
-Hotline Miami, Heat signature, Hitman
-
-Art style inspo:
-Dead cells, Hyper light drifter, Into the breach (pixel art with lighting engine)
-
-Setting:
-a. maybe a current day baddass, like john wick etc
-b. super hero who doesnt want to kill (ie, batman)
-c. baddass ww2 fightign nazis ! (in this case he doesnt use guns because he wasnts to feel the nazis bones break in his hands)
-d. dystopian future overthrowing a fascist government (would be cool, but kinda undermines the joke of the idea)
-
-Challenge #1 - Physics
-It should feel intuitive to move around, responsive and clean. There should be a weight to combat, with a good lunge to close
-that last bit of distance. Ray casting will be nessesary for the gunfire of the enemies. The movemenet of the camera is also 
-incredibly important.
-
-Challenge #2 - AI
-The actual AI of the enemies is one of the biggest challenges of a stealth game. Making the enemies feel competant and real,
-whilst not letting them have any information it feels like they shouldnt. There should also be a good system of control
-over the sound, maybe a way of visualising where they enemy can see, and how far the sound you makes travels. 
-
-Challenge #3 - Lighting engines, Particle effects, Map game and UI design
-Actually making the game look good is incredibly important. I think pixel art is good for us to do as it is slightly easier and 
-there are lots  of tools to help draw and animate it. I think a dynamic lighting engine would make it actually look good tho, 
-this can be difficult in 2D, if we can figure it out it will make it look so much better with not huge performance impacts. 
-We can pretty quickly put  a decent level and ui together, good enough for a demo. 
-
-Game Two: Vampire Survivors, except its a rhythm game. 
-
-A 2D isometric view world with the camera centred on the player.
-Endless hordes of monstrosities from the far reaches of space are
-attacking the player, a lone spaceman with little but a jetpack.
-
-Can you survive the 3 and a half minutes it is going to take for
-your automated life pod to come and rescue you?
