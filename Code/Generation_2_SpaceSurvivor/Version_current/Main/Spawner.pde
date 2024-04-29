@@ -15,7 +15,7 @@ public class Spawner{
    Spawner(ArrayList<Enemy> boidsInput,Coordinate positionInput,int difficultyInput,ArrayList<Collideable> allObjectsInput,ArrayList<Collideable> allStructuresInput){
      allStructures = allStructuresInput;
      allObjects = allObjectsInput;
-     startTick = tick;
+     startTick = 0;
      difficulty = difficultyInput;
      isStartup = true;
      boids = boidsInput;
@@ -37,6 +37,7 @@ public class Spawner{
    
    private void startUp(){
       int goal = populationGoal();
+      println(goal, tick , startTick);
       int difference = goal - numberOfBoidsSpawned;
       for(int i=0;i<difference;i++){
         numberOfBoidsSpawned++;
@@ -45,7 +46,18 @@ public class Spawner{
    }
    
    private int populationGoal(){
-       return floor( 7500.0/(1.0 + exp((-0.0004* (float)(tick-startTick-10000)))));      
+     switch(difficulty){
+        case 0:
+          return floor( 7500.0/(1.0 + exp((-0.0004* (float)(tick-startTick-18000)))));      
+        case 1:
+           return floor( 7500.0/(1.0 + exp((-0.0004* (float)(tick-startTick-16000)))));      
+        case 2:
+           return floor( 7500.0/(1.0 + exp((-0.0004* (float)(tick-startTick-14000)))));      
+      default:
+         return floor( 7500.0/(1.0 + exp((-0.0004* (float)(tick-startTick-18000)))));      
+       
+     }
+      
    }
   
    private void spawn(){
