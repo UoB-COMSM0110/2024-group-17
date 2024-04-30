@@ -13,7 +13,7 @@ As the main developer, Freya was responsible for writing the core skeleton of ou
 
 ### Isaac: Team Manager and Asset Designer
 
-Isaac, serving as the team manager, was tasked with collecting and refining the game concepts. He developed the project plan and timelines, ensuring that all of us kept engaged with the task. In addition, Isaac took on the role of Asset Designer, hand-making most of the assets in the game.
+Isaac, serving as the team manager, was tasked with collecting and refining the game concepts. He developed the project plan and timelines, ensuring that all of us kept engaged with the task. In addition, Isaac took on the role of Asset Designer, hand-making most of the assets in the game. He created and edited the video for our project.
 
 ### Haoyu: Analyst
 
