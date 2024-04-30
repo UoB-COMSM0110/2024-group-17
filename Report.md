@@ -4,7 +4,7 @@
 	
 (Describe the game, what it is based on, and what makes it novel) 
 
-Our game is a single player arcade style game with advanced enemy AI systems. The main inspiration for our game was the idle game Vampire Survivors, which is played from a top-down perspective and features the player being attacked by relentless waves of enemies. While Vampire Survivors is idle, requiring no input from the player for attacks, we decided to make gameplay more engaging by allowing the player to use quick responsive movement and limited weaponry to try and survive the horde. By taking advantage of the individual skills of the members of our team using agile development techniques, we were able to get a minimum viable product working very quickly, so we could put more emphasis on polishing the game and upgrading our prototype to include advanced features such as boid flocking AI, computationally efficient graphics and dynamic backgrounds to make movement feel extremely satisfying, and the game more immersive.
+Our game is a single player arcade style game with advanced enemy AI systems. The main inspiration for our game was the idle game Vampire Survivors, which is played from an isometric perspective, and features the player being attacked by relentless waves of enemies. While Vampire Survivors is idle, requiring no input from the player for attacks, we decided to make gameplay more engaging by allowing the player to use quick responsive movement and limited weaponry to try and survive the horde. By taking advantage of the individual skills of the members of our team using agile development techniques, we were able to get a minimum viable product working very quickly, so we could put more emphasis on polishing the game and upgrading our prototype to include advanced features such as boid flocking AI, computationally efficient graphics and dynamic backgrounds to make movement feel extremely satisfying, and the game more immersive.
 
 ## Requirements (750 Words)
 	
@@ -32,11 +32,23 @@ As a normal gamer, I want a game that is easy to learn. I want nice graphics, an
 
 #### Use Case Reflection:
 
-After identifying our stakeholders, we found a number of issues which would mold our development process. The first of which relates to how we can make our game cater to people who have limited experience playing computer games, and those who have a limited time to experience them (i.e. those marking our work). It became clear that the most important characteristic our game should have is it should be very intuitive. Having analysed the use cases, I found the main way to do this was to have as much instruction as possible for the player, and provide multiple difficulty options for the user to choose from. Instructions could just be added to the main menu for players to read, but in this case, we have decided to provide tips to the player as they play the game to guide them through their first playthrough, so they can get the hang of it. We also thought it would be a good idea to provide explicit hints to the player relating to the objective of the game, such as drawing attention to the timer, and warnings about the enemies about to come onto the screen. We realised that while it would be nice to make the game as aesthetically pleasing as possible, it will be more important to make it obvious to players what each icon represents, and the objective of the game at the same time.
+After identifying our stakeholders, we found a number of issues which would mold our development process. The first of which relates to how we can make our game cater to people who have limited experience playing computer games, and those who have a limited time to experience them (i.e. those marking our work). It became clear that the most important characteristic our game should have is it should be very intuitive. Having analysed the use cases, we found the main way to do this was to have as much instruction as possible for the player, and provide multiple difficulty options for the user to choose from. Instructions could just be added to the main menu for players to read, but in this case, we have decided to provide tips to the player as they play the game to guide them through their first playthrough, so they can get the hang of it. We also thought it would be a good idea to provide explicit hints to the player relating to the objective of the game, such as drawing attention to the timer, a marked minimap, warnings for leaving the combat zone and a dynamic arrow guiding the player back to the extraction point. We realised that while it would be nice to make the game as aesthetically pleasing as possible, it will be more important to make it obvious to players what each icon represents, and the objective of the game at the same time.
 
 ## Design (750 Words)
 	
 (system architecture, class diagrams, behavioural diagrams)
+
+The design of our game evolved many times. There were several prototypes (Figures x-y) before we arrived at our minimum viable product, and as such our code was very messy. This was also everyones first project in Java, and so the ideas of encapsulation and inheritance were more than foreign to us to begin with. 
+
+Our MVP consisted of one main file with the majority of the game flow, with some extrenuous objects (the player, enemies etc), and dozens of global variables, and something had to change once we wanted to add in different game states- start screens and difficulty selections. 
+
+Through an incredible refactor, freya managed to wrestle the code into many neat classes. All the main had to do was monitor keyPresses (which were communicated in a boolean array for the sake of reliability), and call menu.doThings(keyspressed) every frame. What insues is what Freya coined the "doThings cascade".
+
+The code was set up in such a way that calling doThings on a given screen would call doThings on all relevent objects contained inside it. More than that - for example the map would only contain a weapon management system, which in turn would have a list of weapons, so calling doThings on the weapon system called doThings on each individual weapon, which eventually called doThings on each invdividual projectile. This allowed for almost perfect encapsulation (other than the tick counter and the soundfiles, which are very odd indeed), which allowed us to reach our zero bugs recorded on demo day state, and will also make it very easy to add new weapons in the future. You can see a full detail on the classes in the game and how they were broken up in the class diagram below. 
+
+The implimentation of proper inheritance classes also greatly stream lined the code. Every collideable object inherited from the Abstract Class Collideable , which allowed the getting of both radius and position. Since every object in the game was set up as a circle, collision testing was as simple as comparing the distance between and the sum of the radii of the two objects. This allowed a full ArrayList<Collidealbe> allObjects to be passed around to the various collidors. 
+
+It is also worth mentioning the other various tools that were developed to aid in our games development. The first was a map maker tool (figure z) which allowed the user to navigate with WASD and click to place down objects. The program could also read in files, and write to files which we could use in our main project. This was unfortunatley abandonned along with our stealth game idea by week 3. The other tool developed was a full Boid simulation. The movement of our enemies was very complex and required a lot of tiny parameter tweaking, as such it was easiest to make a whole piece of software for testing them (figure n). This by itself is very fun to play with, but it also allowed us to fine tune the enemies to the realistic and reliable point we ended up with· 
 
 Class Diagram
 
@@ -80,7 +92,7 @@ When we created our first prototype, we conducted a think aloud evaluation where
 
 <strong>Positives</strong> - people seemed to think the concept of the game was interesting, and once they understood the controls, the game was engaging and fun.
 
-This early feedback for our game was immensely useful for us. It helped us realise that while the concept and gameplay of our game was interesting and engaging, there was a lot more we could do to make the users feel more comfortable playing.
+This early feedback for our game was immensely useful for us. It helped us realise that while the concept and gameplay of our game was interesting and engaging, there was a lot more we could do to make the users feel more comfortable playing, especially in terms of picking up on what the game was all about with as little externa guidance as possible.
 
 #### Heuristic Evaluation
 In our Heuristic Analysis, which focussed greatly on the accessibility of our project from the perspective of software design best practices, we learned even more useful information which would help develop our game moving forward.
@@ -159,6 +171,9 @@ In conclude, this project taught us how to run a game develop project as a team.
 
 
 ## Conclusion (500 Words)
+After our qualitative analysis, we had much to change. We began by creating a tutorial to talk the players through the controls, which drastically decreased confusion in our players. We also added a warning for leaving the combat zone, much  more recognisable "replicator" sprites, and we restyled the objective text in the top right of the screen to make it much clearer. When it came to the final demonstration day we found that nearly every player was able to figure out the controls and objectives with no input from our facilitator. Most were able to complete the tutorial first try, and the normal mode after a few attempts, and only 2 people were able to beat the insane mode. This represents a massive increase in the viability of both the difficulty system, and the onboarding, which we as a team are very proud of. 
+
+We now have a very much polished demo with no bugs that we have been able to find, full music and sound effects, sprites and gameplay. There are of course many more features we would like to add to the game, including more/a choice of weapons (we already have the code infrastructure to cope with this), a story and progression, and much more complex levels - but for the small amount of time we had we are immensly proud of our finished game. 
 
 ## Appendix
 ### Difficulty levels design
