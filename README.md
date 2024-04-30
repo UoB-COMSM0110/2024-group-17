@@ -84,6 +84,12 @@ There are some supportive components that support some features of our game, suc
 ### User Interface
 The user interface (UI) in our game is meticulously crafted to be both user-friendly and visually appealing, enhancing the overall player experience. On the playing screen, all available player abilities are conveniently displayed at the bottom right corner, each accompanied by a gradient cooldown bar that visually represents the readiness of each ability. Additionally, mission objectives are prominently displayed in eye-catching text on the upper right side of the screen. This strategic placement ensures that players can easily access and understand their goals without distraction, facilitating a smooth and engaging gameplay experience.
 
+## Behavioural diagram
+
+One of our game mechanics is the collision. A communication diagram is drawn to show how the player interacts with enemy and structure (Asteroid). In this diagram shows how the “Player” class sends and receives message to and from the “Enemy” and “Asteroid” class to determine the outcome of the collision.
+
+![communcation](https://github.com/UoB-COMSM0110/2024-group-17/blob/main/communication.png)
+
 ## Class Diagram
 
 ![spaceSurvivorsUML](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/f8d427c6-dab1-4b3d-bca8-b38d252cfbc6)
