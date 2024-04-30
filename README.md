@@ -164,18 +164,14 @@ When we created our first prototype, we conducted a think aloud evaluation where
 
 <strong>Positives</strong> - people seemed to think the concept of the game was interesting, and once they understood the controls, the game was engaging and fun.
 
+![wordcloud_1](https://github.com/UoB-COMSM0110/2024-group-17/assets/63943203/c0ae4883-abf6-4809-8a44-aa948104c334)
+
 This early feedback for our game was immensely useful for us. It helped us realise that while the concept and gameplay of our game was interesting and engaging, there was a lot more we could do to make the users feel more comfortable playing.
 
 #### Heuristic Evaluation
 In our Heuristic Analysis, which focussed greatly on the accessibility of our project from the perspective of software design best practices, we learned even more useful information which would help develop our game moving forward.
 
-<strong>H1</strong>: Liked the menu with usefully highlighted buttons;The user felt elements of the UI needed some work; felt the purpose of some elements of the UI was unclear
-
-<strong>H2</strong>: Liked the intuitive nature of the health bar
-
-<strong>H3</strong>: This user felt the game was extremely difficult to begin with, and thought the games difficulty should start slower at first to let the user get a feel for the game before it gets more difficult
-
-<strong>H10</strong>: No documentation or tooltips, which would make the game very difficult to get into for someone who does not game frequently.
+![HCI_1](https://github.com/UoB-COMSM0110/2024-group-17/assets/63943203/2d306001-c755-49e3-9aa8-cf3005fed263)
 
 After the heuristic analysis, we focussed on improving the most common complaints about our game; namely, that the game was extremely difficult in ‘Insane’ mode, the objective of the game was not obvious, and the UI was unintuitive. 
 
