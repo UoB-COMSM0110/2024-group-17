@@ -175,6 +175,9 @@ In our Heuristic Analysis, which focussed greatly on the accessibility of our pr
 
 After the heuristic analysis, we focussed on improving the most common complaints about our game; namely, that the game was extremely difficult in ‘Insane’ mode, the objective of the game was not obvious, and the UI was unintuitive. 
 
+![changes](https://github.com/UoB-COMSM0110/2024-group-17/assets/63943203/8bc8d2e9-af4e-4a8a-b4c4-759fc75e8756)
+
+
 ### Quantitative analysis
 
 We had used two questionnaires in the workshop and invited people to answer the questionnaires after they had played our game in two different levels.
