@@ -61,6 +61,8 @@ Our game is a single player arcade style game with advanced enemy AI systems. Th
 
 At the start of the development process, we had an in-person meeting where we each pitched several games on which we could base our project, from a variety of genres. Our first idea for a game was going to be an action-packed shoot-em-up like Hotline Miami, except with destructible terrain and furniture. While this would have been exciting, we felt that there was not enough potential to add a twist to the game, as any changes we added would not provide the individuality we desired. One member of our team was playing Vampire Survivors during our meeting, which immediately intrigued us. The game was simple enough that it would be easy to recreate, and provided enormous potential for expansion. To this end, we decided a space theme would be ideal for our game, as it had greater potential for exciting features in a zero-gravity environment. To ascertain the requirements of our new game Space Survivors, we created a paper prototype as pictured below, and set to work on preparing a use-case diagram and specification for our new project.
 
+![](https://github.com/UoB-COMSM0110/2024-group-17/blob/main/Ideas_Phase/spacegame.gif)
+
 <!-- TOC --><a name="use-case-specification"></a>
 ### Use Case Specification:
 
@@ -368,7 +370,6 @@ Welcome to Team 17, comprised of:
 
 For full information of Game ideas, Paper prototyping and Team Photo - see the Ideas_Phase folder.
 
-![](https://github.com/UoB-COMSM0110/2024-group-17/blob/main/Ideas_Phase/spacegame.gif)
 
 Game One - Stealth Melee
 
