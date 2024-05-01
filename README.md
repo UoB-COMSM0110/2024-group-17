@@ -23,11 +23,11 @@
 
 ## Installation Instructions
 
-### 1. Download and Unzip The Repository
-### 2. Navigate to Code/Generation_2_SpaceSurvivor/Version_current/Main
-### 3. Open it in Processing
-### 4. Click the Play button in the top left of the IDE
-### 5. Enjoy blasting some Boids!
+#### 1. Download and Unzip The Repository
+#### 2. Navigate to Code/Generation_2_SpaceSurvivor/Version_current/Main
+#### 3. Open it in Processing
+#### 4. Click the Play button in the top left of the IDE
+#### 5. Enjoy blasting some Boids!
 
 ![TeamPhoto](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/615dc998-de39-4980-b73a-0b89b2777f09)
 
