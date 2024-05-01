@@ -269,10 +269,14 @@ The branching and merging features of GitHub allowed us to manage different vers
 
 <!-- TOC --><a name="project-management-tools"></a>
 ### Project Management Tools:
+
+![20240420_165651](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/db111455-fd74-4f2b-b7c3-c288222e987a)
+
 To manage our game development, we choose Kanban board as our management tool.
 
 As mentioned above, we split the development process into serval different tasks. These tasks been posted onto Kanban board and each team members will sign their names with task to confirm which tasks they want to do. After the task is completed, team members will draw a line to the “Completed” column to act as workflow of the Kanban board. In addition, the flexibility of the Kanban allowed us to add and remove task easily. If any team members have a new idea during development, we can easily treat it to a new task and post it onto Kanban board.
 
+![20240420_151030](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/960dac4c-a3a5-469b-a722-2a082972b719)
 
 <!-- TOC --><a name="reflection-on-teamwork"></a>
 ### Reflection on Teamwork
