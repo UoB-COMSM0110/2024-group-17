@@ -288,6 +288,16 @@ In conclude, this project taught us how to run a game develop project as a team.
 <!-- TOC --><a name="conclusion-500-words"></a>
 ## Conclusion (500 Words)
 
+Our game, "Space Survivors," embodies a 2D isometric world, drawing inspiration from Vampire Survivors. During the development process, we faced and overcame various challenges, constantly refining the game's design to heighten player engagement and satisfaction. Initially pursuing a rhythm-based gameplay concept, we found it challenging to implement and lackluster in engaging players due to vague objectives and minimal immersive elements. Recognizing these shortcomings, we pivoted to develop a more captivating experience by incorporating advanced AI and a more dynamic gameplay model.
+
+The integration of a boid AI system introduced a new level of complexity to enemy behaviors, significantly amplifying the game's sense of urgency. This strategic enhancement, coupled with a time limit, sharply focuses the player on the primary goal of destroying the "Boid Replicator," thereby deepening their engagement and enriching the overall gameplay experience.
+
+After our qualitative analysis, we had much to change. We began by creating a tutorial to talk the players through the controls, which drastically decreased confusion in our players. We also added a warning for leaving the combat zone, much more recognizable "replicator" sprites, and we restyled the objective text in the top right of the screen to make it much clearer. When it came to the final demonstration day we found that nearly every player was able to figure out the controls and objectives with no input from our facilitator. Most were able to complete the tutorial first try, and the normal mode after a few attempts, and only 2 people were able to beat the insane mode. This represents a massive increase in the viability of both the difficulty system, and the onboarding, which we as a team are very proud of.
+
+Incorporating agile development methodologies enhanced our team collaboration and operational efficiency. This approach allowed for rapid iterations based on user feedback, facilitating continual improvements and adaptation throughout the development cycle.
+
+The journey of creating "Space Survivors" was profoundly educational, teaching us valuable lessons in teamwork, problem-solving, and decision-making. As we celebrated the completion of a highly polished demo—free of bugs, and enriched with complete music, sound effects, and sophisticated gameplay—we also recognized the potential for future enhancements. While the current version is a testament to our hard work and dedication, aspirations for expanding the game with additional weapons, a narrative-driven progression, and more intricate levels remain. Given the limited timeframe, our accomplishments with "Space Survivors" leave us immensely proud, and we look forward to future opportunities to expand and refine our creation.
+
 <!-- TOC --><a name="appendix"></a>
 ## Appendix
 <!-- TOC --><a name="difficulty-levels-design"></a>
