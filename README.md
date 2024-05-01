@@ -1,52 +1,23 @@
 <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 
-- Table Of Contents
-   * [Introduction (250 Words)](#introduction-250-words)
-   * [Requirements (750 Words)](#requirements-750-words)
-      + [Use Case Specification:](#use-case-specification)
-      + [Use Case Diagram:](#use-case-diagram)
-         - [User Stories:](#user-stories)
-         - [Use Case Reflection:](#use-case-reflection)
-   * [Design (750 Words)	](#design-750-words)
-      + [System architecture](#system-architecture)
-      + [Game Engine](#game-engine)
-         - [Game Component](#game-component)
-         - [Core Component](#core-component)
-         - [Supportive Components](#supportive-components)
-      + [User Interface](#user-interface)
+
+# Space Survivors – Team 17
+
+![spacegamelogo](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/01ad03bd-76e4-4197-b228-c6468f39c393)
+### Table of Contents
+   * [Introduction](#introduction-250-words)
+   * [Requirements](#requirements-750-words)
+   * [Design](#design-750-words)
    * [Behavioural diagram](#behavioural-diagram)
    * [Class Diagram](#class-diagram)
-   * [Implementation (750 Words)](#implementation-750-words)
-      + [Movement:](#movement)
-         - [Dynamic Backgrounds](#dynamic-backgrounds)
-         - [Reactive Trails](#reactive-trails)
-      + [Artificial Intelligence:](#artificial-intelligence)
-         - [Flocks, Herds and Schools](#flocks-herds-and-schools)
-   * [Evaluation (750 Words)](#evaluation-750-words)
-      + [Qualitative Analysis](#qualitative-analysis)
-         - [Think Aloud Evaluation](#think-aloud-evaluation)
-         - [Heuristic Evaluation](#heuristic-evaluation)
-      + [Quantitative analysis](#quantitative-analysis)
-         - [System Usability Scale (SUS)](#system-usability-scale-sus)
-         - [NASA Task Load Index (NASA-TLX)](#nasa-task-load-index-nasa-tlx)
-      + [How code was tested](#how-code-was-tested)
-   * [Process (750 Words)](#process-750-words)
-      + [Tools and Technologies Used](#tools-and-technologies-used)
-         - [Version Control System:](#version-control-system)
-      + [Project Management Tools:](#project-management-tools)
-      + [Reflection on Teamwork](#reflection-on-teamwork)
-   * [Conclusion (500 Words)](#conclusion-500-words)
-   * [Appendix](#appendix)
-      + [Difficulty levels design](#difficulty-levels-design)
-      + [System Usability Scale(SUS)](#system-usability-scalesus)
-      + [NASA-TLX ](#nasa-tlx)
+   * [Implementation](#implementation-750-words)
+   * [Evaluation](#evaluation-750-words)
+   * [Process](#process-750-words)
+   * [Conclusion](#conclusion-500-words)
 
 <!-- TOC end -->
 
 <!-- TOC --><a name="space-survivors-team-17"></a>
-# Space Survivors – Team 17
-
-![spacegamelogo](https://github.com/UoB-COMSM0110/2024-group-17/assets/145852911/01ad03bd-76e4-4197-b228-c6468f39c393)
 
 <a style="align: center" href="https://youtu.be/TMsvhL6CfG0">Click here to see our promotional video!</a>
 
