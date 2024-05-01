@@ -302,7 +302,7 @@ Due to the effective distribution of roles, our team was able to develop the gam
 In conclusion, communication can always be improved, this project taught us how to run a game develop project as a team and create a game we can be proud of.
 
 <!-- TOC --><a name="conclusion-500-words"></a>
-## Conclusion (500 Words)
+## Conclusion
 
 Our game, 'Space Survivors', embodies a 2D isometric world, drawing inspiration from 'Vampire Survivors'. During the development process, we faced and overcame various challenges, constantly refining the game's design to heighten player engagement and satisfaction. Initially pursuing a rhythm-based gameplay concept, we found it challenging to implement and lacklustre in engaging players due to vague objectives and minimal immersive elements. Recognizing these shortcomings, we pivoted to develop a more captivating experience by incorporating advanced AI and a more dynamic gameplay model.
 
@@ -317,6 +317,9 @@ The journey of creating 'Space Survivors' was very educational, teaching us valu
 ## Contribution
 
 Freya: 1.0
+
 Isaac: 1.0
+
 Daolin: 1.0
+
 Haoyu: 1.0
