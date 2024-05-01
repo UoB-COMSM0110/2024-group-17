@@ -1,11 +1,6 @@
 <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 
-- [Space Survivors – Team 17](#space-survivors-team-17)
-      + [Team roles and responsibilities (Left to Right)](#team-roles-and-responsibilities-left-to-right)
-      + [Freya: Lead developer](#freya-lead-developer)
-      + [Isaac: Team Manager and Asset Designer](#isaac-team-manager-and-asset-designer)
-      + [Haoyu: Analyst](#haoyu-analyst)
-      + [Daolin: Content Developer](#daolin-content-developer)
+- Table Of Contents
    * [Introduction (250 Words)](#introduction-250-words)
    * [Requirements (750 Words)](#requirements-750-words)
       + [Use Case Specification:](#use-case-specification)
@@ -45,10 +40,6 @@
       + [Difficulty levels design](#difficulty-levels-design)
       + [System Usability Scale(SUS)](#system-usability-scalesus)
       + [NASA-TLX ](#nasa-tlx)
-- [Daolin Zhang, ht23051@bristol.ac.uk, HankeXian](#daolin-zhang-ht23051bristolacuk-hankexian)
-- [Isaac Scott, du23937@bristol.ac.uk, ijgs02](#isaac-scott-du23937bristolacuk-ijgs02)
-- [Freya Fewtrell, do20075@bristol.ac.uk, fewtz ](#freya-fewtrell-do20075bristolacuk-fewtz)
-- [Haoyu Zhu, cu23510@bristol.ac.uk, haidanorz](#haoyu-zhu-cu23510bristolacuk-haidanorz)
 
 <!-- TOC end -->
 
